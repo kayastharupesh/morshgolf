@@ -281,7 +281,7 @@ $settings=DB::table('settings')->get();
                             <div class="billing-details-form cart-coupon shipping_calculation" style="background:none;">
                                 <div id="shipping_method" style="display: none;">
                                     <div class="cart-c-title">Shipping&nbsp;
-                                        <span style="float:right">{{ Session::get('getshipping')['shipping_country_name'] }} @if(Helper::totalCartPrice()>='250') {{ "( Free )" }}@else $ <span id="shipping_charge">{{ number_format($total_amount, 2) }}</span>@endif</span>
+                                        <span style="float:right"><span id="shipping_country_name"></span>{{ Session::get('getshipping')['shipping_country_name'] ?? '' }} @if(Helper::totalCartPrice()>='250') {{ "( Free )" }}@else $ <span id="shipping_charge">{{ number_format($total_amount, 2) }}</span>@endif</span>
                                     </div>
                                     <ul>
                                         <li>&nbsp;</li>

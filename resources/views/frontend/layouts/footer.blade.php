@@ -496,6 +496,7 @@ document.addEventListener("DOMContentLoaded", function () {
             var resultData = parseFloat(response[0].shipping_charge) + parseFloat(total_amount_data);
             resultData = resultData.toFixed(2);
 
+            $("#shipping_country_name").html(response[0].shipping_country_name);
             $("#shipping_charge").html(response[0].shipping_charge);
             $("#shipping_state_name").html(response[0].shipping_state_name);
             $("#shipping_city_name").html(response[0].shipping_city_name);
