@@ -16,6 +16,7 @@ use App\Models\Product;
 
 use DB;
 use App\Models\Order;
+use Illuminate\Support\Facades\Mail;
 
 class PaypalController extends Controller
 
@@ -147,10 +148,25 @@ class PaypalController extends Controller
         
         $order_data_update = Order::where('user_id',auth()->user()->id)->where('order_number',$order_id)->update($data_order);
 
+        $order_data_mail = Order::where('user_id', auth()->user()->id)->where('order_number', $order_id)->first();
+        
+        $datais = [
+            'to' => auth()->user()->email,
+            'subject' => "Thank You for your purchase of product. || Morshgolf",
+            'order_number' => $order_id,
+            'name' => $order_data_mail->first_name . " " . $order_data_mail->last_name,
+            'payment_method' => $order_data_mail->payment_method,
+            'date' => $order_data_mail->created_at,
+            'total_amount' => $order_data_mail->total_amount,
+        ];
 
+        Mail::send('mail.userorder',$datais, function($messages) use ($datais){
+            $messages->to($datais['to']);
+            $messages->subject($datais['subject']);
+        });
         //print_r($response);exit;
         //$response_payer_id = $provider->getExpressCheckoutDetails($request->PayerID);
-        //return $response_payer_id;
+         //return $response_payer_id;
 
 
         if (in_array(strtoupper($response['ACK']), ['SUCCESS', 'SUCCESSWITHWARNING'])) {

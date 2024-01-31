@@ -77,24 +77,14 @@
 
 <script>
     $(document).ready(function() {
-      $('.header-part:contains("Powered by")').html('');
-    $('#image_loader').hide();
-    $('#image_loader_checkout').hide();
+        $('.header-part:contains("Powered by")').html('');
+        $('#image_loader').hide();
+        $('#image_loader_checkout').hide();
 
-    $('.show_state_name').hide();
-    $('.show_state_name_checkout').hide();
+        $('.show_state_name').hide();
+        $('.show_state_name_checkout').hide();
 
-       
-
-    // $("select.select2").select2(); 
-
-    // $('select.nice-select').niceSelect();
-
-
-
-    //shipping calculation
-
-    $('.shipping select[name=shipping]').change(function(){
+        $('.shipping select[name=shipping]').change(function(){
 
 			let cost = parseFloat( $(this).find('option:selected').data('price') ) || 0;
 
@@ -108,109 +98,134 @@
 
 		});
 
-	// show state in cart page
-  $('.nice-select-country').on('change', function() {
-    var cat_id=$(this).val();
-    if(cat_id !=null){
-      //console.log(cat_id);
-      // Ajax call
-      $.ajax({
-        url:"{{url('/')}}/country/"+cat_id+"/child",
-        data:{
-          _token:"{{csrf_token()}}",
-          id:cat_id
-        },
-        type:"POST",
-        beforeSend: function() {
-        	$('#image_loader').show();
-        },
-        success:function(response){
-          if(typeof(response) !='object'){
-            response=$.parseJSON(response)
-          }
-          //console.log(response);
-          var html_option="<option value=''>---select state---</option>"
-          if(response.status===true){
-              $('#image_loader').hide();
-            var data=response.data;
-              //alert(data);
-            if(response.data){
-                //console.log(response);
-              $('.child_cat_hide').removeClass('d-none');
-              $('.show_state_name').hide();
-              $('#child_cat_id').removeClass('d-none');
-              $.each(data,function(id,title){
-                html_option +="<option value='"+id+"'>"+title+"</option>"
-              });
+        // show state in cart page
+        $('.nice-select-country').on('change', function() {
+            var cat_id=$(this).val();
+            if(cat_id !=null){
+                $.ajax({
+                    url:"{{url('/')}}/country/"+cat_id+"/child",
+                    data:{
+                        _token:"{{csrf_token()}}",
+                        id:cat_id
+                    },
+                    type:"POST",
+                    beforeSend: function() {
+                        $('#image_loader').show();
+                    },
+                    success:function(response){
+                        if(typeof(response) !='object'){
+                            response=$.parseJSON(response)
+                        }
+
+                        var html_option="<option value=''>---select state---</option>"
+                        if(response.status===true){
+                            $('#image_loader').hide();
+                            var data=response.data;
+                            if(response.data){
+                                $('.child_cat_hide').removeClass('d-none');
+                                $('.show_state_name').hide();
+                                $('#child_cat_id').removeClass('d-none');
+                                $.each(data,function(id,title){
+                                    html_option +="<option value='"+id+"'>"+title+"</option>"
+                                });
+                            }
+                        }
+                        else{
+                            $('#child_cat_id').addClass('d-none');
+                            $('#image_loader').hide();
+                            $('.show_state_name').show();
+                        }
+                        $('#child_cat_id').html(html_option);
+                    }
+                });
             }
-            else{
-            }
-          }
-          else{
-            $('#child_cat_id').addClass('d-none');
-            $('#image_loader').hide();
-            $('.show_state_name').show();
-          }
-          $('#child_cat_id').html(html_option);
-        }
-      });
-    }
-    else{
-    }
-  })	
+
+            $.ajax({
+                url: "{{ route('shipping-store') }}",
+                type: "POST",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    shipping_country: cat_id,
+                }
+            })
+            .done(function(response) {
+                var total_amount_data  = $('#total_amount_data').val();
+                var resultData = parseFloat(response[0].shipping_charge) + parseFloat(total_amount_data);
+                resultData = resultData.toFixed(2);
+
+                var shipping_charge_data = parseFloat(response[0].shipping_charge);
+                result_shipping_charge_data = shipping_charge_data.toFixed(2);
+
+                if(result_shipping_charge_data > 0){
+                    $("#shipping_method").show();
+                    $("#shipping_method_1").hide();
+                    $("#shipping_country_name").html(response[0].shipping_country_name);
+                    $("#shipping_charge").html(result_shipping_charge_data);
+                    $(".shipping_charge_data").html(resultData);
+                } else {
+                    $("#shipping_method").hide();
+                    $("#shipping_method_1").show();
+                    $("#shipping_log").html("There are no shipping options available. Please ensure that your address has been entered correctly, or contact us if you need any help.");
+                }
+                
+            })
+            .fail(function(response) {
+                $("#shipping_method").hide();
+                $("#shipping_method_1").show();
+            });
+        })	
 
 
-// show state in cart page
-$('.nice-select-country_checkout').on('change', function() {
-    var cat_id=$(this).val();
-    if(cat_id !=null){
-      //console.log(cat_id);
-      // Ajax call
-      $.ajax({
-        url:"{{url('/')}}/country/"+cat_id+"/child",
-        data:{
-          _token:"{{csrf_token()}}",
-          id:cat_id
-        },
-        type:"POST",
-        beforeSend: function() {
-        	$('#image_loader_checkout').show();
-        },
-        success:function(response){
-          if(typeof(response) !='object'){
-            response=$.parseJSON(response)
-          }
-          //console.log(response);
-          var html_option="<option value=''>---select state---</option>"
-          if(response.status===true){
-              $('#image_loader_checkout').hide();
-            var data=response.data;
-              //alert(data);
-            if(response.data){
+        // show state in cart page
+        $('.nice-select-country_checkout').on('change', function() {
+            var cat_id=$(this).val();
+            if(cat_id !=null){
+            //console.log(cat_id);
+            // Ajax call
+            $.ajax({
+                url:"{{url('/')}}/country/"+cat_id+"/child",
+                data:{
+                _token:"{{csrf_token()}}",
+                id:cat_id
+                },
+                type:"POST",
+                beforeSend: function() {
+                    $('#image_loader_checkout').show();
+                },
+                success:function(response){
+                if(typeof(response) !='object'){
+                    response=$.parseJSON(response)
+                }
                 //console.log(response);
-              $('.child_cat_hide_checkout').removeClass('d-none');
-              $('.show_state_name_checkout').hide();
-              $('#child_cat_id_checkout').removeClass('d-none');
-              $.each(data,function(id,title){
-                html_option +="<option value='"+id+"'>"+title+"</option>"
-              });
+                var html_option="<option value=''>---select state---</option>"
+                if(response.status===true){
+                    $('#image_loader_checkout').hide();
+                    var data=response.data;
+                    //alert(data);
+                    if(response.data){
+                        //console.log(response);
+                    $('.child_cat_hide_checkout').removeClass('d-none');
+                    $('.show_state_name_checkout').hide();
+                    $('#child_cat_id_checkout').removeClass('d-none');
+                    $.each(data,function(id,title){
+                        html_option +="<option value='"+id+"'>"+title+"</option>"
+                    });
+                    }
+                    else{
+                    }
+                }
+                else{
+                    $('#child_cat_id_checkout').addClass('d-none');
+                    $('#image_loader_checkout').hide();
+                    $('.show_state_name_checkout').show();
+                }
+                $('#child_cat_id_checkout').html(html_option);
+                }
+            });
             }
-            else{
-            }
-          }
-          else{
-            $('#child_cat_id_checkout').addClass('d-none');
-            $('#image_loader_checkout').hide();
-            $('.show_state_name_checkout').show();
-          }
-          $('#child_cat_id_checkout').html(html_option);
-        }
-      });
-    }
-    else{
-    }
-  })	
-  });
+            
+        })	
+    });
 
     $(".shipping_btns").click(function(){
         $(".shippings_details").slideToggle("slow");
@@ -232,211 +247,136 @@ $('.nice-select-country_checkout').on('change', function() {
     accountClass = false;
   });
 
-  $("html").click(function () {
-    if (accountClass) {
-      $(".account-popup").removeClass('account-popup-open');
-    }
-    accountClass = true;
-  });    
+    $("html").click(function () {
+        if (accountClass) {
+            $(".account-popup").removeClass('account-popup-open');
+        }
+        accountClass = true;
+    });    
 
     
-  //check attribute has value or not
-  $(".add-to-cart").click(function(){
-      var selected_value = $('.attributes').val();
-      if($('.attributes').val()===""){
-          $("#showerror").html("Please select options before adding this product to your cart.").addClass("showerror");
-          $(".attributes").addClass("highlightattribute");
-          return false;
-      }
-  });
+    //check attribute has value or not
+    $(".add-to-cart").click(function(){
+        var selected_value = $('.attributes').val();
+        if($('.attributes').val()===""){
+            $("#showerror").html("Please select options before adding this product to your cart.").addClass("showerror");
+            $(".attributes").addClass("highlightattribute");
+            return false;
+        }
+    });
 
-</script>
-{{--<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-<script type="text/javascript">
-    $(function() {
-    var $form         = $(".require-validation");
-    $('form.require-validation').bind('submit', function(e) {
-        var $form         = $(".require-validation"),
-        inputSelector = ['input[type=email]', 'input[type=password]',
-                         'input[type=text]', 'input[type=file]',
-                         'textarea'].join(', '),
-        $inputs       = $form.find('.required').find(inputSelector),
-        $errorMessage = $form.find('div.error'),
-        valid         = true;
-        $errorMessage.addClass('hide');
-  
-        $('.has-error').removeClass('has-error');
-        $inputs.each(function(i, el) {
-          var $input = $(el);
-          if ($input.val() === '') {
-            $input.parent().addClass('has-error');
-            $errorMessage.removeClass('hide');
-            e.preventDefault();
-          }
-        });
-   
-        if (!$form.data('cc-on-file')) {
-          e.preventDefault();
-          Stripe.setPublishableKey($form.data('stripe-publishable-key'));
-          Stripe.createToken({
-            number: $('.card-number').val(),
-            cvc: $('.card-cvc').val(),
-            exp_month: $('.card-expiry-month').val(),
-            exp_year: $('.card-expiry-year').val()
-          }, stripeResponseHandler);
-        }
-  
-  });
-  
-  function stripeResponseHandler(status, response) {
-        if (response.error) {
-            $('.error')
-                .removeClass('hide')
-                .find('.alert')
-                .text(response.error.message);
-        } else {
-            /* token contains id, last4, and card type */
-            var token = response['id'];
-               
-            $form.find('input[type=text]').empty();
-            $form.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
-            $form.get(0).submit();
-        }
-    }
-   
-});
-</script> --}}
-{{-- <script src="{{ asset('frontend/js/jquery.form.js') }}"></script> --}}
-{{-- <script src="{{ asset('frontend/js/jquery.validate.min.js') }}"></script> --}}
-{{-- <script src="{{ asset('frontend/js/contact.js') }}"></script> --}}
-<script>
     var Cookie = {
-    set: function (name, value, days) {
-        var domain, domainParts, date, expires, host;
+        set: function (name, value, days) {
+            var domain, domainParts, date, expires, host;
 
-        if (days) {
-            date = new Date();
-            date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-            expires = "; expires=" + date.toGMTString();
-        } else {
-            expires = "";
-        }
+            if (days) {
+                date = new Date();
+                date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+                expires = "; expires=" + date.toGMTString();
+            } else {
+                expires = "";
+            }
 
-        host = location.host;
-        if (host.split(".").length === 1) {
-            // no "." in a domain - it's localhost or something similar
-            document.cookie = name + "=" + value + expires + "; path=/";
-        } else {
-            // Remember the cookie on all subdomains.
-            //
-            // Start with trying to set cookie to the top domain.
-            // (example: if user is on foo.com, try to set
-            //  cookie to domain ".com")
-            //
-            // If the cookie will not be set, it means ".com"
-            // is a top level domain and we need to
-            // set the cookie to ".foo.com"
-            domainParts = host.split(".");
-            domainParts.shift();
-            domain = "." + domainParts.join(".");
+            host = location.host;
+            if (host.split(".").length === 1) {
+                document.cookie = name + "=" + value + expires + "; path=/";
+            } else {
+                domainParts = host.split(".");
+                domainParts.shift();
+                domain = "." + domainParts.join(".");
 
-            document.cookie =
-                name + "=" + value + expires + "; path=/; domain=" + domain;
-
-            // check if cookie was successfuly set to the given domain
-            // (otherwise it was a Top-Level Domain)
-            if (Cookie.get(name) == null || Cookie.get(name) != value) {
-                // append "." to current domain
-                domain = "." + host;
                 document.cookie =
                     name + "=" + value + expires + "; path=/; domain=" + domain;
+                if (Cookie.get(name) == null || Cookie.get(name) != value) {
+                    domain = "." + host;
+                    document.cookie =
+                        name + "=" + value + expires + "; path=/; domain=" + domain;
+                }
             }
-        }
-    },
+        },
 
-    get: function (name) {
-        var nameEQ = name + "=";
-        var ca = document.cookie.split(";");
-        for (var i = 0; i < ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) == " ") {
-                c = c.substring(1, c.length);
+        get: function (name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(";");
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == " ") {
+                    c = c.substring(1, c.length);
+                }
+
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
             }
+            return null;
+        },
 
-            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        erase: function (name) {
+            Cookie.set(name, "", -1);
         }
-        return null;
-    },
+    };
 
-    erase: function (name) {
-        Cookie.set(name, "", -1);
+
+    function googleTranslateElementInit() {
+        let url = new URL(window.location);
+        let lang = url.searchParams.get("lang");
+        
+        if (lang) {
+            console.log(lang);
+            Cookies.set("googtrans", `/en/${lang}`, {
+                path: "",
+                domain: location.host
+            });
+        } else {
+            Cookie.erase("googtrans");
+        }
+
+        // Wait for Google Translate API to load before initializing
+        function initializeTranslate() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'auto', // or set it to a specific default language code
+            }, 'translate');
+
+            // Add event listener to change URL param on language selection change
+            let langSelector = document.querySelector(".goog-te-combo");
+            langSelector.addEventListener("change", function () {
+                let lang = langSelector.value;
+                var newurl =
+                    window.location.protocol +
+                    "//" +
+                    window.location.host +
+                    window.location.pathname +
+                    "?lang=" +
+                    lang;
+                window.history.pushState({
+                    path: newurl
+                }, "", newurl);
+            });
+        }
+
+        // Check if the Google Translate API is already loaded
+        if (typeof google !== 'undefined' && google.translate) {
+            initializeTranslate();
+        } else {
+            // If not loaded, wait for the API to load
+            window.onGoogleTranslateApiLoad = initializeTranslate;
+
+            // Load the Google Translate API script
+            var googleTranslateScript = document.createElement("script");
+            googleTranslateScript.type = "text/javascript";
+            googleTranslateScript.src =
+                "//translate.google.com/translate_a/element.js?cb=onGoogleTranslateApiLoad";
+            (
+                document.getElementsByTagName("head")[0] ||
+                document.getElementsByTagName("body")[0]
+            ).appendChild(googleTranslateScript);
+        }
     }
-};
 
+    document.addEventListener("DOMContentLoaded", function () {
+        (function () {
+            googleTranslateElementInit();
+        })();
+    });
 
-function googleTranslateElementInit() {
-    let url = new URL(window.location);
-    let lang = url.searchParams.get("lang");
-    
-    if (lang) {
-        console.log(lang);
-        Cookies.set("googtrans", `/en/${lang}`, {
-            path: "",
-            domain: location.host
-        });
-    } else {
-        Cookie.erase("googtrans");
-    }
-
-    // Wait for Google Translate API to load before initializing
-    function initializeTranslate() {
-        new google.translate.TranslateElement({
-            pageLanguage: 'auto', // or set it to a specific default language code
-        }, 'translate');
-
-        // Add event listener to change URL param on language selection change
-        let langSelector = document.querySelector(".goog-te-combo");
-        langSelector.addEventListener("change", function () {
-            let lang = langSelector.value;
-            var newurl =
-                window.location.protocol +
-                "//" +
-                window.location.host +
-                window.location.pathname +
-                "?lang=" +
-                lang;
-            window.history.pushState({
-                path: newurl
-            }, "", newurl);
-        });
-    }
-
-    // Check if the Google Translate API is already loaded
-    if (typeof google !== 'undefined' && google.translate) {
-        initializeTranslate();
-    } else {
-        // If not loaded, wait for the API to load
-        window.onGoogleTranslateApiLoad = initializeTranslate;
-
-        // Load the Google Translate API script
-        var googleTranslateScript = document.createElement("script");
-        googleTranslateScript.type = "text/javascript";
-        googleTranslateScript.src =
-            "//translate.google.com/translate_a/element.js?cb=onGoogleTranslateApiLoad";
-        (
-            document.getElementsByTagName("head")[0] ||
-            document.getElementsByTagName("body")[0]
-        ).appendChild(googleTranslateScript);
-    }
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    (function () {
-        googleTranslateElementInit();
-    })();
-});
-</script>
-<script>
     $(document).ready(function() {
         var offerClass = true;    
         $(window).on('load', function() {
@@ -462,52 +402,6 @@ document.addEventListener("DOMContentLoaded", function () {
             offerClass = true;
         });   
 	});
-    
-    function calculateShipping() {
-        var country   = $('#country').val();
-        var stateData = $('#child_cat_id').val();
-        var state     = $('input[name="state_id"]').val();
-        var city      = $('#city_shipping_data').val();
-        var postcode  = $('#post_code_shipping').val();
-        var state_id;
-
-        if (stateData > 0) {
-            state_id = stateData;
-        } else {
-            state_id = state;
-        }
-
-        $.ajax({
-            url: "{{ route('shipping-store') }}",
-            type: "POST",
-            data: {
-                _token: "{{ csrf_token() }}",
-                shipping_country: country,
-                shipping_state: state_id,
-                shipping_city: city,
-                shipping_zip_code: postcode
-            }
-        })
-        .done(function(response) {
-            $("#shipping_method").show();
-            $("#shipping_method_1").hide();
-
-            var total_amount_data  = $('#total_amount_data').val();
-            var resultData = parseFloat(response[0].shipping_charge) + parseFloat(total_amount_data);
-            resultData = resultData.toFixed(2);
-
-            $("#shipping_country_name").html(response[0].shipping_country_name);
-            $("#shipping_charge").html(response[0].shipping_charge);
-            $("#shipping_state_name").html(response[0].shipping_state_name);
-            $("#shipping_city_name").html(response[0].shipping_city_name);
-            $("#shipping_zip_code").html(response[0].shipping_zip_code);
-            $(".shipping_charge_data").html(resultData);
-        })
-        .fail(function(response) {
-            $("#shipping_method").hide();
-            $("#shipping_method_1").show();
-        });
-    }
 
 </script>
 <style>

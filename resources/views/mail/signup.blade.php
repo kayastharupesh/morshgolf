@@ -55,7 +55,7 @@
         </tr>
         <tr>
             <td class="footer">
-                &copy; 2023 MorshGolf | Development: Polosoftech
+                &copy; @php echo date('Y'); @endphp MorshGolf | Development: Polosoftech
             </td>
         </tr>
     </table>

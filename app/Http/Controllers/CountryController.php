@@ -159,17 +159,8 @@ class CountryController extends Controller
 
     //shipping calculation countrywise
     public function shippingStore(Request $request){
-        //get country name
-        $country=Country::where('id',$request->shipping_country)->first();
-        //get state name
-        $state_list=State::where('id',$request->shipping_state)->first();
         
-
-        if($state_list) { 
-            $state_name = $state_list->state_name; 
-        } else { 
-            $state_name = $request->calc_shipping_state_text; 
-        }
+        $country=Country::where('id',$request->shipping_country)->first();
         
         if(!$country){
             request()->session()->flash('error','Invalid shipping details, Please try again');
@@ -181,9 +172,6 @@ class CountryController extends Controller
                 'id'=>$country->id,
                 'country_code'         =>$country->country_code,
                 'shipping_country_name'=>$country->country_name,
-                'shipping_state_name'  =>$state_name,
-                'shipping_city_name'   =>$request->shipping_city,
-                'shipping_zip_code'    =>$request->shipping_zip_code,
                 'currency_symbol'      =>$country->currency_symbol,
                 'currency'             =>$country->currency,
                 'shipping_charge'      =>$country->shipping_charge,

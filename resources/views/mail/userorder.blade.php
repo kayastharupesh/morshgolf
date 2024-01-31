@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,16 +43,23 @@
         <tr>
             <td class="header">
                 <img src="https://polosoftech.com/staging/morshgolf/public/storage/photos/1/General%20Settings/logo.png" alt="morshgolf">
-                <h1>Welcome to morshgolf</h1>
+                <h1>New Order Details</h1>
             </td>
         </tr>
         <tr>
-            <td class="content">
-                <h2>Hello, sir/ma'am</h2>
-                <p>We wanted to take a moment to express our gratitude for subscribing to Newsletter. Welcome to our community!</p>
-                <p>Thank you again for choosing Newsletter. We're excited to have you with us!</p>
-                <p><a href=" {{route('login.form')}} ">Click here</a> to visit our website.</p>
-            </td>
+          <td class="content">
+            <h2>Hello, {{ $name }}</h2>
+            <p>Thank you for ordering from MorshGolf.</p>
+            <p>Your order number #{{$order_number}} has been shipped.</p>
+            <p>Woo hoo! Your order is on its way. Your order details can be found below.</p>
+            <p><b>ORDER SUMMARY:</b></p>
+            <p>Order ID: #{{$order_number}}</p>
+            <p>Order Date: {{$date}}</p>
+            <p>Payment Method: {{$payment_method}}</p>
+            <p>Order Total: {{$total_amount}}</p>
+            <p><b>We hope you enjoyed your shopping experience with us and that you will visit us again soon.</b></p>
+            <p><a href=" {{route('login.form')}} ">Click here</a> to visit our website.</p>
+          </td>
         </tr>
         <tr>
             <td class="footer">

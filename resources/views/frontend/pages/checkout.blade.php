@@ -281,22 +281,16 @@ $settings=DB::table('settings')->get();
                             <div class="billing-details-form cart-coupon shipping_calculation" style="background:none;">
                                 <div id="shipping_method" style="display: none;">
                                     <div class="cart-c-title">Shipping&nbsp;
-                                        <span style="float:right"><span id="shipping_country_name"></span> @if(Helper::totalCartPrice()>='250') {{ "( Free )" }}@else $ <span id="shipping_charge">{{ number_format($total_amount, 2) }}</span>@endif</span>
+                                        <span style="float:right"><span id="shipping_country_name"></span> @if(Helper::totalCartPrice()>='500') {{ "( Free )" }}@else $ <span id="shipping_charge">{{ number_format($total_amount, 2) }}</span>@endif</span>
                                     </div>
-                                    <ul>
-                                        <li>&nbsp;</li>
-                                        <li class="text-right">Shipping to <b id="shipping_state_name"></b></li>
-                                        <li class="text-right"><b id="shipping_city_name"></b></li>
-                                        <li class="text-right"><b id="shipping_zip_code"></b></li>					
-                                    </ul>
                                 </div>
                                 <div id="shipping_method_1" style="display: block;">                        
                                     <div class="cart-c-title">Shipping<span style="float:right;margin: 0px 0 25px 0;padding: 0;
-                                        position: relative;font-size: 13px;font-weight: 500;color: #686868;">Enter your address to view shipping options.</span>
+                                        position: relative;font-size: 13px;font-weight: 500;color: #686868;" id="shipping_log">Enter your address to view shipping options.</span>
                                     </div>
                                 </div>
                                 
-                                <div class="cart-c-title text-right" onclick="calculateShipping()"><a class="shipping_btns_checkout">Calculate Shipping</a></div><br><br>
+                                {{-- <div class="cart-c-title text-right" onclick="calculateShipping()"><a class="shipping_btns_checkout">Calculate Shipping</a></div><br><br> --}}
                             </div>
                             {{-- shipping code end here --}}                        
 
@@ -304,7 +298,7 @@ $settings=DB::table('settings')->get();
                             <input type="hidden" id="total_amount_data" value="{{$total_amount}}">
                             @if(session('coupon'))
                                 <div class="total-price last" id="order_total_price">Total <span> $ 
-                                    @if (Helper::totalCartPrice() >= '250')
+                                    @if (Helper::totalCartPrice() >= '500')
                                         {{ number_format($total_amount, 2) }}
                                     @else                                        
                                         <span class="shipping_charge_data">{{ number_format($total_amount, 2) }}</span>
@@ -312,7 +306,7 @@ $settings=DB::table('settings')->get();
                                 </span></div>
                             @else
                                 <div class="total-price last">Total <span> $ 
-                                    @if (Helper::totalCartPrice() >= '250')
+                                    @if (Helper::totalCartPrice() >= '500')
                                         {{ number_format($total_amount, 2) }}
                                     @else                                        
                                         <span class="shipping_charge_data">{{ number_format($total_amount, 2) }}</span>
