@@ -534,10 +534,14 @@ class OrderController extends Controller
 
     // PDF generate
 
-    public function pdf($id){
+    public function pdf($id)
+    {
+      
         $order=Order::getAllOrder($id);
+        
         $file_name=$order->order_number.'-'.$order->first_name.'.pdf';
         $pdf=PDF::loadview('backend.order.pdf',compact('order'));
+        // dd($pdf);
         return $pdf->download($file_name);
     }
 
