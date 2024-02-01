@@ -193,7 +193,7 @@ $home_popup=DB::table('homepage_popup')->where('id','1')->get();
             <img src="{{ asset('public/frontend/images/banner/'.$home_popup[0]->photo1) }}" alt="LIMITED TIME OFFER">
         </div>
         @endif
-    <a href="javascript:void(0)" class="popup-close-btn"><i class="fa-solid fa-xmark"></i></a>
+        <a href="javascript:void(0)" class="popup-close-btn"><i class="fa-solid fa-xmark"></i></a>
     </div>
 </div>
 @endif

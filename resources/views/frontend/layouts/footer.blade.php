@@ -103,7 +103,7 @@
             var cat_id=$(this).val();
             if(cat_id !=null){
                 $.ajax({
-                    url:"{{url('/')}}/country/"+cat_id+"/child",
+                    url:"{{ route('show-state-country-wise') }}",
                     data:{
                         _token:"{{csrf_token()}}",
                         id:cat_id
@@ -141,7 +141,7 @@
             }
 
             $.ajax({
-                url: "{{ route('shipping-store') }}",
+                url: "{{ route('shipping-stor') }}",
                 type: "POST",
                 data: {
                     _token: "{{ csrf_token() }}",
@@ -396,9 +396,7 @@
         });    
         
         $(".popup-close-btn").click(function () {
-            if (offerClass) {
-                $(".offer-popup-sec").removeClass('offer-popup-sec-open');
-            }
+            $(".offer-popup-sec").removeClass('offer-popup-sec-open');
             offerClass = true;
         });   
 	});

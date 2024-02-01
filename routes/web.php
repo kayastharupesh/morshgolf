@@ -109,6 +109,7 @@ Route::get('wishlist-delete/{id}','WishlistController@wishlistDelete')->name('wi
 
 Route::post('cart/order','OrderController@store')->name('cart.order');
 Route::get('order/pdf/{id}','OrderController@pdf')->name('order.pdf');
+Route::get('order/pdfPackingSlip/{id}','OrderController@pdfPackingSlip')->name('order.pdfPackingSlip');
 Route::get('/income','OrderController@incomeChart')->name('product.order.income');
 
 // Route::get('/user/chart','AdminController@userPieChart')->name('user.piechart');
@@ -151,12 +152,12 @@ Route::get('/coupon-delete/{id}','CouponController@couponDelete')->name('coupon-
 // Shipping Calculation
 
 Route::post('/shipping-calculation','CountryController@getShippingDetails')->name('shipping-calculation');
-Route::post('/shipping-store','CountryController@shippingStore')->name('shipping-store');
+Route::post('/shipping-stor', 'CountryController@shippingStore')->name('shipping-stor');
 
 
 
  // Ajax for show state
- Route::post('/country/{id}/child','CountryController@showStateCountryWise');
+ Route::post('/show-state-country-wise', 'CountryController@showStateCountryWise')->name('show-state-country-wise');
 
 
 // Backend section start

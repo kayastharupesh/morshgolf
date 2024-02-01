@@ -536,12 +536,17 @@ class OrderController extends Controller
 
     public function pdf($id)
     {
-      
         $order=Order::getAllOrder($id);
-        
         $file_name=$order->order_number.'-'.$order->first_name.'.pdf';
         $pdf=PDF::loadview('backend.order.pdf',compact('order'));
-        // dd($pdf);
+        return $pdf->download($file_name);
+    }
+
+    public function pdfPackingSlip($id)
+    {
+        $order=Order::getAllOrder($id);
+        $file_name=$order->order_number.'-'.$order->first_name.'-packing-slip.pdf';
+        $pdf=PDF::loadview('backend.order.pdfPackingSlip',compact('order'));
         return $pdf->download($file_name);
     }
 

@@ -9,6 +9,7 @@ use App\Models\ProductReview;
 use App\Models\PostComment;
 use App\Rules\MatchOldPassword;
 use Hash;
+use DB;
 
 class HomeController extends Controller
 {
@@ -83,8 +84,8 @@ class HomeController extends Controller
 
     public function orderShow($id){
         $order=Order::find($id);
-        // return $order;
-        return view('user.order.show')->with('order',$order);
+        $ordered_prods=DB::table('products')->join('carts','products.id', '=', 'carts.product_id')->select('*')->where('order_id','=',$order->order_number)->get();
+        return view('user.order.show')->with(['ordered_prods'=>$ordered_prods, 'order' => $order]);
     }
     // Product Review
     public function productReviewIndex(){

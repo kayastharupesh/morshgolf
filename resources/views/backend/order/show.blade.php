@@ -5,8 +5,10 @@
 @section('main-content')
 <div class="card">
   <h5 class="card-header">Order <a href="{{route('order.pdf',$order->id)}}"
-      class=" btn btn-sm btn-primary shadow-sm float-right"><i class="fas fa-download fa-sm text-white-50"></i> Generate
-      PDF</a>
+      class=" btn btn-sm btn-primary shadow-sm float-right"><i class="fas fa-download fa-sm text-white-50"></i>PDF Invoice</a>
+
+      <a style="margin-right: 10px;" href="{{route('order.pdfPackingSlip',$order->id)}}"
+        class=" btn btn-sm btn-primary shadow-sm float-right"><i class="fas fa-download fa-sm text-white-50"></i>PDF Packing Slip</a>
   </h5>
   <div class="card-body">
     @if($order)
@@ -135,11 +137,12 @@
                   <td> : {{$order->phone}}</td>
 
                   <td>Post Code</td>
-                  <td> : {{$order->post_code}}/td>
+                  <td> : {{$order->post_code}}</td>
                 </tr>
                 <tr>
+                  @php $country = DB::table('countries')->where('id', $order->country)->first(); @endphp
                   <td>Country</td>
-                  <td> : {{$order->country}}</td>
+                  <td> : {{ $country->country_name }}</td>
 
                   <td>Address</td>
                   <td> : {{$order->address1}}, {{$order->address2}}</td>

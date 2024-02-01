@@ -131,10 +131,8 @@
         <table class="table table-bordered table-stripe">
             <thead>
                 <tr>
-                    <th scope="col" class="col-3">Product</th>
+                    <th scope="col" class="col-9">Product</th>
                     <th scope="col" class="col-3">Quantity</th>
-                    <th scope="col" class="col-3">Product Price</th>
-                    <th scope="col" class="col-3">Total</th>
                 </tr>
             </thead>
             <tbody>
@@ -145,29 +143,9 @@
                     <tr>
                         <td>{{ $item->title ." - ". $item->product_sub_title }}</td>
                         <td>{{ $item->quantity }}</td>
-                        <td>${{ number_format($item->price, 2) }}</td>
-                        <td>${{ number_format($item->amount, 2) }}</td>
                     </tr>
                 @endforeach
             </tbody>
-            <tfoot>
-                <tr>
-                    <th scope="col" class="empty"></th>
-                    <th scope="col" class="empty"></th>
-                    <th scope="col" class="text-right">Subtotal:</th>
-                    <th scope="col"> <span>${{ number_format($order->sub_total, 2) }}</span></th>
-                </tr>
-                <tr>
-                    <th scope="col" class="empty"></th>
-                    <th scope="col" class="empty"></th>
-                    <th scope="col" class="text-right">Total:</th>
-                    <th>
-                        <span>
-                            ${{ number_format($order->total_amount, 2) }}
-                        </span>
-                    </th>
-                </tr>
-            </tfoot>
         </table>
     </section>
 

@@ -181,55 +181,55 @@
 		
 
 	// show state in cart page
-  $('.nice-select-country').on('change', function() {
-    var cat_id=$(this).val();
-    if(cat_id !=null){
-      //console.log(cat_id);
-      // Ajax call
-      $.ajax({
-        url:"https://www.polosoftech.com/staging/morshgolf/country/"+cat_id+"/child",
-        data:{
-          _token:"{{csrf_token()}}",
-          id:cat_id
-        },
-        type:"POST",
-        beforeSend: function() {
-        	$('#image_loader').show();
-        },
-        success:function(response){
-          if(typeof(response) !='object'){
-            response=$.parseJSON(response)
-          }
-          //console.log(response);
-          var html_option="<option value=''>---select state---</option>"
-          if(response.status===true){
-              $('#image_loader').hide();
-            var data=response.data;
-              //alert(data);
-            if(response.data){
-                //console.log(response);
-              $('.child_cat_hide').removeClass('d-none');
-              $('.show_state_name').hide();
-              $('#child_cat_id').removeClass('d-none');
-              $.each(data,function(id,title){
-                html_option +="<option value='"+id+"'>"+title+"</option>"
-              });
-            }
-            else{
-            }
-          }
-          else{
-            $('#child_cat_id').addClass('d-none');
-            $('#image_loader').hide();
-            $('.show_state_name').show();
-          }
-          $('#child_cat_id').html(html_option);
-        }
-      });
-    }
-    else{
-    }
-  })	
+  // $('.nice-select-country').on('change', function() {
+  //   var cat_id=$(this).val();
+  //   if(cat_id !=null){
+  //     //console.log(cat_id);
+  //     // Ajax call
+  //     $.ajax({
+  //       url:"https://www.polosoftech.com/staging/morshgolf/country/"+cat_id+"/child",
+  //       data:{
+  //         _token:"{{csrf_token()}}",
+  //         id:cat_id
+  //       },
+  //       type:"POST",
+  //       beforeSend: function() {
+  //       	$('#image_loader').show();
+  //       },
+  //       success:function(response){
+  //         if(typeof(response) !='object'){
+  //           response=$.parseJSON(response)
+  //         }
+  //         //console.log(response);
+  //         var html_option="<option value=''>---select state---</option>"
+  //         if(response.status===true){
+  //             $('#image_loader').hide();
+  //           var data=response.data;
+  //             //alert(data);
+  //           if(response.data){
+  //               //console.log(response);
+  //             $('.child_cat_hide').removeClass('d-none');
+  //             $('.show_state_name').hide();
+  //             $('#child_cat_id').removeClass('d-none');
+  //             $.each(data,function(id,title){
+  //               html_option +="<option value='"+id+"'>"+title+"</option>"
+  //             });
+  //           }
+  //           else{
+  //           }
+  //         }
+  //         else{
+  //           $('#child_cat_id').addClass('d-none');
+  //           $('#image_loader').hide();
+  //           $('.show_state_name').show();
+  //         }
+  //         $('#child_cat_id').html(html_option);
+  //       }
+  //     });
+  //   }
+  //   else{
+  //   }
+  // })	
 
 
 // show state in cart page

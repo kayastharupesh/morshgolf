@@ -143,8 +143,8 @@ class CountryController extends Controller
         return redirect()->route('country.index');
     }
 
-    public function showStateCountryWise($id){
-        $state_list =  State::where('country_id',$id)->pluck('state_name','id');
+    public function showStateCountryWise(Request $request){
+        $state_list =  State::where('country_id',$request->id)->pluck('state_name','id');
         if(count($state_list)<=0){
             return response()->json(['status'=>false,'msg'=>'','data'=>null]);
         }
