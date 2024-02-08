@@ -9,6 +9,7 @@ use App\Models\Brand;
 //use App\Models\ProductVendor;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -306,6 +307,19 @@ class ProductController extends Controller
             request()->session()->flash('error','Error while deleting product');
         }
         return redirect()->route('product.index');
+    }
+
+    public function removeImage(Request $request, $id) {
+        $product = Product::findOrFail($id);
+        $photo_lists = explode(',', $product->photo);
+
+        $indexToRemove = $request->input('index');
+        Storage::delete($photo_lists[$indexToRemove]);
+        unset($photo_lists[$indexToRemove]);
+        $product->photo = implode(',', array_values($photo_lists));
+        $product->save();
+
+        return response()->json(['success' => 'Image removed successfully']);
     }
 }
 

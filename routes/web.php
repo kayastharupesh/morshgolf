@@ -205,6 +205,8 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
     // Product
     Route::resource('/product','ProductController');
 
+    Route::delete('/product/{id}/remove-image', 'ProductController@removeImage')->name('product.removeImage');
+
     // Ajax for sub category
     Route::post('/category/{id}/child','CategoryController@getChildByParent');
 
@@ -217,8 +219,10 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
     // Post
     Route::resource('/post','PostController');
     Route::resource('/enquiry','MessageController');
-    Route::resource('/affiliates-enquiry','MessageController@affiliates_enquiry');
-    Route::resource('/partners-enquiry','MessageController@partners_enquiry');
+    Route::resource('/affiliates-enquiry','MessageController');
+    Route::resource('/partners-enquiry','MessageController');
+    
+    
     
     // Message
     Route::resource('/message','MessageController');

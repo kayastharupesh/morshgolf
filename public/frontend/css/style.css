@@ -4296,3 +4296,7 @@ div#commentFormContainer h2 {
 .text-danger {
     color: #ee1127 !important;
 }
+.faq-body .accordion{
+    width: 69%;
+}
+

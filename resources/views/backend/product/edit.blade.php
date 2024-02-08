@@ -1,314 +1,352 @@
+<style>
+  .btn-sec i {
+    color: red;
+    font-size: 15px;
+    position: relative;
+    left: -1px;
+    top: -7px;
+  }
+</style>
+
 @extends('backend.layouts.master')
 @section('main-content')
 <div class="card">
-    <h5 class="card-header">Edit Product</h5>
-    <div class="card-body">
-      <form method="post" action="{{route('product.update',$product->id)}}" enctype="multipart/form-data">
-        @csrf 
-        @method('PATCH')
-        <div class="row">
-          <div class="col-xl-6 col-md-6 mb-4">
+  <h5 class="card-header">Edit Product</h5>
+  <div class="card-body">
+    <form method="post" action="{{route('product.update',$product->id)}}" enctype="multipart/form-data">
+      @csrf
+      @method('PATCH')
+      <div class="row">
+        <div class="col-xl-6 col-md-6 mb-4">
           <label for="inputTitle" class="col-form-label">Product Title <span class="text-danger">*</span></label>
-          <input id="inputTitle" type="text" name="title" placeholder="Enter title"  value="{{$product->title}}" class="form-control">
+          <input id="inputTitle" type="text" name="title" placeholder="Enter title" value="{{$product->title}}"
+            class="form-control">
           @error('title')
           <span class="text-danger">{{$message}}</span>
           @enderror
-          </div>
-          <div class="col-xl-6 col-md-6 mb-4">
-            <label for="inputTitle" class="col-form-label">Product Sub Title </label>
-            <input id="inputTitle" type="text" name="product_sub_title" placeholder="Enter sub title"  value="{{$product->product_sub_title}}" class="form-control">
-            @error('product_sub_title')
-            <span class="text-danger">{{$message}}</span>
-            @enderror
-          </div>
         </div>
-        <div class="row">
-          <div class="col-xl-6 col-md-6 mb-4">
+        <div class="col-xl-6 col-md-6 mb-4">
+          <label for="inputTitle" class="col-form-label">Product Sub Title </label>
+          <input id="inputTitle" type="text" name="product_sub_title" placeholder="Enter sub title"
+            value="{{$product->product_sub_title}}" class="form-control">
+          @error('product_sub_title')
+          <span class="text-danger">{{$message}}</span>
+          @enderror
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-md-6 mb-4">
           <label for="inputTitle" class="col-form-label">Rating <span class="text-danger">*</span></label>
-          <input id="inputTitle" type="text" name="rating" placeholder="Enter rating"  value="{{$product->rating}}" class="form-control">
+          <input id="inputTitle" type="text" name="rating" placeholder="Enter rating" value="{{$product->rating}}"
+            class="form-control">
           @error('rating')
           <span class="text-danger">{{$message}}</span>
           @enderror
-          </div>
-          <div class="col-xl-6 col-md-6 mb-4">
-            <label for="inputTitle" class="col-form-label">No of Product Sold <span class="text-danger">*</span></label>
-            <input id="inputTitle" type="text" name="no_of_product_sold" placeholder="Enter no of product sold"  value="{{$product->no_of_product_sold}}" class="form-control">
-            @error('no_of_product_sold')
-            <span class="text-danger">{{$message}}</span>
-            @enderror
-          </div>
         </div>
+        <div class="col-xl-6 col-md-6 mb-4">
+          <label for="inputTitle" class="col-form-label">No of Product Sold <span class="text-danger">*</span></label>
+          <input id="inputTitle" type="text" name="no_of_product_sold" placeholder="Enter no of product sold"
+            value="{{$product->no_of_product_sold}}" class="form-control">
+          @error('no_of_product_sold')
+          <span class="text-danger">{{$message}}</span>
+          @enderror
+        </div>
+      </div>
 
 
-        <div class="row">
-          <div class="col-xl-3 col-md-3 mb-4">
+      <div class="row">
+        <div class="col-xl-3 col-md-3 mb-4">
           <label for="inputTitle" class="col-form-label">Hand Orientation <span class="text-danger">*</span></label>
-          <input id="inputTitle" type="text" name="hand_orientation" placeholder="Enter hand orientation"  value="{{$product->hand_orientation}}" class="form-control" >
+          <input id="inputTitle" type="text" name="hand_orientation" placeholder="Enter hand orientation"
+            value="{{$product->hand_orientation}}" class="form-control">
           @error('hand_orientation')
           <span class="text-danger">{{$message}}</span>
           @enderror
-          </div>
-          <div class="col-xl-3 col-md-3 mb-4">
-            <label for="inputTitle" class="col-form-label">Shaft Material <span class="text-danger">*</span></label>
-            <input id="inputTitle" type="text" name="shaft_material" placeholder="Enter shaft material"  value="{{$product->shaft_material}}" class="form-control">
-            @error('shaft_material')
-            <span class="text-danger">{{$message}}</span>
-            @enderror
-          </div>
-          <div class="col-xl-3 col-md-3 mb-4">
-            <label for="inputTitle" class="col-form-label">Flex <span class="text-danger">*</span></label>
-            <input id="inputTitle" type="text" name="flex" placeholder="Enter flex"  value="{{$product->flex}}" class="form-control">
-            @error('flex')
-            <span class="text-danger">{{$message}}</span>
-            @enderror
-          </div>
-          <div class="col-xl-3 col-md-3 mb-4">
-            <label for="inputTitle" class="col-form-label">Configuration <span class="text-danger">*</span></label>
-            <input id="inputTitle" type="text" name="configuration" placeholder="Enter configuration"  value="{{$product->configuration}}" class="form-control">
-            @error('configuration')
-            <span class="text-danger">{{$message}}</span>
-            @enderror
-          </div>
+        </div>
+        <div class="col-xl-3 col-md-3 mb-4">
+          <label for="inputTitle" class="col-form-label">Shaft Material <span class="text-danger">*</span></label>
+          <input id="inputTitle" type="text" name="shaft_material" placeholder="Enter shaft material"
+            value="{{$product->shaft_material}}" class="form-control">
+          @error('shaft_material')
+          <span class="text-danger">{{$message}}</span>
+          @enderror
+        </div>
+        <div class="col-xl-3 col-md-3 mb-4">
+          <label for="inputTitle" class="col-form-label">Flex <span class="text-danger">*</span></label>
+          <input id="inputTitle" type="text" name="flex" placeholder="Enter flex" value="{{$product->flex}}"
+            class="form-control">
+          @error('flex')
+          <span class="text-danger">{{$message}}</span>
+          @enderror
+        </div>
+        <div class="col-xl-3 col-md-3 mb-4">
+          <label for="inputTitle" class="col-form-label">Configuration <span class="text-danger">*</span></label>
+          <input id="inputTitle" type="text" name="configuration" placeholder="Enter configuration"
+            value="{{$product->configuration}}" class="form-control">
+          @error('configuration')
+          <span class="text-danger">{{$message}}</span>
+          @enderror
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-4 col-md-4 mb-4">
+          <label for="inputTitle" class="col-form-label">Volume <span class="text-danger">*</span></label>
+          <input id="inputTitle" type="text" name="volume" placeholder="Enter volume" value="{{$product->volume}}"
+            class="form-control">
+          @error('volume')
+          <span class="text-danger">{{$message}}</span>
+          @enderror
         </div>
 
-        <div class="row">
-          <div class="col-xl-4 col-md-4 mb-4">
-            <label for="inputTitle" class="col-form-label">Volume  <span class="text-danger">*</span></label>
-              <input id="inputTitle" type="text" name="volume" placeholder="Enter volume"  value="{{$product->volume}}" class="form-control">
-            @error('volume')
-              <span class="text-danger">{{$message}}</span>
-            @enderror
-          </div>
-
-          <div class="col-xl-4 col-md-4 mb-4">
-            <label for="inputTitle" class="col-form-label">Length  <span class="text-danger">*</span></label>
-              <input id="inputTitle" type="text" name="length" placeholder="Enter length"  value="{{$product->length}}" class="form-control">
-              @error('length')
-                <span class="text-danger">{{$message}}</span>
-              @enderror
-          </div>
-
-          <div class="col-xl-4 col-md-4 mb-4">
-            <label for="inputTitle" class="col-form-label">Swing weight <span class="text-danger">*</span></label>
-              <input id="inputTitle" type="text" name="swing_weight" placeholder="Enter flex"  value="{{$product->swing_weight}}" class="form-control">
-              @error('swing_weight')
-                <span class="text-danger">{{$message}}</span>
-              @enderror
-          </div>
+        <div class="col-xl-4 col-md-4 mb-4">
+          <label for="inputTitle" class="col-form-label">Length <span class="text-danger">*</span></label>
+          <input id="inputTitle" type="text" name="length" placeholder="Enter length" value="{{$product->length}}"
+            class="form-control">
+          @error('length')
+          <span class="text-danger">{{$message}}</span>
+          @enderror
         </div>
 
-        <div class="row">
-          <div class="col-xl-6 col-md-6 mb-6 pt-2 pb-3">
-            <label for="inputTitle" class="col-form-label" style="color:#4a6fdc;"><b>Is Featured /   Top Offers</b> <span class="text-danger">*</span></label>
-            <input type="checkbox" name='is_featured' id='is_featured' value='1' {{(($product->is_featured) ? 'checked' : '')}}> Yes      
-          </div>
+        <div class="col-xl-4 col-md-4 mb-4">
+          <label for="inputTitle" class="col-form-label">Swing weight <span class="text-danger">*</span></label>
+          <input id="inputTitle" type="text" name="swing_weight" placeholder="Enter flex"
+            value="{{$product->swing_weight}}" class="form-control">
+          @error('swing_weight')
+          <span class="text-danger">{{$message}}</span>
+          @enderror
+        </div>
+      </div>
 
-
-          <div class="col-xl-6 col-md-6 mb-6 pt-2 pb-3">
-            <label for="inputTitle" class="col-form-label" style="color:#4a6fdc;"><b>Is Cross Sell Product</b> <span class="text-danger">*</span></label>
-            <input type="checkbox" name='is_cross_sell' id='is_cross_sell' value='1' {{(($product->is_cross_sell) ? 'checked' : '')}}> Yes      
-          </div>
+      <div class="row">
+        <div class="col-xl-6 col-md-6 mb-6 pt-2 pb-3">
+          <label for="inputTitle" class="col-form-label" style="color:#4a6fdc;"><b>Is Featured / Top Offers</b> <span
+              class="text-danger">*</span></label>
+          <input type="checkbox" name='is_featured' id='is_featured' value='1' {{(($product->is_featured) ? 'checked' :
+          '')}}> Yes
         </div>
 
 
+        <div class="col-xl-6 col-md-6 mb-6 pt-2 pb-3">
+          <label for="inputTitle" class="col-form-label" style="color:#4a6fdc;"><b>Is Cross Sell Product</b> <span
+              class="text-danger">*</span></label>
+          <input type="checkbox" name='is_cross_sell' id='is_cross_sell' value='1' {{(($product->is_cross_sell) ?
+          'checked' : '')}}> Yes
+        </div>
+      </div>
 
-        <div class="row">
-          <div class="col-xl-3 col-md-3 mb-4">
-            <label for="price" class="col-form-label">Price(USD) <span class="text-danger">*</span></label>
-            <input inputmode="decimal" 
-            id="float-input" 
-            pattern="[0-9]*[.,]?[0-9]*" type="text" name="price" placeholder="Enter price"  value="{{$product->price}}" class="form-control">
-            @error('price')
-            <span class="text-danger">{{$message}}</span>
-            @enderror
-          </div>
-          <div class="col-xl-3 col-md-3 mb-4">
-            <label for="discount" class="col-form-label">Discount(%)</label>
-            <input id="discount" type="number" name="discount" min="0" max="100" placeholder="Enter discount"  value="{{$product->discount}}" class="form-control">
+
+
+      <div class="row">
+        <div class="col-xl-3 col-md-3 mb-4">
+          <label for="price" class="col-form-label">Price(USD) <span class="text-danger">*</span></label>
+          <input inputmode="decimal" id="float-input" pattern="[0-9]*[.,]?[0-9]*" type="text" name="price"
+            placeholder="Enter price" value="{{$product->price}}" class="form-control">
+          @error('price')
+          <span class="text-danger">{{$message}}</span>
+          @enderror
+        </div>
+        <div class="col-xl-3 col-md-3 mb-4">
+          <label for="discount" class="col-form-label">Discount(%)</label>
+          <input id="discount" type="number" name="discount" min="0" max="100" placeholder="Enter discount"
+            value="{{$product->discount}}" class="form-control">
           @error('discount')
           <span class="text-danger">{{$message}}</span>
           @enderror
-          </div>
-          <div class="col-xl-6 col-md-6 mb-6">
-            <label for="size">Attribute</label>
-            <select name="size[]" class="form-control selectpicker"  multiple data-live-search="true">
-              <option value="">--Select any Attribute--</option>
-              @foreach($items as $item)              
-                @php 
-                $data=explode(',',$item->size);
-                // dd($data);
-                @endphp
-              <option value="Left Handed"  @if( in_array( "Left Handed",$data ) ) selected @endif>Left Handed</option>
-              <option value="Right Handed"  @if( in_array( "Right Handed",$data ) ) selected @endif>Right Handed</option>
-              <option value="Regular"  @if( in_array( "Regular",$data ) ) selected @endif>Regular</option>
-              <option value="Stiff"  @if( in_array( "Stiff",$data ) ) selected @endif>Stiff</option>
-              <option value="XStiff"  @if( in_array( "Xstiff",$data ) ) selected @endif>XStiff </option>
-              <option value="X-Stiff Shaft"  @if( in_array( "X-Stiff Shaft",$data ) ) selected @endif>X-Stiff Shaft</option>
-              <option value="RH REG"  @if( in_array( "RH REG",$data ) ) selected @endif>RH REG</option>
-              <option value="RH STIFF"  @if( in_array( "RH STIFF",$data ) ) selected @endif>RH STIFF</option>
-              @endforeach
-          </select>
-          </div>
         </div>
-
-
-        <div class="row">
-          <div class="col-xl-6 col-md-3 mb-4">
-            <label for="stock">Quantity <span class="text-danger">*</span></label>
-            <input id="quantity" type="number" name="stock" min="0" placeholder="Enter quantity"  value="{{$product->stock}}" class="form-control">
-            @error('stock')
-            <span class="text-danger">{{$message}}</span>
-            @enderror
-          </div>
-          <div class="col-xl-6 col-md-3 mb-4">
-            <label for="status" class="col-form-label">Status <span class="text-danger">*</span></label>
-            <select name="status" class="form-control">
-              <option value="active" {{(($product->status=='active')? 'selected' : '')}}>Active</option>
-              <option value="inactive" {{(($product->status=='inactive')? 'selected' : '')}}>Inactive</option>
-          </select>
-            @error('status')
-            <span class="text-danger">{{$message}}</span>
-            @enderror
-          </div>
-        </div>
-
-
-        <div class="form-group">
-          <label for="cat_id">Category <span class="text-danger">*</span></label>
-          <select name="cat_id" id="cat_id" class="form-control">
-              <option value="">--Select any category--</option>
-              @foreach($categories as $key=>$cat_data)
-                  <option value='{{$cat_data->id}}' {{(($product->cat_id==$cat_data->id)? 'selected' : '')}}>{{$cat_data->title}}</option>
-              @endforeach
+        <div class="col-xl-6 col-md-6 mb-6">
+          <label for="size">Attribute</label>
+          <select name="size[]" class="form-control selectpicker" multiple data-live-search="true">
+            <option value="">--Select any Attribute--</option>
+            @foreach($items as $item)
+            @php
+            $data=explode(',',$item->size);
+            // dd($data);
+            @endphp
+            <option value="Left Handed" @if( in_array( "Left Handed" ,$data ) ) selected @endif>Left Handed</option>
+            <option value="Right Handed" @if( in_array( "Right Handed" ,$data ) ) selected @endif>Right Handed</option>
+            <option value="Regular" @if( in_array( "Regular" ,$data ) ) selected @endif>Regular</option>
+            <option value="Stiff" @if( in_array( "Stiff" ,$data ) ) selected @endif>Stiff</option>
+            <option value="XStiff" @if( in_array( "Xstiff" ,$data ) ) selected @endif>XStiff </option>
+            <option value="X-Stiff Shaft" @if( in_array( "X-Stiff Shaft" ,$data ) ) selected @endif>X-Stiff Shaft
+            </option>
+            <option value="RH REG" @if( in_array( "RH REG" ,$data ) ) selected @endif>RH REG</option>
+            <option value="RH STIFF" @if( in_array( "RH STIFF" ,$data ) ) selected @endif>RH STIFF</option>
+            @endforeach
           </select>
         </div>
-        @php 
-          $sub_cat_info=DB::table('categories')->select('title')->where('id',$product->child_cat_id)->get();
-        // dd($sub_cat_info);
-        @endphp
-
-        {{-- {{$product->child_cat_id}} --}}
-        <div class="form-group {{(($product->child_cat_id)? '' : 'd-none')}}" id="child_cat_div">
-          <label for="child_cat_id">Sub Category</label>
-          <select name="child_cat_id" id="child_cat_id" class="form-control">
-              <option value="">--Select any sub category--</option>
-          </select>
-        </div>
+      </div>
 
 
-        <div class="form-group">
-          <label for="summary" class="col-form-label">About Description <span class="text-danger">*</span></label>
-          <textarea class="form-control" id="about_description"  name="summary">{!! stripslashes($product->summary) !!}</textarea>
-          @error('summary')
+      <div class="row">
+        <div class="col-xl-6 col-md-3 mb-4">
+          <label for="stock">Quantity <span class="text-danger">*</span></label>
+          <input id="quantity" type="number" name="stock" min="0" placeholder="Enter quantity"
+            value="{{$product->stock}}" class="form-control">
+          @error('stock')
           <span class="text-danger">{{$message}}</span>
           @enderror
         </div>
+        <div class="col-xl-6 col-md-3 mb-4">
+          <label for="status" class="col-form-label">Status <span class="text-danger">*</span></label>
+          <select name="status" class="form-control">
+            <option value="active" {{(($product->status=='active')? 'selected' : '')}}>Active</option>
+            <option value="inactive" {{(($product->status=='inactive')? 'selected' : '')}}>Inactive</option>
+          </select>
+          @error('status')
+          <span class="text-danger">{{$message}}</span>
+          @enderror
+        </div>
+      </div>
 
-        <div class="form-group">
-          <label for="description" class="col-form-label">Know The Brand</label>
-          <textarea class="form-control" id="know_the_brand"  name="description">
+
+      <div class="form-group">
+        <label for="cat_id">Category <span class="text-danger">*</span></label>
+        <select name="cat_id" id="cat_id" class="form-control">
+          <option value="">--Select any category--</option>
+          @foreach($categories as $key=>$cat_data)
+          <option value='{{$cat_data->id}}' {{(($product->cat_id==$cat_data->id)? 'selected' :
+            '')}}>{{$cat_data->title}}</option>
+          @endforeach
+        </select>
+      </div>
+      @php
+      $sub_cat_info=DB::table('categories')->select('title')->where('id',$product->child_cat_id)->get();
+      // dd($sub_cat_info);
+      @endphp
+
+      {{-- {{$product->child_cat_id}} --}}
+      <div class="form-group {{(($product->child_cat_id)? '' : 'd-none')}}" id="child_cat_div">
+        <label for="child_cat_id">Sub Category</label>
+        <select name="child_cat_id" id="child_cat_id" class="form-control">
+          <option value="">--Select any sub category--</option>
+        </select>
+      </div>
+
+
+      <div class="form-group">
+        <label for="summary" class="col-form-label">About Description <span class="text-danger">*</span></label>
+        <textarea class="form-control" id="about_description"
+          name="summary">{!! stripslashes($product->summary) !!}</textarea>
+        @error('summary')
+        <span class="text-danger">{{$message}}</span>
+        @enderror
+      </div>
+
+      <div class="form-group">
+        <label for="description" class="col-form-label">Know The Brand</label>
+        <textarea class="form-control" id="know_the_brand" name="description">
             {!! stripslashes($product->description) !!}</textarea>
-          @error('description')
-          <span class="text-danger">{{$message}}</span>
-          @enderror
-        </div>
+        @error('description')
+        <span class="text-danger">{{$message}}</span>
+        @enderror
+      </div>
 
-        <div class="form-group">
-          <label for="description" class="col-form-label">Product Description</label>
-          <textarea class="form-control" id="product_description" name="product_description">
+      <div class="form-group">
+        <label for="description" class="col-form-label">Product Description</label>
+        <textarea class="form-control" id="product_description" name="product_description">
             {!! stripslashes($product->product_description) !!}</textarea>
-          @error('product_description')
-          <span class="text-danger">{{$message}}</span>
-          @enderror
-        </div>
+        @error('product_description')
+        <span class="text-danger">{{$message}}</span>
+        @enderror
+      </div>
 
 
-        <div class="form-group">
-          <label for="description" class="col-form-label">Technical Details</label>
-          <textarea class="form-control" id="technical_details" name="technical_details">
+      <div class="form-group">
+        <label for="description" class="col-form-label">Technical Details</label>
+        <textarea class="form-control" id="technical_details" name="technical_details">
             {!! $product->technical_details !!}</textarea>
-          @error('technical_details')
-          <span class="text-danger">{{$message}}</span>
-          @enderror
-        </div>
+        @error('technical_details')
+        <span class="text-danger">{{$message}}</span>
+        @enderror
+      </div>
 
-        {{-- <div class="form-group">
+      {{-- <div class="form-group">
 
-          <label for="brand_id">Brand</label>
+        <label for="brand_id">Brand</label>
 
-          <select name="brand_id" class="form-control">
+        <select name="brand_id" class="form-control">
 
-              <option value="">--Select Brand--</option>
+          <option value="">--Select Brand--</option>
 
-             @foreach($brands as $brand)
+          @foreach($brands as $brand)
 
-              <option value="{{$brand->id}}" {{(($product->brand_id==$brand->id)? 'selected':'')}}>{{$brand->title}}</option>
+          <option value="{{$brand->id}}" {{(($product->brand_id==$brand->id)? 'selected':'')}}>{{$brand->title}}
+          </option>
 
-             @endforeach
+          @endforeach
 
-          </select>
+        </select>
 
-        </div> --}}
+      </div> --}}
 
 
 
-        {{-- <div class="form-group">
+      {{-- <div class="form-group">
 
-          <label for="condition">Condition</label>
+        <label for="condition">Condition</label>
 
-          <select name="condition" class="form-control">
+        <select name="condition" class="form-control">
 
-              <option value="">--Select Condition--</option>
+          <option value="">--Select Condition--</option>
 
-              <option value="default" {{(($product->condition=='default')? 'selected':'')}}>Default</option>
+          <option value="default" {{(($product->condition=='default')? 'selected':'')}}>Default</option>
 
-              <option value="new" {{(($product->condition=='new')? 'selected':'')}}>New</option>
+          <option value="new" {{(($product->condition=='new')? 'selected':'')}}>New</option>
 
-              <option value="hot" {{(($product->condition=='hot')? 'selected':'')}}>Hot</option>
+          <option value="hot" {{(($product->condition=='hot')? 'selected':'')}}>Hot</option>
 
-          </select>
+        </select>
 
-        </div> --}}
+      </div> --}}
 
-        <div class="row">
-          <div class="col-xl-6 col-md-6 mb-4">
+      <div class="row">
+        <div class="col-xl-6 col-md-6 mb-4">
           <label for="inputPhoto" class="col-form-label">Photo <span class="text-danger">*</span>
-          <br>
-          <em class="text-danger">For multiple image upload choose image & press ctrl key for multiselect. </em></label>
-          <input  class="form-control" type="file" name="photo[]" multiple accept="image/png, image/gif, image/jpeg" >
-        <div id="holder" style="margin-top:15px;max-height:100px;"></div>
+            <br>
+            <em class="text-danger">For multiple image upload choose image & press ctrl key for multiselect.
+            </em></label>
+          <input class="form-control" type="file" name="photo[]" multiple accept="image/png, image/gif, image/jpeg">
+          <div id="holder" style="margin-top:15px;max-height:100px;"></div>
           @error('photo')
           <span class="text-danger">{{$message}}</span>
           @enderror
 
           @if($product->photo)
-            @php
-            $photo_lists = explode(',',$product->photo);
-            @endphp
+          @php
+          $photo_lists = explode(',',$product->photo);
+          @endphp
 
-            @foreach($photo_lists as $list_pp)
-              <img src="{{ url('/public/product/') }}/{{ $list_pp }}" class="img-fluid zoom" style="max-width:80px" alt="{{$product->photo}}">
+          <div class="btn-sec d-flex" style="gap: 8px">
+            @foreach($photo_lists as $index => $list_pp)
+            <div class="image-container" style="display: flex;">
+              <img src="{{ url('/public/product/') }}/{{ $list_pp }}" class="img-fluid zoom" style="max-width:80px"
+                alt="{{$product->photo}}">
+              <i class="fa fa-times remove-image" aria-hidden="true" data-index="{{ $index }}"></i>
+            </div>
             @endforeach
+          </div>
           @endif
         </div>
 
         {{-- <div class="col-xl-6 col-md-6 mb-4">
 
-          <label for="inputPhoto" class="col-form-label">Thumbnail  Photo <span class="text-danger">*</span></label>
+          <label for="inputPhoto" class="col-form-label">Thumbnail Photo <span class="text-danger">*</span></label>
 
           <div class="input-group">
 
-             
 
 
 
-          <input type="file" class="form-control" name="thumb_photo[]" multiple accept="image/png, image/gif, image/jpeg"  value="{{old('thumb_photo')}}"/>
+
+            <input type="file" class="form-control" name="thumb_photo[]" multiple
+              accept="image/png, image/gif, image/jpeg" value="{{old('thumb_photo')}}" />
 
 
 
-        </div>
+          </div>
 
-        <div id="holder" style="margin-top:15px;max-height:100px;"></div>
+          <div id="holder" style="margin-top:15px;max-height:100px;"></div>
 
           @error('thumb_photo')
 
@@ -318,65 +356,67 @@
 
         </div> --}}
 
-        </div>
+      </div>
 
 
 
-    
-
-        <div class="card" id="meta" style="cursor: grab;">
-          <h5 class="card-header" style="padding: 8px 0px 8px 12px;font-size: 18px;">Add Seo Information</h5>
-        </div>
-
-        <div class="row meta_details"  @if(isset($product->meta_title) && $product->meta_title!="")  style="display:block;" @else style="display:none;"  @endif >
-            <div class="col-xl-6 col-md-6 mb-4">
-              <div class=" h-100 py-2">
-                <label for="status" class="col-form-label">Meta Title <span class="text-danger">*</span></label>
-                  <input type="text" name="meta_title" class="form-control" value="{{$product->meta_title}}">
-                  @error('meta_title')
-                  <span class="text-danger">{{$message}}</span>
-                  @enderror
-              </div>
-            </div>
-
-            <div class="col-xl-6 col-md-6 mb-4">
-              <div class=" h-100 py-2">
-                <label for="status" class="col-form-label">Meta Keyword <span class="text-danger">*</span></label>
-                  <input type="text" name="meta_keyword" class="form-control" value="{{$product->meta_keyword}}">
-                  @error('meta_keyword')
-                  <span class="text-danger">{{$message}}</span>
-                  @enderror
-              </div>
-            </div>
-
-            <div class="col-xl-12 col-md-12 mb-12">
-              <div class=" h-100 py-2">
-                <label for="status" class="col-form-label">Meta Description <span class="text-danger">*</span></label>
-                  <textarea name="meta_description" class="form-control" rows="2" cols="20">{{$product->meta_description}}</textarea>
-                  @error('meta_description')
-                    <span class="text-danger">{{$message}}</span>
-                  @enderror
-              </div>
-            </div>
 
 
-            <div class="col-xl-12 col-md-12 mb-12">
-              <div class=" h-100 py-2">
-                  <label for="status" class="col-form-label">Extra Code <span class="text-danger">*</span></label>
-                  <textarea name="extra_code" class="form-control" rows="4" cols="20">{{$product->extra_code}}</textarea>
-                  @error('extra_code')
-                    <span class="text-danger">{{$message}}</span>
-                  @enderror
-              </div>
-            </div>
+      <div class="card" id="meta" style="cursor: grab;">
+        <h5 class="card-header" style="padding: 8px 0px 8px 12px;font-size: 18px;">Add Seo Information</h5>
+      </div>
+
+      <div class="row meta_details" @if(isset($product->meta_title) && $product->meta_title!="") style="display:block;"
+        @else style="display:none;" @endif >
+        <div class="col-xl-6 col-md-6 mb-4">
+          <div class=" h-100 py-2">
+            <label for="status" class="col-form-label">Meta Title <span class="text-danger">*</span></label>
+            <input type="text" name="meta_title" class="form-control" value="{{$product->meta_title}}">
+            @error('meta_title')
+            <span class="text-danger">{{$message}}</span>
+            @enderror
           </div>
-
-        <div class="form-group mt-xl-3">
-          <a href="{{ url('admin/product') }}" class="btn btn-primary">Cancel</a>
-           <button class="btn btn-success" type="submit">Update</button>
         </div>
-      </form>
-    </div>
+
+        <div class="col-xl-6 col-md-6 mb-4">
+          <div class=" h-100 py-2">
+            <label for="status" class="col-form-label">Meta Keyword <span class="text-danger">*</span></label>
+            <input type="text" name="meta_keyword" class="form-control" value="{{$product->meta_keyword}}">
+            @error('meta_keyword')
+            <span class="text-danger">{{$message}}</span>
+            @enderror
+          </div>
+        </div>
+
+        <div class="col-xl-12 col-md-12 mb-12">
+          <div class=" h-100 py-2">
+            <label for="status" class="col-form-label">Meta Description <span class="text-danger">*</span></label>
+            <textarea name="meta_description" class="form-control" rows="2"
+              cols="20">{{$product->meta_description}}</textarea>
+            @error('meta_description')
+            <span class="text-danger">{{$message}}</span>
+            @enderror
+          </div>
+        </div>
+
+
+        <div class="col-xl-12 col-md-12 mb-12">
+          <div class=" h-100 py-2">
+            <label for="status" class="col-form-label">Extra Code <span class="text-danger">*</span></label>
+            <textarea name="extra_code" class="form-control" rows="4" cols="20">{{$product->extra_code}}</textarea>
+            @error('extra_code')
+            <span class="text-danger">{{$message}}</span>
+            @enderror
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group mt-xl-3">
+        <a href="{{ url('admin/product') }}" class="btn btn-primary">Cancel</a>
+        <button class="btn btn-success" type="submit">Update</button>
+      </div>
+    </form>
+  </div>
 </div>
 
 @endsection
@@ -395,82 +435,98 @@
 
 {{-- ckeditor code end here --}}
 <script>
-    $(document).ready(function() {
-      $('#about_description').summernote({
+  $(document).ready(function() {
+    $('#about_description').summernote({
       placeholder: "Write about description.....",
-        tabsize: 2,
-        height: 100
+      tabsize: 2,
+      height: 100
     });
     $('#know_the_brand').summernote({
       placeholder: "Write product description.....",
-        tabsize: 2,
-        height: 100
+      tabsize: 2,
+      height: 100
     });
     $('#product_description').summernote({
       placeholder: "Write brand description.....",
-        tabsize: 2,
-        height: 150
+      tabsize: 2,
+      height: 150
     });
     $('#technical_details').summernote({
       placeholder: "Write brand description.....",
-        tabsize: 2,
-        height: 150
+      tabsize: 2,
+      height: 150
     });
-      $("#meta").click(function(){
-        $(".meta_details").slideDown();
-      });
+    $("#meta").click(function(){
+      $(".meta_details").slideDown();
     });
+  });
+
+  $(document).on('click', '.remove-image', function(){
+    var index = $(this).data('index');
+    $.ajax({
+      url: '{{ route("product.removeImage", ["id" => $product->id]) }}',
+      method: 'DELETE',
+      data: {
+        index: index,
+        _token: '{{ csrf_token() }}'
+      },
+      success: function(response) {
+        $('.image-container').eq(index).remove();
+      },
+      error: function(xhr) {
+        console.log(xhr.responseText);
+      }
+    });
+  });
 </script>
 
 
 
 <script>
-
   var  child_cat_id='{{$product->child_cat_id}}';
-        // alert(child_cat_id);
 
-        $('#cat_id').change(function(){
-            var cat_id=$(this).val();
-            if(cat_id !=null){
-                // ajax call
-                $.ajax({
-                    url:"/admin/category/"+cat_id+"/child",
-                    type:"POST",
-                    data:{
-                        _token:"{{csrf_token()}}"
-                    },
+  $('#cat_id').change(function(){
+      var cat_id=$(this).val();
+      if(cat_id !=null){
+          // ajax call
+          $.ajax({
+              url:"/admin/category/"+cat_id+"/child",
+              type:"POST",
+              data:{
+                  _token:"{{csrf_token()}}"
+              },
 
-                    success:function(response){
-                        if(typeof(response)!='object'){
-                            response=$.parseJSON(response);
-                        }
-                        var html_option="<option value=''>--Select any one--</option>";
-                        if(response.status){
-                            var data=response.data;
-                            if(response.data){
-                                $('#child_cat_div').removeClass('d-none');
-                                $.each(data,function(id,title){
-                                    html_option += "<option value='"+id+"' "+(child_cat_id==id ? 'selected ' : '')+">"+title+"</option>";
-                                });
-                            }
-                            else{
-                                console.log('no response data');
-                            }
-                        }
-                        else{
-                            $('#child_cat_div').addClass('d-none');
-                        }
-                        $('#child_cat_id').html(html_option);
-                    }
-                });
-            }
-            else{
-            }
-        });
+              success:function(response){
+                  if(typeof(response)!='object'){
+                      response=$.parseJSON(response);
+                  }
+                  var html_option="<option value=''>--Select any one--</option>";
+                  if(response.status){
+                      var data=response.data;
+                      if(response.data){
+                          $('#child_cat_div').removeClass('d-none');
+                          $.each(data,function(id,title){
+                              html_option += "<option value='"+id+"' "+(child_cat_id==id ? 'selected ' : '')+">"+title+"</option>";
+                          });
+                      }
+                      else{
+                          console.log('no response data');
+                      }
+                  }
+                  else{
+                      $('#child_cat_div').addClass('d-none');
+                  }
+                  $('#child_cat_id').html(html_option);
+              }
+          });
+      }
+      else{
+      }
+  });
 
-        if(child_cat_id!=null){
-            $('#cat_id').change();
-        }
+  if(child_cat_id!=null){
+      $('#cat_id').change();
+  }
 
 </script>
 @endpush

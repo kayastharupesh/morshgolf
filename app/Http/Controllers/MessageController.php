@@ -159,4 +159,10 @@ class MessageController extends Controller
         }
         return back();
     }
+
+    public function affiliates_enquiry()
+    {
+        $message=Message::where('type','A')->paginate(10);
+        return view('backend.affiliates.index')->with('messages',$message);
+    }
 }
