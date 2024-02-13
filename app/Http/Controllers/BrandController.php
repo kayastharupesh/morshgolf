@@ -36,15 +36,21 @@ class BrandController extends Controller
     public function store(Request $request){
         $this->validate($request,[
             'title'=>'string|required',
-            'logo'=>'string|nullable',
+            'logo'=>'required',
         ]);
         $data=$request->all();
-        $slug=Str::slug($request->title);
-        $count=Brand::where('slug',$slug)->count();
-        if($count>0){
-            $slug=$slug.'-'.date('ymdis').'-'.rand(0,999);
+        if($request->hasFile('logo')) {
+            $file = $request->file('logo');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "gallery-".rand(11111, 99999).".".$file_extension;
+            if($file->move('public/backend/gallery/',$file_Newname)){
+                $data['logo']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
         }
-        $data['slug']=$slug;
         $status = Brand::create($data);
         if($status){
             request()->session()->flash('success','Brand successfully created');
@@ -94,6 +100,19 @@ class BrandController extends Controller
             'photo'=>'string|nullable',
         ]);
         $data=$request->all();
+
+        if($request->hasFile('logo')) {
+            $file = $request->file('logo');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "gallery-".rand(11111, 99999).".".$file_extension;
+            if($file->move('public/backend/gallery/',$file_Newname)){
+                $data['logo']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
        
         $status=$brand->fill($data)->save();
         if($status){

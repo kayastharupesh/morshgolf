@@ -3,9 +3,9 @@
 @section('main-content')
 
 <div class="card">
-    <h5 class="card-header">Edit Brand</h5>
+    <h5 class="card-header">Edit Gallery</h5>
     <div class="card-body">
-      <form method="post" action="{{route('brand.update',$brand->id)}}">
+      <form method="post" action="{{route('brand.update',$brand->id)}}" enctype="multipart/form-data">
         @csrf 
         @method('PATCH')
         <div class="form-group">
@@ -19,13 +19,9 @@
         <div class="form-group">
           <label for="inputPhoto" class="col-form-label">Logo</label>
           <div class="input-group">
-              <span class="input-group-btn">
-                  <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
-                  <i class="fa fa-picture-o"></i> Choose
-                  </a>
-              </span>
-          <input id="thumbnail" class="form-control" type="text" name="logo" value="{{$brand->logo}}">
+          <input id="thumbnail" class="form-control" type="file" name="logo">
         </div>
+        <img src="{{asset('backend/gallery/'.$brand->logo)}}" class="img-fluid" style="max-width:100px" alt="{{$brand->logo}}">
         <div id="holder" style="margin-top:15px;max-height:100px;"></div>
           @error('logo')
           <span class="text-danger">{{$message}}</span>

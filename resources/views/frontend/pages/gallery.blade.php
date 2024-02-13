@@ -15,165 +15,18 @@
 @endsection --}}
 @section('title','Gallery - Morsh Golf')
 @section('main-content')
+@php $brands=DB::table('brands')->where('status', 'active')->get();@endphp
 <section class="gallery-page">
     <div class="gallery-page-body">
         <h1>Product Gallery</h1>
         <div class="gallery-page-list" id="default-demo">
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/product-img-1.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/product-img-1.jpeg') }}" alt="">
-                </a>
-            </div>
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/product-img-2.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/product-img-2.jpeg') }}" alt="">
-                </a>
-            </div>
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/product-img-3.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/product-img-3.jpeg') }}" alt="">
-                </a>
-            </div>
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/product-img-4.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/product-img-4.jpeg') }}" alt="">
-                </a>
-            </div>
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/product-img-5.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/product-img-5.jpeg') }}" alt="">
-                </a>
-            </div>
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/product-img-6.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/product-img-6.jpeg') }}" alt="">
-                </a>
-            </div>
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/product-img-7.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/product-img-7.jpeg') }}" alt="">
-                </a>
-            </div>
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/product-img-8.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/product-img-8.jpeg') }}" alt="">
-                </a>
-            </div>
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/product-img-9.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/product-img-9.jpeg') }}" alt="">
-                </a>
-            </div>
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/product-img-10.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/product-img-10.jpeg') }}" alt="">
-                </a>
-            </div>
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/product-img-11.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/product-img-11.jpeg') }}" alt="">
-                </a>
-            </div>
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/product-img-12.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/product-img-12.jpeg') }}" alt="">
-                </a>
-            </div>
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/product-img-13.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/product-img-13.jpeg') }}" alt="">
-                </a>
-            </div>
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/product-img-14.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/product-img-14.jpeg') }}" alt="">
-                </a>
-            </div>
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/product-img-15.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/product-img-15.jpeg') }}" alt="">
-                </a>
-            </div>
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/product-img-16.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/product-img-16.jpeg') }}" alt="">
-                </a>
-            </div>
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/product-img-17.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/product-img-17.jpeg') }}" alt="">
-                </a>
-            </div>
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/product-img-18.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/product-img-18.jpeg') }}" alt="">
-                </a>
-            </div>
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/product-img-19.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/product-img-19.jpeg') }}" alt="">
-                </a>
-            </div>
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/product-img-20.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/product-img-20.jpeg') }}" alt="">
-                </a>
-            </div>
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/product-img-21.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/product-img-21.jpeg') }}" alt="">
-                </a>
-            </div>
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/product-img-22.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/product-img-22.jpeg') }}" alt="">
-                </a>
-            </div>
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/product-img-23.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/product-img-23.jpeg') }}" alt="">
-                </a>
-            </div>
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/product-img-24.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/product-img-24.jpeg') }}" alt="">
-                </a>
-            </div>
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/product-img-25.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/product-img-25.jpeg') }}" alt="">
-                </a>
-            </div>
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/product-img-26.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/product-img-26.jpeg') }}" alt="">
-                </a>
-            </div>
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/product-img-27.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/product-img-27.jpeg') }}" alt="">
-                </a>
-            </div>
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/golf-ball-1.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/golf-ball-1.jpeg') }}" alt="">
-                </a>
-            </div>
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/golf-ball-2.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/golf-ball-2.jpeg') }}" alt="">
-                </a>
-            </div>
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/golf-ball-3.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/golf-ball-3.jpeg') }}" alt="">
-                </a>
-            </div>
-            <div class="gallery-item">
-                <a href="{{ asset('frontend/images/gallery/golf-ball-4.jpeg') }}" target="_blank" class="thumbnail">
-                    <img src="{{ asset('frontend/images/gallery/golf-ball-4.jpeg') }}" alt="">
-                </a>
-            </div>
+						@foreach($brands as $brand)
+							<div class="gallery-item">
+									<a href="{{asset('backend/gallery/'.$brand->logo)}}" target="_blank" class="thumbnail">
+											<img src="{{asset('backend/gallery/'.$brand->logo)}}" alt="">
+									</a>
+							</div>
+						@endforeach
         </div>
     </div>
 </section>

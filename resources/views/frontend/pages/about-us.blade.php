@@ -16,20 +16,20 @@
 
 @section('title','About us - Morsh Golf')
 @section('main-content')
-
+@php $aboutus=DB::table('about_us')->first(); @endphp
 <section class="inner-about-us-sec">
     <h1>About Us</h1>
     <div class="inner-about-body">
         <div class="inner-about-left">
-            <h3>Let us introduce ourselves:</h3>
+            <h3>{{ $aboutus->head_line1 }}</h3>
 
-            <p>We love to play golf and share our passion for golf, this is why we decided to contribute our part to the worldwide golf. We started our idea a bit earlier, but the company was born in the start of 2015. We saw that there are still so many things we can improve in the game of golf and its equipment, that we couldn’t resist it. What we love the most is to see satisfied golfers with the passion for the game and the desire to manage “seen only on tv” shots. There’s no better feeling that doing what you love to do.</p>
+            <p>{{ $aboutus->head_line_content1 }}</p>
         </div>
         <div class="inner-about-middle">
-            <img src="{{ asset('frontend/images/about-us/about-image.png') }}" class="img-fluid" alt="" >
+            <img src="{{url('public/frontend/images/banner/'.$aboutus->image1)}}" class="img-fluid" alt="" >
         </div>
         <div class="inner-about-right">
-            <p>How we came up with the idea for our company and our first product is another story. It was quite spontaneous, so take a look at <a href="#">Our Story</a> 😉</p>
+            <p>{{ $aboutus->sub_head_line_content }}</p>
         </div>
     </div>
 </section>
@@ -38,17 +38,11 @@
 <section class="our-story-sec">
     <div class="our-story-body">
         <div class="our-story-title">
-            <h2>Our Story <span>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium</span></h2>
-            <img src="{{ asset('frontend/images/about-us/story-img.jpg') }}" alt="" class="img-fluid" />
+            <h2>{{ $aboutus->head_line2 }} <span>{{ $aboutus->head_line_content2 }}</span></h2>
+            <img src="{{url('public/frontend/images/banner/'.$aboutus->image2)}}" alt="" class="img-fluid" />
         </div>
         <div class="story-content">
-            <p>It all began five years ago. Our central figure, Žiga Mlakar from Slovenia (27, and a golf player for over 10 years), has been thinking about how to enable golfers to hit longer shots when they cannot find sufficient accuracy with the driver. He began to notice that many amateur golfers do not even carry a driver, but use woods and hybrids instead. There would be nothing questionable about that, if the first stroke wouldn’t put them so far from the green that their making par seems highly unlikely from the start. Žiga has a clear vision of how to help the players of golf with this problematic part of the game, which is why he decided to find some answers and got the idea that brought us to this point.</p>
-
-            <p>In golf, the precision of the tee shots is incredibly important, but so is their length. The simple fact is that greater distance and accuracy grants us a better starting position for the next shot. This also presents the greatest challenge – the further we want to hit, the less accurate we are, mostly due to the difficulty of using the driver. Drivers are designed to maximize distance, but do so at a high potential loss of accuracy. With the use of a slightly modified club, however, we could achieve a much improved accuracy at only a minimal cost to distance.</p>
-
-            <p>This is the purpose of the Morsh 2 wood, the club designed for all golfers. As stated above, many golfers don’t want to use the driver because of its inaccuracy. Every one of us was in this position once, when you simply don’t hit precisely enough with the driver to opt for it or you feel more confident with another club. This is precisely why we carefully designed and crafted the club that enables shots nearly as long as those made with a driver, while being far more accurate.</p>
-
-            <p>To everyone who asks how we knew that such a club would work, we reply: ‘We didn’t, but we tried anyway.’ It turns out that there is still room in the game of golf for improvements and advances which improve the player’s game. We hope that our story has sparked your interest and curiosity, and we will be delighted if you join us in the Morsh community and try a different kind of golf.</p>
+            {!! (stripslashes($aboutus->content)) !!}
         </div>
     </div>
 </section>    

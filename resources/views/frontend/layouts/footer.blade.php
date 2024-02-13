@@ -31,24 +31,12 @@
             </div>
             <div class="about-footer">
                 <h3>ABOUT US</h3>
-                <p>Since 2015 we try very hard to fulfil every golfer’s dreams – long shots off the tee and fairway. Not
-                    with a driver, but with a 2 wood.</p>
-            </div>
-        </div>
-        <div class="footer-right">
-            <div class="footer-news-letter">
-                <h2>@foreach($settings as $data) {{$data->newletter_heading}} @endforeach</h2>
-                <p>@foreach($settings as $data) {{$data->newsletter_subheading}} @endforeach</p>
-                <form action="{{route('subscribe')}}" method="post" class="newsletter-inner">
-                    @csrf
-                    <input type="text" class="form-control" name="email" placeholder="Enter your e-mail here">
-                    <input type="submit" class="sub-btn" value="Yes, I love a good deal">
-                </form>
+                <p>{{ $settings[0]->home_page_about_us }} <a href="{{ route('about-us') }}" style="color: #fff;">Read more...</a></p>
             </div>
         </div>
     </div>
     <div class="footer-copyright">
-        <p>© {{ date('Y') }} MorshGolf | Development: <a href="https://www.polosoftech.com/"
+        <p>{{ $settings[0]->location_map }} | Development: <a href="https://www.polosoftech.com/"
                 target="_blank">Polosoftech</a></p>
         <div class="footer-payment"> <a href=""><img src="{{ asset('frontend/images/payment-method.png') }}" alt=""></a>
         </div>

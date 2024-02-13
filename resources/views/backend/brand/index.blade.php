@@ -1,5 +1,5 @@
 @extends('backend.layouts.master')
-@section('title','E-SHOP || Brand Page')
+@section('title','E-SHOP || Gallery Page')
 @section('main-content')
  <!-- DataTales Example -->
  <div class="card shadow mb-4">
@@ -9,8 +9,8 @@
          </div>
      </div>
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary float-left">Brand List</h6>
-      <a href="{{route('brand.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Add User"><i class="fas fa-plus"></i> Add Brand</a>
+      <h6 class="m-0 font-weight-bold text-primary float-left">Gallery List</h6>
+      <a href="{{route('brand.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Add User"><i class="fas fa-plus"></i> Add Gallery</a>
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -20,7 +20,6 @@
             <tr>
               <th>S.N.</th>
               <th>Title</th>
-              <th>Slug</th>
               <th>Logo</th>
               <th>Status</th>
               <th>Action</th>
@@ -30,7 +29,6 @@
             <tr>
               <th>S.N.</th>
               <th>Title</th>
-              <th>Slug</th>
               <th>Logo</th>
               <th>Status</th>
               <th>Action</th>
@@ -41,12 +39,11 @@
                 <tr>
                     <td>{{$brand->id}}</td>
                     <td>{{$brand->title}}</td>
-                    <td>{{$brand->slug}}</td>
                     <td>
                         @if($brand->logo)
-                            <img src="{{$brand->logo}}" class="img-fluid" style="max-width:80px" alt="{{$brand->logo}}">
+                            <img src="{{asset('backend/gallery/'.$brand->logo)}}" class="img-fluid" style="max-width:100px" alt="{{$brand->logo}}">
                         @else
-                            <img src="{{asset('backend/img/thumbnail-default.jpg')}}" class="img-fluid" style="max-width:80px" alt="avatar.png">
+                            <img src="{{asset('backend/img/thumbnail-default.jpg')}}" class="img-fluid" style="max-width:100px" alt="avatar.png">
                         @endif
                     </td>
                     <td>
@@ -90,7 +87,7 @@
         </table>
         <span style="float:right">{{$brands->links()}}</span>
         @else
-          <h6 class="text-center">No brands found!!! Please create brand</h6>
+          <h6 class="text-center">No Gallery found!!! Please create brand</h6>
         @endif
       </div>
     </div>

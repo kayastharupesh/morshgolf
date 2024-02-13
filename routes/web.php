@@ -250,6 +250,14 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
     Route::post('homepage_popup/update','AdminController@homepage_popupUpdate')->name('homepage_popup.update');
     Route::post('homepageimage/update/{id}','HomepageimageController@Update')->name('homepageimage.update');
 
+    //home page about us
+    Route::get('aboutus','AdminController@aboutus')->name('aboutus');
+    Route::post('about/update','AdminController@aboutusUpdate')->name('aboutus.update');
+
+    //home page our story
+    Route::get('ourstory','AdminController@ourstory')->name('ourstory');
+    Route::post('ourstory/update','AdminController@ourstoryUpdate')->name('ourstory.update');
+
     // Notification
     Route::get('/notification/{id}','NotificationController@show')->name('admin.notification');
     Route::get('/notifications','NotificationController@index')->name('all.notification');
