@@ -334,3 +334,14 @@
 #json-output {
   margin-top: 20px;
 }
+
+.active-btn-sec{
+  position: absolute;
+  right: -204px;
+  top: 0px;
+  padding: 1px 12px;
+}
+
+.Inactive{
+  padding: 1px 8px;
+}

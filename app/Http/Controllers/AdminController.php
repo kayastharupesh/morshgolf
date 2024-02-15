@@ -300,25 +300,61 @@ class AdminController extends Controller
     }
 
     public function menus(){
-        $menus=Menu::orderBy('order_by','asc')->get();
+        $menus=Menu::where(['sub_menu' => 0])->orderBy('order_by','asc')->get();
         return view('backend.menus.index')->with('menus',$menus);
     }
 
     public function menuCreate(){
-        return view('backend.menus.create');
+        $orderbyData=Menu::where(['sub_menu' => 0])->orderBy('order_by','asc')->get();
+        return view('backend.menus.create')->with('orderbyData',$orderbyData);
+    }
+
+    public function menuStore(Request $request) {
+        $orderBy = Menu::orderBy('order_by', 'desc')->first();
+        $order = ($orderBy != null) ? $orderBy->order_by + 1 : 1;
+    
+        $data = $request->only(['name', 'url', 'sub_menu', 'status']);
+        $data['order_by'] = $order;
+    
+        $status = Menu::create($data);
+    
+        if ($status) {
+            \Log::info('Home Page menu created');
+            $request->session()->flash('success', 'Home Page menu created');
+        } else {
+            \Log::error('Error creating Home Page menu');
+            $request->session()->flash('error', 'Please try again');
+        }
+    
+        return redirect()->route('menus');
     }
 
     public function menusEdit($id){
+        $orderbyData=Menu::where(['sub_menu' => 0])->orderBy('order_by','asc')->get();
         $menu=Menu::find($id);
-        return view('backend.menus.edit')->with('menu',$menu);
+        return view('backend.menus.edit')->with('menu',$menu)->with('orderbyData',$orderbyData);
     }
 
     public function menusUpdate(Request $request){
         $data=$request->all();
         $Homepagepopup=Menu::where('id',$request->id)->first();
-        
+
+        if($request->input('sub_menu') == null){
+            $orderBy = Menu::where(['sub_menu' => 0])->orderBy('order_by', 'desc')->first();
+            $order = ($orderBy != null) ? $orderBy->order_by + 1 : 1;
+
+            $sub_menu = 0;
+        } else {
+            $orderBy = Menu::where(['sub_menu' => $request->input('sub_menu')])->orderBy('order_by', 'desc')->first();
+            $order = ($orderBy != null) ? $orderBy->order_by + 1 : 1;
+
+            $sub_menu = $request->input('sub_menu');
+        }
+
         $data['name'] = $request->input('name');
         $data['url'] = $request->input('url');
+        $data['sub_menu'] = $sub_menu;
+        $data['order_by'] = $order;
         $data['status'] = $request->input('status');
         
         $status=$Homepagepopup->fill($data)->save();
@@ -328,6 +364,29 @@ class AdminController extends Controller
         else{
             request()->session()->flash('error','Please try again');
         }
+        return redirect()->route('menus');
+    }
+
+    public function menusDrackanddrop(Request $request){
+        $menuOrderBy = 1;
+        $submenuOrderBy = 1;
+        foreach ($request->menus as $menu) {
+            $update = Menu::where('id', $menu['id'])->first();
+            $update->order_by = $menuOrderBy;
+            $update->save();
+            if(isset($menu['submenus']) && $menu['submenus'] != null){
+                foreach ($menu['submenus'] as $submenu) {
+                    $update = Menu::where('id', $submenu['id'])->first();
+                    $update->sub_menu = $menu['id'];
+                    $update->order_by = $submenuOrderBy;
+                    $update->save();
+                    $submenuOrderBy++;
+                }
+            }
+            $menuOrderBy++;
+            $submenuOrderBy = 1;
+        }
+        
         return redirect()->route('menus');
     }
 }

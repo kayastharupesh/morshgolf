@@ -261,8 +261,10 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
     //home page menu
     Route::get('menus','AdminController@menus')->name('menus');
     Route::get('menus/create','AdminController@menuCreate')->name('menus.create');
+    Route::post('menu/store','AdminController@menuStore')->name('menu.store');
     Route::get('menus/edit/{id}','AdminController@menusEdit')->name('menus.edit');
     Route::post('menus/update','AdminController@menusUpdate')->name('menus.update');
+    Route::post('menus/drackanddrop','AdminController@menusDrackanddrop')->name('menus.drackanddrop');
 
     // Notification
     Route::get('/notification/{id}','NotificationController@show')->name('admin.notification');

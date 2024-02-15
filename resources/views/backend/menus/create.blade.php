@@ -5,7 +5,7 @@
 <div class="card">
     <h5 class="card-header">Add Menu</h5>
     <div class="card-body">
-      <form method="post" action="{{route('coupon.store')}}">
+      <form method="post" action="{{route('menu.store')}}">
         {{csrf_field()}}
         <div class="form-group">
           <label for="inputTitle" class="col-form-label">Menu Name <span class="text-danger">*</span></label>
@@ -21,6 +21,19 @@
             @error('url')
             <span class="text-danger">{{$message}}</span>
             @enderror
+        </div>
+
+        <div class="form-group">
+          <label for="inputTitle" class="col-form-label">Sub Menu <span class="text-danger">*</span></label>
+          <select name="sub_menu" class="form-control">
+            <option value="">Select Sub Menu</option>
+            @foreach ($orderbyData as $orderby)
+              <option value="{{ $orderby->id }}">{{ $orderby->name }}</option>
+            @endforeach
+          </select>
+          @error('sub_menu')
+          <span class="text-danger">{{$message}}</span>
+          @enderror
         </div>
         
         <div class="form-group">

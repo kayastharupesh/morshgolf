@@ -20,6 +20,8 @@ use App\Models\Shipping;
 
 use App\Models\Cart;
 
+use App\Models\Menu;
+
 // use Auth;
 
 class Helper{
@@ -240,6 +242,11 @@ class Helper{
     }
     public static function crosssell(){
         return Product::orderBy('id','DESC')->where('status','active')->where('is_cross_sell','1')->get();
+    }
+
+    public static function subMenus($id){
+        $SubMenu = Menu::where('sub_menu',$id)->orderBy('order_by','asc')->get();
+        return $SubMenu;
     }
 
 }
