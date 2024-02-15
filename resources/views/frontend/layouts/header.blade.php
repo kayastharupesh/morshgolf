@@ -1,6 +1,7 @@
 @php
 $settings=DB::table('settings')->get();
 $productList=DB::table('products')->where('status','active')->orderBy('id', 'desc')->get();
+$menu=DB::table('menu')->get();
 @endphp 
 
 <!--HEADER SEC-->
@@ -10,9 +11,12 @@ $productList=DB::table('products')->where('status','active')->orderBy('id', 'des
         <div class="header-logo"> <a href="{{ route('home') }}"><img src="@foreach($settings as $data) {{$data->logo}} @endforeach " class="img-fluid" alt="" /></a> </div>
         <div class="header-menu">
             <ul>
-                <li><a href="{{ route('home') }}">Home</a></li>
+                @if($menu[0]->status == 1)
+                <li><a href="{{ route('home') }}">{{ $menu[0]->name }}</a></li>
+                @endif
+                @if($menu[1]->status == 1)
                 <li class="product-list">
-                    <a href="{{ route('fairway-wood') }}">Fairway Wood</a>
+                    <a href="{{ route('fairway-wood') }}">{{ $menu[1]->name }}</a>
                     <div class="product-menu">
                         <div class="product-menu-left">
                             @foreach ($productList as $pplist)
@@ -29,15 +33,20 @@ $productList=DB::table('products')->where('status','active')->orderBy('id', 'des
                     </div>
                     <button type="button" class="mob-btn"><i class="fa-regular fa-circle-chevron-down"></i></button>
                 </li>
-                <li><a href="{{ route('golf-balls') }}">Golf Balls</a></li>
-                <li><a href="{{ route('story') }}">Our Story</a></li>
-                <li><a href="{{ route('blog') }}">Blogs</a></li>
-                <li class="pr-media">
-                    <a href="#">PR and Media</a>
-                    <div class="pr-media-ul">
-                        <a href="{{ route('gallery') }}">Gallery</a>
-                    </div>
-                </li>
+                @endif
+                @if($menu[2]->status == 1)
+                    <li><a href="{{ route('golf-balls') }}">{{ $menu[2]->name }}</a></li>
+                @endif
+                @if($menu[3]->status == 1)
+                    <li><a href="{{ route('story') }}">{{ $menu[3]->name }}</a></li>
+                @endif
+                @if($menu[4]->status == 1)
+                    <li><a href="{{ route('blog') }}">{{ $menu[4]->name }}</a></li>
+                @endif
+                @if($menu[5]->status == 1)
+                    <li><a href="{{ route('gallery') }}">{{ $menu[5]->name }}</a></li>
+                @endif
+                <div id="translate"></div>
             </ul>
         </div>
         <div class="header-contact">
@@ -62,7 +71,7 @@ $productList=DB::table('products')->where('status','active')->orderBy('id', 'des
         </div>
     </div>
 </header>
-<div id="translate"></div>
+{{-- <div id="translate"></div> --}}
 <style>
 #translate {
     margin: 0;

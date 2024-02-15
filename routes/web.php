@@ -258,6 +258,12 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
     Route::get('ourstory','AdminController@ourstory')->name('ourstory');
     Route::post('ourstory/update','AdminController@ourstoryUpdate')->name('ourstory.update');
 
+    //home page menu
+    Route::get('menus','AdminController@menus')->name('menus');
+    Route::get('menus/create','AdminController@menuCreate')->name('menus.create');
+    Route::get('menus/edit/{id}','AdminController@menusEdit')->name('menus.edit');
+    Route::post('menus/update','AdminController@menusUpdate')->name('menus.update');
+
     // Notification
     Route::get('/notification/{id}','NotificationController@show')->name('admin.notification');
     Route::get('/notifications','NotificationController@index')->name('all.notification');

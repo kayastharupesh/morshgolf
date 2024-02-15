@@ -242,6 +242,7 @@
         <a class="collapse-item" href="{{route('faq.index')}}">FAQ Management</a>
         <a class="collapse-item" href="{{route('aboutus')}}">About Us</a>
         <a class="collapse-item" href="{{route('ourstory')}}">Our story</a>
+        <a class="collapse-item" href="{{route('menus')}}">Menus</a>
       </div>
     </div>
   </li>

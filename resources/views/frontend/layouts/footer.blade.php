@@ -18,7 +18,7 @@
                     <ul>
                         <li><a href="{{ route('contact') }}">Contact us</a></li>
                         <li><a href="{{ route('guarantee') }}">Guarantee</a></li>
-                        <li><a href="{{ route('returns') }}">Returns</a></li>
+                        {{-- <li><a href="{{ route('returns') }}">Returns</a></li> --}}
                     </ul>
                 </div>
                 <div class="footer-menu-list">

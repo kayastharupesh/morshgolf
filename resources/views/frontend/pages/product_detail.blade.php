@@ -78,24 +78,27 @@ $productContDetails=DB::table('productcont')->first();
                     <hr>
                     @if(!empty($product_detail->hand_orientation) || !empty($product_detail->shaft_material) || !empty($product_detail->flex) || !empty($product_detail->configuration) || !empty($product_detail->volume) || !empty($product_detail->length) || !empty($product_detail->swing_weight))
                     <ul class="product-content-list">
-                        <li><span>Hand Orientation</span> : {{ $product_detail->hand_orientation }}</li>
-                        <li><span>Shaft Material</span> : {{ $product_detail->shaft_material }}</li>
-                        <li><span>Flex</span> : {{ $product_detail->flex }}</li>
-                        <li><span>Configuration</span> : {{ $product_detail->configuration }}</li>
-                        <li><span>Volume</span> : {{ $product_detail->volume }}</li>
-                        <li><span>Length</span> : {{ $product_detail->length }}</li>
-                        <li><span>Swing weight</span> : {{ $product_detail->swing_weight }}</li>
-                        {{-- @php
-                        $string = "SURAVI";  
-                        $length = strlen($string);  
-                        for ($i=($length-1) ; $i >= 0 ; $i--)   
-                        {  
-                        echo $string[$i]."</br>
-                        ";  
-                        echo $i."</br>
-                        ";
-                        } 
-                        @endphp  --}}
+                        @if($product_detail->hand_orientation != null)
+                            <li><span>Hand Orientation</span> : {{ $product_detail->hand_orientation }}</li>
+                        @endif
+                        @if($product_detail->shaft_material != null)
+                            <li><span>Shaft Material</span> : {{ $product_detail->shaft_material }}</li>
+                        @endif
+                        @if($product_detail->flex != null)
+                            <li><span>Flex</span> : {{ $product_detail->flex }}</li>
+                        @endif
+                        @if($product_detail->configuration != null)
+                            <li><span>Configuration</span> : {{ $product_detail->configuration }}</li>
+                        @endif
+                        @if($product_detail->volume != null)
+                            <li><span>Volume</span> : {{ $product_detail->volume }}</li>
+                        @endif
+                        @if($product_detail->length != null)
+                            <li><span>Length</span> : {{ $product_detail->length }}</li>
+                        @endif
+                        @if($product_detail->swing_weight != null)
+                            <li><span>Swing weight</span> : {{ $product_detail->swing_weight }}</li>
+                        @endif
                     </ul>
                     @endif
                 </div>
@@ -103,10 +106,6 @@ $productContDetails=DB::table('productcont')->first();
         </div>
         <!--SIDEBAR-->
         <aside class="sidebar">
-            {{-- <div class="product-discount-part">
-                <h3>25% OFF <span>If Order Over $259</span></h3>
-                <div class="discount-date">Until Aug 30, 2023</div>
-            </div> --}}
             <form action="{{route('single-add-to-cart')}}" method="POST">
                 @csrf
                 <div class="set-order-sec">

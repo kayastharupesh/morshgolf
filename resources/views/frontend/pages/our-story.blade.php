@@ -18,7 +18,7 @@
 @section('main-content')
 @php $aboutus=DB::table('our_story')->first(); @endphp
 <section class="inner-about-us-sec">
-    <h1>About Us</h1>
+    <h1>Our Story</h1>
     <div class="inner-about-body">
         <div class="inner-about-left">
             <h3>{{ $aboutus->head_line1 }}</h3>

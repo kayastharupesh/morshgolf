@@ -8,11 +8,11 @@ use App\Models\Productcont;
 use App\Models\Homepagepopup;
 use App\Models\Aboutus;
 use App\Models\Ourstory;
+use App\Models\Menu;
 use App\User;
 use App\Rules\MatchOldPassword;
 use Hash;
 use Carbon\Carbon;
-use Spatie\Activitylog\Models\Activity;
 class AdminController extends Controller
 {
     public function index(){
@@ -299,9 +299,35 @@ class AdminController extends Controller
      return view('backend.index')->with('course', json_encode($array));
     }
 
-    // public function activity(){
-    //     return Activity::all();
-    //     $activity= Activity::all();
-    //     return view('backend.layouts.activity')->with('activities',$activity);
-    // }
+    public function menus(){
+        $menus=Menu::orderBy('order_by','asc')->get();
+        return view('backend.menus.index')->with('menus',$menus);
+    }
+
+    public function menuCreate(){
+        return view('backend.menus.create');
+    }
+
+    public function menusEdit($id){
+        $menu=Menu::find($id);
+        return view('backend.menus.edit')->with('menu',$menu);
+    }
+
+    public function menusUpdate(Request $request){
+        $data=$request->all();
+        $Homepagepopup=Menu::where('id',$request->id)->first();
+        
+        $data['name'] = $request->input('name');
+        $data['url'] = $request->input('url');
+        $data['status'] = $request->input('status');
+        
+        $status=$Homepagepopup->fill($data)->save();
+        if($status){
+            request()->session()->flash('success','Home Page menu updated');
+        }
+        else{
+            request()->session()->flash('error','Please try again');
+        }
+        return redirect()->route('menus');
+    }
 }
