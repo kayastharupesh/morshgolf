@@ -42,9 +42,6 @@
                         @if(!empty($p->discount))
                         <div class="offer-d-box"><span>{{ $p->discount }}%</span> OFF</div>
                         @endif
-                        @if(!empty($p->condition))
-                        <div class="offer-d-box">{{ strtoupper($p->condition) }}</div>
-                        @endif
                     </div>
                 </div>
                 <h3>{{ $p->title }}  <span> {{ $p->product_sub_title }}</span>  <span>{{ $p->size }}</span></h3>

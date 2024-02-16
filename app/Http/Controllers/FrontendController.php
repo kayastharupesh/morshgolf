@@ -113,11 +113,8 @@ class FrontendController extends Controller
         $products = Product::query();
         if (!empty($_GET['category'])) {
             $slug = explode(',', $_GET['category']);
-            // dd($slug);
             $cat_ids = Category::select('id')->whereIn('slug', $slug)->pluck('id')->toArray();
-            // dd($cat_ids);
             $products->whereIn('cat_id', $cat_ids);
-            // return $products;
         }
 
         if (!empty($_GET['brand'])) {
