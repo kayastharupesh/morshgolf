@@ -1,7 +1,7 @@
 @php
 $settings=DB::table('settings')->get();
 $productList=DB::table('products')->where('status','active')->orderBy('id', 'desc')->get();
-$menu=DB::table('menu')->get();
+$menus=DB::table('menu')->where(['status' => 1, 'sub_menu' => 0,])->orderBy('order_by', 'asc')->get();
 @endphp 
 
 <!--HEADER SEC-->
@@ -11,42 +11,31 @@ $menu=DB::table('menu')->get();
         <div class="header-logo"> <a href="{{ route('home') }}"><img src="@foreach($settings as $data) {{$data->logo}} @endforeach " class="img-fluid" alt="" /></a> </div>
         <div class="header-menu">
             <ul>
-                @if($menu[0]->status == 1)
-                <li><a href="{{ route('home') }}">{{ $menu[0]->name }}</a></li>
-                @endif
-                @if($menu[1]->status == 1)
-                <li class="product-list">
-                    <a href="{{ route('fairway-wood') }}">{{ $menu[1]->name }}</a>
-                    <div class="product-menu">
-                        <div class="product-menu-left">
-                            @foreach ($productList as $pplist)
-                            <a href="{{ url('shop/') }}/{{ $pplist->slug }}">
-                                <div class="product-icon">
-                                    @if(strpos($pplist->title , "Urethane") !== false)<i class="fa-regular fa-golf-ball-tee"></i>@else <i class="fa-regular fa-golf-club"></i> @endif</div>
-                                <div class="product-m-title">  {{ $pplist->title }} <span>  {{ $pplist->product_sub_title }}  {{ $pplist->size }}</span></div>
-                            </a>
-                            @endforeach
+                @foreach ($menus as $menu)
+                    @php $submenus = Helper::subMenus($menu->id); @endphp
+                    @if ($submenus->isNotEmpty())
+                    <li class="product-list"><a href="{{ route($menu->url) }}">{{ $menu->name }}</a>
+                        <div class="product-menu">
+                            <div class="product-menu-left">
+                                @foreach ($submenus as $submenu)
+                                    @php $urlData = explode('/', $submenu->url); @endphp
+                                    @if($urlData[0] == 'shop')
+                                    <a class="product-paragraf" href="{{ url('shop/') }}/{{ $urlData[1] }}">{{ $submenu->name }}</a>
+                                    @else
+                                        <a href="{{ route($submenu->url) }}">{{ $submenu->name }}</a>
+                                    @endif
+                                @endforeach
+                            </div>
+                            <div class="product-menu-right">
+                                <img src="{{asset('/frontend/images/menu-img.jpg')}}" alt="">
+                            </div>
                         </div>
-                        <div class="product-menu-right">
-                            <img src="{{asset('/frontend/images/menu-img.jpg')}}" alt="">
-                        </div>
-                    </div>
-                    <button type="button" class="mob-btn"><i class="fa-regular fa-circle-chevron-down"></i></button>
-                </li>
-                @endif
-                @if($menu[2]->status == 1)
-                    <li><a href="{{ route('golf-balls') }}">{{ $menu[2]->name }}</a></li>
-                @endif
-                @if($menu[3]->status == 1)
-                    <li><a href="{{ route('story') }}">{{ $menu[3]->name }}</a></li>
-                @endif
-                @if($menu[4]->status == 1)
-                    <li><a href="{{ route('blog') }}">{{ $menu[4]->name }}</a></li>
-                @endif
-                @if($menu[5]->status == 1)
-                    <li><a href="{{ route('gallery') }}">{{ $menu[5]->name }}</a></li>
-                @endif
-                <div id="translate"></div>
+                        <button type="button" class="mob-btn"><i class="fa-regular fa-circle-chevron-down"></i></button>
+                    </li>
+                    @else
+                        <li><a href="{{ route($menu->url) }}">{{ $menu->name }}</a></li>
+                    @endif
+                @endforeach
             </ul>
         </div>
         <div class="header-contact">

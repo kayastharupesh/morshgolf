@@ -245,7 +245,7 @@ class Helper{
     }
 
     public static function subMenus($id){
-        $SubMenu = Menu::where('sub_menu',$id)->orderBy('order_by','asc')->get();
+        $SubMenu = Menu::where(['status' => 1, 'sub_menu' => $id,])->orderBy('order_by','asc')->get();
         return $SubMenu;
     }
 

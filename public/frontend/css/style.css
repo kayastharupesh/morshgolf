@@ -114,6 +114,13 @@ header .header-body .header-logo a {
     color: #FFF;
     text-transform: uppercase;
 }
+
+.product-paragraf{
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #000 !important;
+}
+
 .header-menu ul li.product-list a:before {
     position: absolute;
     right: -16px;
