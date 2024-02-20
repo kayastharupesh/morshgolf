@@ -329,7 +329,15 @@
                   @enderror
                 </div>
               </div>
+            </div>
+          </div>
 
+          <div class="form-group mt-4">
+            <div class="card">
+              <h5 class="card-header">Delivery Information</h5>
+            </div>
+
+            <div class="row">
               <div class="col-xl-12 col-md-12 mb-12">
                 <div class=" h-100 py-2">
                   <label for="summary" class="col-form-label">Delivery Information <span class="text-danger">*</span></label>
@@ -339,7 +347,14 @@
                   @enderror
                 </div>
               </div>
+            </div>
+          </div>
 
+          <div class="form-group mt-4">
+            <div class="card">
+              <h5 class="card-header">Privacy Policy Information</h5>
+            </div>
+            <div class="row">
               <div class="col-xl-12 col-md-12 mb-12">
                 <div class=" h-100 py-2">
                   <label for="summary" class="col-form-label">Privacy Policy <span class="text-danger">*</span></label>
@@ -349,7 +364,13 @@
                   @enderror
                 </div>
               </div>
-
+            </div>
+          </div>
+          <div class="form-group mt-4">
+            <div class="card">
+              <h5 class="card-header">Terms and Conditions Information</h5>
+            </div>
+            <div class="row">
               <div class="col-xl-12 col-md-12 mb-12">
                 <div class=" h-100 py-2">
                   <label for="summary" class="col-form-label">Terms and Conditions <span class="text-danger">*</span></label>
@@ -359,7 +380,43 @@
                   @enderror
                 </div>
               </div>
-
+            </div>
+          </div>
+          <div class="form-group mt-4">
+            <div class="card">
+              <h5 class="card-header">Home Page Heding Information</h5>
+            </div>
+            <div class="row">
+              <div class="col-xl-12 col-md-12 mb-12">
+                <div class=" h-100 py-2">
+                  <label for="summary" class="col-form-label">Home Page Heding <span class="text-danger">*</span></label>
+                  <textarea class="form-control" id="home_page_heding" rows="6" cols="20"  name="home_page_heding">{{$data->home_page_heding}}</textarea>
+                  @error('home_page_heding')
+                  <span class="text-danger">{{$message}}</span>
+                  @enderror
+                </div>
+              </div>
+              <div class="col-xl-12 col-md-12 mb-12">
+                <label for="inputPhoto" class="col-form-label">Home Page Heding Image <span class="text-danger">*</span></label>
+                <div class="input-group">
+                  <input class="form-control" type="file" name="home_page_heding_image">
+                </div>
+                <br>
+                <img src="{{ url('/public/product/') }}/{{$data->home_page_heding_image}}" style="width:32%;">
+                <div id="holder4" style="margin-top:15px;max-height:100px;"></div>
+                @error('home_page_heding_image')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+              </div>
+              <div class="col-xl-12 col-md-12 mb-12">
+                <div class=" h-100 py-2">
+                  <label for="summary" class="col-form-label">Today Nesw <span class="text-danger">*</span></label>
+                  <textarea class="form-control" id="todayNesw" rows="6" cols="20"  name="todaynesw">{{$data->todaynesw}}</textarea>
+                  @error('todaynesw')
+                  <span class="text-danger">{{$message}}</span>
+                  @enderror
+                </div>
+              </div>
               <div class="form-group mb-3">
                 <button class="btn btn-success" type="submit">Update</button>
               </div>
@@ -387,6 +444,7 @@
   $('#home_banner2').filemanager('image');
   $('#home_banner3').filemanager('image');
   $('#home_banner4').filemanager('image');
+  $('#home_page_heding_image').filemanager('image');
   $(document).ready(function() {
     $('#summary').summernote({
       placeholder: "Write short description.....",
@@ -430,6 +488,22 @@
   $(document).ready(function() {
     $('#delivery_information').summernote({
       placeholder: "Write Delivery Information Quote.....",
+      tabsize: 2,
+      height: 100
+    });
+  });
+
+  $(document).ready(function() {
+    $('#home_page_heding').summernote({
+      placeholder: "Write Home Page Heding Information Quote.....",
+      tabsize: 2,
+      height: 100
+    });
+  });
+
+  $(document).ready(function() {
+    $('#todayNesw').summernote({
+      placeholder: "Write Today Nesw Quote.....",
       tabsize: 2,
       height: 100
     });

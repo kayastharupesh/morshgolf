@@ -46,6 +46,17 @@ class FrontendController extends Controller
         return view('frontend.pages.fairway-wood')
             ->with('plist', $products_lists);
     }
+
+    public function product(){
+        $products_lists = Product::where('status', 'active')->orderBy('id', 'DESC')->limit(10)->get();
+        return view('frontend.pages.product')
+            ->with('plist', $products_lists);
+    }
+
+    public function productCategory(Request $request){
+        $products_lists = Product::where('cat_id', $request->category)->where('status', 'active')->orderBy('id', 'DESC')->get();
+        return view('frontend.pages.product')->with('plist', $products_lists)->with('category', $request->category);
+    }
     
     public function testing(){
         return view('frontend.pages.testing');

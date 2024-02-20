@@ -48,6 +48,8 @@ Route::get('/','FrontendController@home')->name('home');
 // Frontend Routes
 Route::get('/home', 'FrontendController@index');
 Route::get('/fairway-wood','FrontendController@fairwayWood')->name('fairway-wood');
+Route::get('/product','FrontendController@product')->name('product');
+Route::post('/product_category','FrontendController@productCategory')->name('product_category');
 Route::get('/golf-balls','FrontendController@golfBalls')->name('golf-balls');
 
 Route::get('/about-us','FrontendController@aboutUs')->name('about-us');
@@ -257,6 +259,24 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
     //home page our story
     Route::get('ourstory','AdminController@ourstory')->name('ourstory');
     Route::post('ourstory/update','AdminController@ourstoryUpdate')->name('ourstory.update');
+
+    //home page golf information
+    Route::get('homepage_golf_information','AdminController@homepageGolfInformation')->name('homepage_golf_information');
+    Route::get('golfInformation/create','AdminController@golfInformationCreate')->name('golfInformation.create');
+    Route::post('golfInformation/store','AdminController@golfInformationStore')->name('golfInformation.store');
+    Route::get('golfInformation/edit/{id}','AdminController@golfInformationEdit')->name('golfInformation.edit');
+    Route::post('golfInformation/update','AdminController@golfInformationUpdate')->name('golfInformation.update');
+    Route::delete('golfInformation/delete/{id}','AdminController@golfInformationDelete')->name('golfInformation.delete');
+
+    //drlivery information information
+    Route::get('drlivery_information','AdminController@drliveryInformation')->name('drlivery_information');
+    Route::get('drliveryinformation/edit/{id}','AdminController@drliveryinformationEdit')->name('drliveryinformation.edit');
+    Route::post('drliveryinformation/update','AdminController@drliveryinformationUpdate')->name('drliveryinformation.update');
+
+    //why choose
+    Route::get('why_choose','AdminController@whyChoose')->name('why_choose');
+    Route::get('whychoose/edit/{id}','AdminController@whychooseEdit')->name('whychoose.edit');
+    Route::post('whychoose/update','AdminController@whychooseUpdate')->name('whychoose.update');
 
     //home page menu
     Route::get('menus','AdminController@menus')->name('menus');

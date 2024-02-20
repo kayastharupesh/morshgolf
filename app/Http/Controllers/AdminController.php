@@ -9,6 +9,9 @@ use App\Models\Homepagepopup;
 use App\Models\Aboutus;
 use App\Models\Ourstory;
 use App\Models\Menu;
+use App\Models\Golfinformation;
+use App\Models\Drliveryinformation;
+use App\Models\Whychoose;
 use App\User;
 use App\Rules\MatchOldPassword;
 use Hash;
@@ -67,6 +70,72 @@ class AdminController extends Controller
         ]);
         $data=$request->all();
         $settings=Settings::first();
+
+        if($request->hasFile('home_banner1')) {
+            $file = $request->file('home_banner1');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "homeimage-" . time() . "." . $file_extension;
+            if($file->move('public/product/',$file_Newname)){
+                $data['home_banner1']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+
+        if($request->hasFile('home_banner2')) {
+            $file = $request->file('home_banner2');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "homeimage-" . time() . "." . $file_extension;
+            if($file->move('public/product/',$file_Newname)){
+                $data['home_banner2']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+
+        if($request->hasFile('home_banner3')) {
+            $file = $request->file('home_banner3');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "homeimage-" . time() . "." . $file_extension;
+            if($file->move('public/product/',$file_Newname)){
+                $data['home_banner3']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+
+        if($request->hasFile('home_banner4')) {
+            $file = $request->file('home_banner4');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "homeimage-" . time() . "." . $file_extension;
+            if($file->move('public/product/',$file_Newname)){
+                $data['home_banner4']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+
+        if($request->hasFile('home_page_heding_image')) {
+            $file = $request->file('home_page_heding_image');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "homeimage-" . time() . "." . $file_extension;
+            if($file->move('public/product/',$file_Newname)){
+                $data['home_page_heding_image']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+
         $status=$settings->fill($data)->save();
         if($status){
             request()->session()->flash('success','Setting successfully updated');
@@ -388,5 +457,152 @@ class AdminController extends Controller
         }
         
         return redirect()->route('menus');
+    }
+
+    public function homepageGolfInformation(){
+        $golfinformations = Golfinformation::get();
+        return view('backend.golfInformation.index')->with('golfinformations',$golfinformations);
+    }
+
+    public function golfInformationCreate() {
+        return view('backend.golfInformation.create');
+    }
+
+    public function golfInformationStore(Request $request) {
+        $data=$request->all();
+        if($request->hasFile('image')) {
+            $file = $request->file('image');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "banner-".rand(11111, 99999).".".$file_extension;
+            if($file->move('public/frontend/images/banner/',$file_Newname)){
+                $data['image']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+
+        $status=Golfinformation::create($data);
+
+        if($status){
+            request()->session()->flash('success','Golf Information successfully added');
+        }
+        else{
+            request()->session()->flash('error','Error occurred, Please try again!');
+        }
+        return redirect()->route('homepage_golf_information');
+    }
+
+    public function golfInformationEdit($id) {
+        $golfinformation = Golfinformation::find($id);
+        return view('backend.golfInformation.edit')->with('golfinformation',$golfinformation);
+    }
+
+    public function golfInformationUpdate(Request $request) {
+        $golfinformation = Golfinformation::find($request->id);
+        $data=$request->all();
+        if($request->hasFile('image')) {
+            $file = $request->file('image');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "banner-".rand(11111, 99999).".".$file_extension;
+            if($file->move('public/frontend/images/banner/',$file_Newname)){
+                $data['image']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+        $status=$golfinformation->fill($data)->save();
+        if($status){
+            request()->session()->flash('success','Golf Information successfully updated');
+        }
+        else{
+            request()->session()->flash('error','Error occurred, Please try again!');
+        }
+        return redirect()->route('homepage_golf_information');
+    }
+
+    public function golfInformationDelete($id){
+        $golfinformation = Golfinformation::find($id);
+        $status=$golfinformation->delete();
+        if($status){
+            request()->session()->flash('success','Banner successfully deleted');
+        }
+        else{
+            request()->session()->flash('error','Error occurred, Please try again!');
+        }
+        return redirect()->route('homepage_golf_information');
+    }
+
+    public function drliveryInformation(){
+        $drliveryinformations = Drliveryinformation::get();
+        return view('backend.drliveryinformation.index')->with('drliveryinformations',$drliveryinformations);
+    }
+
+    public function drliveryinformationEdit($id) {
+        $drliveryinformation = Drliveryinformation::find($id);
+        return view('backend.drliveryinformation.edit')->with('drliveryinformation',$drliveryinformation);
+    }
+
+    public function drliveryinformationUpdate(Request $request) {
+        $drliveryinformation = Drliveryinformation::find($request->id);
+        $data=$request->all();
+        if($request->hasFile('image')) {
+            $file = $request->file('image');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "banner-".rand(11111, 99999).".".$file_extension;
+            if($file->move('public/frontend/images/banner/',$file_Newname)){
+                $data['image']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+        $status=$drliveryinformation->fill($data)->save();
+        if($status){
+            request()->session()->flash('success','Drlivery information successfully updated');
+        }
+        else{
+            request()->session()->flash('error','Error occurred, Please try again!');
+        }
+        return redirect()->route('drlivery_information');
+    }
+
+    public function whyChoose(){
+        $whychooses = Whychoose::get();
+        return view('backend.whychoose.index')->with('whychooses',$whychooses);
+    }
+
+    public function whychooseEdit($id) {
+        $whychoose = Whychoose::find($id);
+        return view('backend.whychoose.edit')->with('whychoose',$whychoose);
+    }
+
+    public function whychooseUpdate(Request $request) {
+        $whychoose = Whychoose::find($request->id);
+        $data=$request->all();
+        if($request->hasFile('image')) {
+            $file = $request->file('image');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "banner-".rand(11111, 99999).".".$file_extension;
+            if($file->move('public/frontend/images/banner/',$file_Newname)){
+                $data['image']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+        $status=$whychoose->fill($data)->save();
+        if($status){
+            request()->session()->flash('success','Why Choose successfully updated');
+        }
+        else{
+            request()->session()->flash('error','Error occurred, Please try again!');
+        }
+        return redirect()->route('why_choose');
     }
 }

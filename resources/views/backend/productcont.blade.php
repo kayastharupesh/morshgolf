@@ -95,6 +95,7 @@
     $('#home_banner2').filemanager('image');
     $('#home_banner3').filemanager('image');
     $('#home_banner4').filemanager('image');
+    $('#home_page_heding_image').filemanager('image');
     $(document).ready(function() {
     $('#summary').summernote({
       placeholder: "Write short description.....",

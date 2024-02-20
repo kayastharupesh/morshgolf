@@ -26,7 +26,7 @@
         <div class="form-group">
           <label for="inputTitle" class="col-form-label">Sub Menu <span class="text-danger">*</span></label>
           <select name="sub_menu" class="form-control">
-            <option value="">Select Sub Menu</option>
+            <option value="0">Select Sub Menu</option>
             @foreach ($orderbyData as $orderby)
               <option value="{{ $orderby->id }}">{{ $orderby->name }}</option>
             @endforeach

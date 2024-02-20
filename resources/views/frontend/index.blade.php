@@ -15,59 +15,27 @@
 </section>
 @endif 
 <!--BANNER SEC--> 
-
+@php 
+$settings=DB::table('settings')->get();
+$golfinfors=DB::table('golf_information')->where('status','1')->get();
+@endphp
 <!--MORSH_2-WOOD SEC-->
 <section class="morsh-2-wood-sec">
     <div class="morsh-2-wood-body">
         <div class="morsh-2-wood-left">
-            <h2>Morsh 2 Wood Fairway <span>And/ Or Driver and Its Benefits</span></h2>
-            <p>Choose Fairway Wood For An Indefinite Win</p>
+            {!! (stripslashes($settings[0]->home_page_heding)) !!}
         </div>
-        <div class="morsh-2-wood-right"> <img src="{{ asset('frontend/images/morrsh-2-wood-img.jpg') }}" class="img-fluid" alt="" /> </div>
+        <div class="morsh-2-wood-right"> <img src="{{ url('/public/product/') }}/{{$settings[0]->home_page_heding_image}}" class="img-fluid" alt="" /> </div>
     </div>
     <div class="morsh-2-wood-list">
-        <div class="morsh-2-wood-box">
-            <div class="two-wood-icon"><img src="{{ asset('frontend/images/2-wood-icon-1.png') }}" alt=""></div>
-            <div class="two-wood-content">
-                <h3>Clubhead Design</h3>
-                <p>The larger club head of these fairway woods, combined with a shallow face design, offers a distinct advantage for all golfers.</p>
+        @foreach ($golfinfors as $golfinfor)
+            <div class="morsh-2-wood-box">
+                <div class="two-wood-icon"><img src="{{ url('public/frontend/images/banner/') }}/{{ $golfinfor->image }}" alt="{{ $golfinfor->image }}"></div>
+                <div class="two-wood-content">
+                    {!! (stripslashes($golfinfor->content)) !!}
+                </div>
             </div>
-        </div>
-        <div class="morsh-2-wood-box">
-            <div class="two-wood-icon"><img src="{{ asset('frontend/images/2-wood-icon-2.png') }}" alt=""></div>
-            <div class="two-wood-content">
-                <h3>Optimal Control</h3>
-                <p>Have better control with a smaller 183cc club head. A smaller club head with better swing impact at the right position.</p>
-            </div>
-        </div>
-        <div class="morsh-2-wood-box">
-            <div class="two-wood-icon"><img src="{{ asset('frontend/images/2-wood-icon-3.png') }}" alt=""></div>
-            <div class="two-wood-content">
-                <h3>Distance off the Fairway & Tee</h3>
-                <p>Make the most of your distance with just a 10.5-degree lofted 2 wood. The swing is exactly the same as when using your 3 wood.</p>
-            </div>
-        </div>
-        <div class="morsh-2-wood-box">
-            <div class="two-wood-icon"><img src="{{ asset('frontend/images/2-wood-icon-4.png') }}" alt=""></div>
-            <div class="two-wood-content">
-                <h3>Accuracy</h3>
-                <p>Many golfers choose to utilize a 3w instead of their driver because they lack confidence in it.  You can increase distance with a 2-wood with accuracy.</p>
-            </div>
-        </div>
-        <div class="morsh-2-wood-box">
-            <div class="two-wood-icon"><img src="{{ asset('frontend/images/2-wood-icon-5.png') }}" alt=""></div>
-            <div class="two-wood-content">
-                <h3>Shot Shaping and Versatility</h3>
-                <p>Adjustable lower loft swing and clubhead design for long, and straight shots.</p>
-            </div>
-        </div>
-        <div class="morsh-2-wood-box">
-            <div class="two-wood-icon"><img src="{{ asset('frontend/images/2-wood-icon-6.png') }}" alt=""></div>
-            <div class="two-wood-content">
-                <h3>Forgiveness</h3>
-                <p>Forgiveness on off-center hits is a crucial feature that golfers can rely on to preserve their distance and accuracy. </p>
-            </div>
-        </div>
+        @endforeach
     </div>
 </section>
 <!--MORSH_2-WOOD SEC--> 

@@ -242,6 +242,9 @@
         <a class="collapse-item" href="{{route('faq.index')}}">FAQ Management</a>
         <a class="collapse-item" href="{{route('aboutus')}}">About Us</a>
         <a class="collapse-item" href="{{route('ourstory')}}">Our story</a>
+        <a class="collapse-item" href="{{route('homepage_golf_information')}}">Golf Information</a>
+        <a class="collapse-item" href="{{route('drlivery_information')}}">Drlivery Information</a>
+        <a class="collapse-item" href="{{route('why_choose')}}">Why Choose</a>
         <a class="collapse-item" href="{{route('menus')}}">Menus</a>
       </div>
     </div>
