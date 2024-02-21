@@ -1,5 +1,5 @@
 @extends('frontend.layouts.master')
-{{-- @section('meta')
+@section('meta')
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name='copyright' content=''>
@@ -12,7 +12,7 @@
 	<meta property="og:title" content="{{$product_detail->title}}">
 	<meta property="og:image" content="{{$product_detail->photo}}">
 	<meta property="og:description" content="{{$product_detail->description}}">
-@endsection --}}
+@endsection
 
 @section('title','Guarantee - Morsh Golf')
 @section('main-content')

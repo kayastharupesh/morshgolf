@@ -1,6 +1,6 @@
 @extends('frontend.layouts.master')
 
-{{-- @section('meta')
+@section('meta')
 
 	<meta charset="utf-8">
 
@@ -26,7 +26,7 @@
 
 	<meta property="og:description" content="{{$product_detail->description}}">
 
-@endsection --}}
+@endsection
 
 
 
