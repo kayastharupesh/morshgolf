@@ -9,9 +9,10 @@
          </div>
      </div>
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary float-left">Drlivery Information List</h6>
+      <h6 class="m-0 font-weight-bold text-primary float-left">Facilities List</h6>
     </div>
     <div class="card-body">
+      @include('backend.layouts.tablinks')
       <div class="table-responsive">
         @if(count($drliveryinformations)>0)
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

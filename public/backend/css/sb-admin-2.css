@@ -11221,3 +11221,38 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+
+
+.tab {
+  overflow: hidden;
+  display: flex;
+  gap: 0 15px;
+  flex-wrap: wrap;
+}
+
+/* Style the buttons inside the tab */
+.tab a {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 4px 24px;
+  transition: 0.3s;
+  font-size: 17px;
+  color: #000 !important;
+  border: 1px solid gainsboro !important;
+  gap: 2;
+  border-radius: 8px;
+  margin-bottom: 13px;
+  text-decoration: none;
+}
+
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}

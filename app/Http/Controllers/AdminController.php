@@ -58,6 +58,27 @@ class AdminController extends Controller
         return view('backend.setting')->with('data',$data);
     }
 
+    public function homeheding(){
+        $data=Settings::first();
+        return view('backend.homepageheding')->with('data',$data);
+    }
+
+    public function morshinfo(){
+        $data=Settings::first();
+        return view('backend.morsh-info')->with('data',$data);
+    }
+    
+    public function todaynesw(){
+        $data=Settings::first();
+        return view('backend.todaynesw')->with('data',$data);
+    }
+
+    public function video(){
+        $data=Settings::first();
+        return view('backend.video')->with('data',$data);
+    }
+
+
     public function settingsUpdate(Request $request){
         $this->validate($request,[
             'short_des'=>'required|string',

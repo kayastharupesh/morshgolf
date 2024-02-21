@@ -7,26 +7,6 @@
   <div class="card-body">
     <form method="post" action="{{route('settings.update')}}" enctype="multipart/form-data">
       @csrf
-      <div class="row">
-        <div class="col-xl-6 col-md-6 mb-6">
-          <label for="short_des" class="col-form-label">Home Page Video1 <span class="text-danger">*</span></label>
-          <textarea class="form-control" rows="5" name="short_des">{{$data->short_des}}</textarea>
-          @error('short_des')
-          <span class="text-danger">{{$message}}</span>
-          @enderror
-          <br>
-          <iframe src="{{$data->short_des}}" width="566px"></iframe>
-        </div>
-        <div class="col-xl-6 col-md-6 mb-6">
-          <label for="description" class="col-form-label">Home Page Video2 <span class="text-danger">*</span></label>
-          <textarea class="form-control" rows="5" name="long_des">{{$data->long_des}}</textarea>
-          @error('long_des')
-          <span class="text-danger">{{$message}}</span>
-          @enderror
-          <br>
-          <iframe src="{{$data->long_des}}" width="566px"></iframe>
-        </div>
-      </div>
 
       <div class="row">
         <div class="col-xl-6 col-md-6 mb-6">
@@ -60,65 +40,6 @@
           <img src="{{$data->photo}}" style="width:15%">
           <div id="holder" style="margin-top:15px;max-height:100px;"></div>
           @error('photo')
-          <span class="text-danger">{{$message}}</span>
-          @enderror
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xl-6 col-md-6 mb-6">
-          <label for="inputPhoto" class="col-form-label">Home Page Image1 <span class="text-danger">*</span></label>
-          <div class="input-group">
-            <input id="thumbnail19" class="form-control" type="file" name="home_banner1">
-          </div>
-          <br>
-          <img src="{{ url('/public/product/') }}/{{$data->home_banner1}}" style="width:32%;">
-          <div id="holder11" style="margin-top:15px;max-height:100px;"></div>
-          <textarea name="home_banner1_content1" class="form-control" rows="2" cols="20">{{$data->home_banner1_content1}}</textarea>
-          @error('home_banner1')
-          <span class="text-danger">{{$message}}</span>
-          @enderror
-        </div>
-        <div class="col-xl-6 col-md-6 mb-6">
-          <label for="inputPhoto" class="col-form-label">Home Page Image2 <span class="text-danger">*</span></label>
-          <div class="input-group">
-            <input class="form-control" type="file" name="home_banner2">
-          </div>
-          <br>
-          <img src="{{ url('/public/product/') }}/{{$data->home_banner2}}" style="width:32%;">
-          <div id="holder2" style="margin-top:15px;max-height:100px;"></div>
-          <textarea name="home_banner2_content2" class="form-control" rows="2" cols="20">{{$data->home_banner2_content2}}</textarea>
-          @error('home_banner2')
-          <span class="text-danger">{{$message}}</span>
-          @enderror
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xl-6 col-md-6 mb-6">
-          <label for="inputPhoto" class="col-form-label">Home Page Image3 <span class="text-danger">*</span></label>
-          <div class="input-group">
-
-            <input class="form-control" type="file" name="home_banner3">
-          </div>
-          <br>
-          <img src="{{ url('/public/product/') }}/{{$data->home_banner3}}" style="width:32%;">
-          <div id="holder3" style="margin-top:15px;max-height:100px;"></div>
-          <textarea name="home_banner3_content3" class="form-control" rows="2" cols="20">{{$data->home_banner3_content3}}</textarea>
-          @error('home_banner3')
-          <span class="text-danger">{{$message}}</span>
-          @enderror
-        </div>
-        <div class="col-xl-6 col-md-6 mb-6">
-          <label for="inputPhoto" class="col-form-label">Home Page Image4 <span class="text-danger">*</span></label>
-          <div class="input-group">
-            <input class="form-control" type="file" name="home_banner4">
-          </div>
-          <br>
-          <img src="{{ url('/public/product/') }}/{{$data->home_banner4}}" style="width:32%;">
-          <div id="holder4" style="margin-top:15px;max-height:100px;"></div>
-          <textarea name="home_banner4_content4" class="form-control" rows="2" cols="20">{{$data->home_banner4_content4}}</textarea>
-          @error('home_banner4')
           <span class="text-danger">{{$message}}</span>
           @enderror
         </div>
@@ -387,36 +308,6 @@
               <h5 class="card-header">Home Page Heding Information</h5>
             </div>
             <div class="row">
-              <div class="col-xl-12 col-md-12 mb-12">
-                <div class=" h-100 py-2">
-                  <label for="summary" class="col-form-label">Home Page Heding <span class="text-danger">*</span></label>
-                  <textarea class="form-control" id="home_page_heding" rows="6" cols="20"  name="home_page_heding">{{$data->home_page_heding}}</textarea>
-                  @error('home_page_heding')
-                  <span class="text-danger">{{$message}}</span>
-                  @enderror
-                </div>
-              </div>
-              <div class="col-xl-12 col-md-12 mb-12">
-                <label for="inputPhoto" class="col-form-label">Home Page Heding Image <span class="text-danger">*</span></label>
-                <div class="input-group">
-                  <input class="form-control" type="file" name="home_page_heding_image">
-                </div>
-                <br>
-                <img src="{{ url('/public/product/') }}/{{$data->home_page_heding_image}}" style="width:32%;">
-                <div id="holder4" style="margin-top:15px;max-height:100px;"></div>
-                @error('home_page_heding_image')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
-              <div class="col-xl-12 col-md-12 mb-12">
-                <div class=" h-100 py-2">
-                  <label for="summary" class="col-form-label">Today Nesw <span class="text-danger">*</span></label>
-                  <textarea class="form-control" id="todayNesw" rows="6" cols="20"  name="todaynesw">{{$data->todaynesw}}</textarea>
-                  @error('todaynesw')
-                  <span class="text-danger">{{$message}}</span>
-                  @enderror
-                </div>
-              </div>
               <div class="form-group mb-3">
                 <button class="btn btn-success" type="submit">Update</button>
               </div>
@@ -437,6 +328,21 @@
 <script src="{{ asset('/vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script>
 <script src="{{asset('backend/summernote/summernote.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+<script>
+  function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+  </script>
 <script>
   $('#lfm').filemanager('image');
   $('#lfm1').filemanager('image');

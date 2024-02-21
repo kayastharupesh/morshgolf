@@ -1,3 +1,4 @@
+@php $settings=DB::table('settings')->first(); @endphp
 @extends('frontend.layouts.master')
 {{-- @section('meta')
 	<meta charset="utf-8">
@@ -16,7 +17,6 @@
 
 @section('title','Terms and Conditions - Morsh Golf')
 @section('main-content')
-@php $settings=DB::table('settings')->first(); @endphp
 <section class="common-policy-sec">
     <h1>Terms and Conditions</h1>
     <div class="common-policy-body">
@@ -26,9 +26,7 @@
         </div>
     </div>
 </section>
-
-
-   
     
 @include('frontend.layouts.why_choose')
 @include('frontend.layouts.call_to_action')
+@endsection 

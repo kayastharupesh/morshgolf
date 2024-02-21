@@ -13,6 +13,7 @@
       <a href="{{route('testimonial.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Add User"><i class="fas fa-plus"></i> Add Testimonial</a>
     </div>
     <div class="card-body">
+      @include('backend.layouts.tablinks')
       <div class="table-responsive">
         @if(count($testimonials)>0)
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

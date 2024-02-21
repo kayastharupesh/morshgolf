@@ -245,6 +245,10 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
     
     // Settings
     Route::get('settings','AdminController@settings')->name('settings');
+    Route::get('homeheding','AdminController@homeheding')->name('homeheding');
+    Route::get('morshinfo','AdminController@morshinfo')->name('morshinfo');
+    Route::get('todaynesw','AdminController@todaynesw')->name('todaynesw');
+    Route::get('video','AdminController@video')->name('video');
     Route::post('setting/update','AdminController@settingsUpdate')->name('settings.update');
     
     //home page popup

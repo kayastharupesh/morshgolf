@@ -8,12 +8,18 @@
             @include('backend.layouts.notification')
          </div>
      </div>
+     
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary float-left">Banners List</h6>
       <a href="{{route('banner.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Add User"><i class="fas fa-plus"></i> Add Banner</a>
+
+      
     </div>
+
     <div class="card-body">
+     
       <div class="table-responsive">
+        @include('backend.layouts.tablinks')
         @if(count($banners)>0)
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
           <thead>
@@ -85,6 +91,7 @@
             @endforeach
           </tbody>
         </table>
+       
         <span style="float:right">{{$banners->links()}}</span>
         @else
           <h6 class="text-center">No banners found!!! Please create banner</h6>

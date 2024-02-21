@@ -3,7 +3,7 @@
 @section('main-content')
 
 <div class="card">
-    <h5 class="card-header">Edit Drlivery Information</h5>
+    <h5 class="card-header">Edit Facilities</h5>
     <div class="card-body">
       <form method="post" action="{{route('drliveryinformation.update')}}" enctype="multipart/form-data">
         {{csrf_field()}}

@@ -13,6 +13,7 @@
       <a href="{{route('faq.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Add User"><i class="fas fa-plus"></i> Add FAQ</a>
     </div>
     <div class="card-body">
+      @include('backend.layouts.tablinks')
       <div class="table-responsive">
         @if(count($faqs)>0)
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

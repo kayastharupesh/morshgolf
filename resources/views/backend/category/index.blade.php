@@ -21,9 +21,6 @@
               <th>S.N.</th>
               <th>Title</th>
               <th>Slug</th>
-              <th>Is Parent</th>
-              <th>Parent Category</th>
-              <th>Photo</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
@@ -33,9 +30,6 @@
               <th>S.N.</th>
               <th>Title</th>
               <th>Slug</th>
-              <th>Is Parent</th>
-              <th>Parent Category</th>
-              <th>Photo</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
@@ -49,17 +43,6 @@
                     <td>{{$category->id}}</td>
                     <td>{{$category->title}}</td>
                     <td>{{$category->slug}}</td>
-                    <td>{{(($category->is_parent==1)? 'Yes': 'No')}}</td>
-                    <td>
-                        {{$category->parent_info->title ?? '--'}}
-                    </td>
-                    <td>
-                        @if($category->photo)
-                            <img src="{{$category->photo}}" class="img-fluid" style="max-width:80px" alt="{{$category->photo}}">
-                        @else
-                            <img src="{{asset('backend/img/thumbnail-default.jpg')}}" class="img-fluid" style="max-width:80px" alt="avatar.png">
-                        @endif
-                    </td>
                     <td>
                         @if($category->status=='active')
                             <span class="badge badge-success">{{$category->status}}</span>

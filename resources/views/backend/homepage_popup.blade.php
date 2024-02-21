@@ -4,6 +4,7 @@
 <div class="card">
     <h5 class="card-header">Edit Home Page Pop Up</h5>
     <div class="card-body">
+      @include('backend.layouts.tablinks')
     <form method="post" action="{{route('homepage_popup.update')}}" enctype="multipart/form-data">
 
         @csrf 

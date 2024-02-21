@@ -12,6 +12,7 @@
       <h6 class="m-0 font-weight-bold text-primary float-left">Why Choose List</h6>
     </div>
     <div class="card-body">
+      @include('backend.layouts.tablinks')
       <div class="table-responsive">
         @if(count($whychooses)>0)
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
