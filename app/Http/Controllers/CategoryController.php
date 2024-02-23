@@ -40,7 +40,6 @@ class CategoryController extends Controller
         $this->validate($request,[
             'title'=>'string|required',
             'summary'=>'string|nullable',
-            'photo'=>'string|nullable',
             'status'=>'required|in:active,inactive',
             'is_parent'=>'sometimes|in:1',
             'parent_id'=>'nullable|exists:categories,id',
@@ -51,6 +50,21 @@ class CategoryController extends Controller
         if($count>0){
             $slug=$slug.'-'.date('ymdis').'-'.rand(0,999);
         }
+
+        if($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "catagory-".rand(11111, 99999).".".$file_extension;
+            if($file->move('public/frontend/images/banner/',$file_Newname)){
+                $data['photo']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+
+
         $data['slug']=$slug;
         $data['is_parent']=$request->input('is_parent',0);
         // return $data;   
@@ -99,19 +113,29 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // return $request->all();
         $category=Category::findOrFail($id);
         $this->validate($request,[
             'title'=>'string|required',
             'summary'=>'string|nullable',
-            'photo'=>'string|nullable',
             'status'=>'required|in:active,inactive',
             'is_parent'=>'sometimes|in:1',
             'parent_id'=>'nullable|exists:categories,id',
         ]);
         $data= $request->all();
         $data['is_parent']=$request->input('is_parent',0);
-        // return $data;
+
+        if($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "catagory-".rand(11111, 99999).".".$file_extension;
+            if($file->move('public/frontend/images/banner/',$file_Newname)){
+                $data['photo']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
         $status=$category->fill($data)->save();
         if($status){
             request()->session()->flash('success','Category successfully updated');

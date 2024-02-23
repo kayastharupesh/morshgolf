@@ -12,13 +12,13 @@
 
     <div class="card-body">
 
-      <form method="post" action="{{route('category.store')}}">
+      <form method="post" action="{{route('category.store')}}" enctype="multipart/form-data">
 
         {{csrf_field()}}
 
         <div class="form-group">
           <label for="inputTitle" class="col-form-label">Title <span class="text-danger">*</span></label>
-          <input id="inputTitle" type="text" name="title" placeholder="Enter title"  value="{{old('title')}}" class="form-control">
+          <input id="inputTitle" type="text" name="title" placeholder="Enter title"  value="{{old('title')}}" class="form-control" required>
           @error('title')
           <span class="text-danger">{{$message}}</span>
           @enderror
@@ -32,6 +32,13 @@
           @enderror
         </div>
 
+        <div class="form-group">
+          <label for="inputTitle" class="col-form-label">Catagory Image <span class="text-danger">*</span></label>
+          <input  type="file" name="photo" value="{{old('photo')}}" class="form-control" required>
+          @error('photo')
+          <span class="text-danger">{{$message}}</span>
+          @enderror
+        </div>
       
         <div class="form-group">
           <label for="status" class="col-form-label">Status <span class="text-danger">*</span></label>

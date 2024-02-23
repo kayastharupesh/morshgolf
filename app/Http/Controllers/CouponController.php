@@ -143,25 +143,29 @@ class CouponController extends Controller
     }
 
     public function couponStore(Request $request){
-        // return $request->all();
         $coupon=Coupon::where('code',$request->code)->first();
-        // dd($coupon);
         if(!$coupon){
             request()->session()->flash('error','Invalid coupon code, Please try again');
             return back();
         }
         if($coupon){
             $total_price=Cart::where('user_id',auth()->user()->id)->where('order_id',null)->sum('price');
-            // dd($total_price);
-            session()->put('coupon',[
-                'id'=>$coupon->id,
-                'code'=>$coupon->code,
-                'coupon_type'=>$coupon->type,
-                'coupon_amount'=>$coupon->value,
-                'value'=>$coupon->discount($total_price)
-            ]);
-            request()->session()->flash('success','Coupon successfully applied');
-            return redirect()->back();
+            if($coupon->coupon_expiry_date <= date('Y-m-d')) {
+                if($coupon->type == 'fixed'){ 
+                    $value = $coupon->value;
+                } else {
+                    $value = $coupon->discount($total_price);
+                }
+                session()->put('coupon',[
+                    'id'=>$coupon->id,
+                    'code'=>$coupon->code,
+                    'coupon_type'=>$coupon->type,
+                    'coupon_amount'=>$coupon->value,
+                    'value'=>$value
+                ]);
+                request()->session()->flash('success','Coupon successfully applied');
+                return redirect()->back();
+            }
         }
     }
 

@@ -22,13 +22,9 @@ class StripePaymentController extends Controller
      */
     public function stripe(Request $request)
     {
-        
         $order_sql_id = Crypt::Decrypt($request->order_sql_id);
-
         $order_data = Order::select('*')->Where('id',$order_sql_id)->first();
-
         $order_id = $order_data['order_number'];
-
         return view('frontend.pages.stripe',['order_id'=>$order_id]);
     }
   
@@ -43,8 +39,7 @@ class StripePaymentController extends Controller
         $email = auth()->user()->email;
         $user_id = auth()->user()->id;
 
-        $ord_dtl = Order::where('order_number','ORD-49PLZADOUM')->first();        
-        
+        $ord_dtl = Order::where('order_number', $request->order_id)->sum('currency_total_amount');
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
         $customer = \Stripe\Customer::create([
@@ -54,17 +49,16 @@ class StripePaymentController extends Controller
         ]);
 
         $get_product_stock = Cart::where('user_id',$user_id)->where('order_id',null)->get();
-
         $cart_prdo_price = 0;    
         foreach($get_product_stock as $res_cart_prod)
         {
-            $cart_prdo_price = $cart_prdo_price + $res_cart_prod['price'];
+            $cart_prdo_price = $cart_prdo_price + $res_cart_prod['amount'];
         }
-        $checkout_amount =  $cart_prdo_price *100; 
-
-       $response =  Stripe\Charge::create ([
+        $currency_data = number_format($ord_dtl, 1);
+        $checkout_amount =  $currency_data * 100;
+        $response =  Stripe\Charge::create ([
             "amount" => $checkout_amount,
-            "currency" => "usd",
+            "currency" => session('currency'),
             'customer' => $customer->id,
             "description" => 'Invoice of Order ID #'.$order_id 
         ]);
@@ -108,7 +102,7 @@ class StripePaymentController extends Controller
                 $cart_order_id_update = Cart::where('user_id',auth()->user()->id)->where('order_id',null)->update($order_id_arr);
                 $data_order= array('payment_status'=>'paid','pg_response'=>$response);
                 $order_data_update = Order::where('user_id',auth()->user()->id)->where('order_number',$order_id)->update($data_order);
-
+                $orderDetails = Cart::join('products', 'carts.product_id', '=', 'products.id')->where('user_id', auth()->user()->id)->where('order_id', $order_id)->get();
                 //------------Product Stock Updation cod end-----------//
 
                 $order_data_mail = Order::where('user_id', auth()->user()->id)->where('order_number', $order_id)->first();
@@ -119,11 +113,33 @@ class StripePaymentController extends Controller
                     'order_number' => $order_id,
                     'name' => $order_data_mail->first_name . " " . $order_data_mail->last_name,
                     'payment_method' => $order_data_mail->payment_method,
+                    'currency' => session('symbol'),
                     'date' => $order_data_mail->created_at,
                     'total_amount' => $order_data_mail->total_amount,
+                    'orderDetails' => $orderDetails,
+
                 ];
 
                 Mail::send('mail.userorder',$datais, function($messages) use ($datais){
+                    $messages->to($datais['to']);
+                    $messages->subject($datais['subject']);
+                });
+
+                $datais = [
+                    'to' => 'info@morshgolf.com',
+                    'subject' => "New order we have received. || Morshgolf",
+                    'order_number' => $order_id,
+                    'name' => $order_data_mail->first_name . " " . $order_data_mail->last_name,
+                    'payment_method' => $order_data_mail->payment_method,
+                    'date' => $order_data_mail->created_at,
+                    'total_amount' => $order_data_mail->total_amount,
+                    'currency' => session('symbol'),
+                    'email' => auth()->user()->email,
+                    'phone' => $order_data_mail->phone,
+                    'orderDetails' => $orderDetails,
+                ];
+
+                Mail::send('mail.adminorderinfo',$datais, function($messages) use ($datais){
                     $messages->to($datais['to']);
                     $messages->subject($datais['subject']);
                 });

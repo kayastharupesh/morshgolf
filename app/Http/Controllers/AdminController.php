@@ -425,18 +425,22 @@ class AdminController extends Controller
         return view('backend.menus.edit')->with('menu',$menu)->with('orderbyData',$orderbyData);
     }
 
+    public function menusDelete($id){
+        $menu=Menu::find($id);
+        $status=$menu->delete();
+        return redirect()->route('menus');
+    }
+
     public function menusUpdate(Request $request){
         $data=$request->all();
         $Homepagepopup=Menu::where('id',$request->id)->first();
 
         if($request->input('sub_menu') == null){
             $orderBy = Menu::where(['sub_menu' => 0])->orderBy('order_by', 'desc')->first();
-            $order = ($orderBy != null) ? $orderBy->order_by + 1 : 1;
 
             $sub_menu = 0;
         } else {
             $orderBy = Menu::where(['sub_menu' => $request->input('sub_menu')])->orderBy('order_by', 'desc')->first();
-            $order = ($orderBy != null) ? $orderBy->order_by + 1 : 1;
 
             $sub_menu = $request->input('sub_menu');
         }
@@ -444,7 +448,6 @@ class AdminController extends Controller
         $data['name'] = $request->input('name');
         $data['url'] = $request->input('url');
         $data['sub_menu'] = $sub_menu;
-        $data['order_by'] = $order;
         $data['status'] = $request->input('status');
         
         $status=$Homepagepopup->fill($data)->save();

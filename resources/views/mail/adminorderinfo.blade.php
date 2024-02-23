@@ -48,16 +48,14 @@
         </tr>
         <tr>
           <td class="content">
-            <h2>Hello, {{ $name }}</h2>
-            <p>Thank you for ordering from MorshGolf.</p>
-            <p>Your order number #{{$order_number}} has been shipped.</p>
-            <p>Woo hoo! Your order is on its way. Your order details can be found below.</p>
-            <p><b>ORDER SUMMARY:</b></p>
+            <h2>ORDER SUMMARY:</h2>
             <p>Order ID: #{{$order_number}}</p>
             <p>Order Date: {{$date}}</p>
             <p>Payment Method: {{$payment_method}}</p>
             <p>Order Total: {{$total_amount}}</p>
-            <p><b>We hope you enjoyed your shopping experience with us and that you will visit us again soon.</b></p>
+            <p>Name: {{$name}}</p>
+            <p>Email: {{$email}}</p>
+            <p>Phone Number: {{$phone}}</p>
             <br><br>
             @if ($orderDetails != null)
               <p>Product Details</p>
@@ -80,7 +78,7 @@
                   </tbody>
               </table>
             @endif
-            <p><a href=" {{route('login.form')}} ">Click here</a> to visit our website.</p>
+            <p><a href=" {{route('admin')}} ">Click here</a> to visit website.</p>
           </td>
         </tr>
         <tr>

@@ -107,49 +107,46 @@
   <!-- Page level custom scripts -->
   <script src="{{asset('backend/js/demo/datatables-demo.js')}}"></script>
   <script>
-      
-      $('#order-dataTable').DataTable( {
-            "columnDefs":[
-                {
-                    "orderable":false,
-                    "targets":[8]
-                }
-            ]
-        } );
-
-        // Sweet alert
-
-        function deleteData(id){
-            
+    $('#order-dataTable').DataTable({
+      "order": [[0, "desc"]],
+      "columnDefs":[
+        {
+          "orderable":false,
+          "targets":[8]
         }
-  </script>
-  <script>
-      $(document).ready(function(){
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-          $('.dltBtn').click(function(e){
-            var form=$(this).closest('form');
-              var dataID=$(this).data('id');
-              // alert(dataID);
-              e.preventDefault();
-              swal({
-                    title: "Are you sure?",
-                    text: "Once deleted, you will not be able to recover this data!",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                       form.submit();
-                    } else {
-                        swal("Your data is safe!");
-                    }
-                });
-          })
-      })
+      ]
+    });
+
+    function deleteData(id){
+        
+    }
+
+    $(document).ready(function(){
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+        $('.dltBtn').click(function(e){
+          var form=$(this).closest('form');
+            var dataID=$(this).data('id');
+            // alert(dataID);
+            e.preventDefault();
+            swal({
+                  title: "Are you sure?",
+                  text: "Once deleted, you will not be able to recover this data!",
+                  icon: "warning",
+                  buttons: true,
+                  dangerMode: true,
+              })
+              .then((willDelete) => {
+                  if (willDelete) {
+                      form.submit();
+                  } else {
+                      swal("Your data is safe!");
+                  }
+              });
+        })
+    })
   </script>
 @endpush

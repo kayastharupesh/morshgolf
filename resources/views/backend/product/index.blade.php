@@ -21,7 +21,6 @@
               <th>Photo</th>
               <th>Title</th>
               <th>Category</th>
-              <th>Is Featured</th>
               <th>Price</th>
               <th>Size</th>
               <th>Stock</th>
@@ -35,7 +34,6 @@
               <th>Photo</th>
               <th>Title</th>
               <th>Category</th>
-              <th>Is Featured</th>
               <th>Price</th>
               <th>Size</th>
               <th>Stock</th>
@@ -73,7 +71,6 @@
                       @endif
                   </td>
                     <td>{{$product->title}}</td>
-                    <td>{{$product->cat_info['title']}}
                       <sub>
                           {{$product->sub_cat_info->title ?? ''}}
                       </sub>
@@ -141,6 +138,7 @@
   <script src="{{asset('backend/js/demo/datatables-demo.js')}}"></script>
   <script>
       $('#product-dataTable').DataTable( {
+        "order": [[0, "desc"]],
         "scrollX": false
             "columnDefs":[
                 {

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Shipping;
+use App\Models\Country;
 use App\User;
 use PDF;
 use Notification;
@@ -72,106 +73,30 @@ class OrderController extends Controller
      */
 
     public function store(Request $request){
-
         $this->validate($request,[
-
             'first_name'=>'string|required|min:2',
-
             'last_name' =>'string|required|min:2',
-
             'address1'  =>'string|required',
-
             'address2'  =>'string|nullable',
-
             'coupon'    =>'nullable|numeric',
-
             'phone'     =>'numeric|required|min:10',
-
             'post_code' =>'string|nullable',
-
-            //'email'     =>'required|email|unique:users',
             'email'     =>'required|email',
             'terms_and_condition'  =>'string|required'
-            
-
         ]);
 
-        // return $request->all();
-
-
-        $cart_data_count = Cart::where('user_id',auth()->user()->id)->where('order_id',null)->count();
-
+        $cart_data_count = Cart::where('user_id',auth()->user()->id)->where('order_id','ORD-XJOHA6DENG')->count();
         if($cart_data_count==0){
-
             request()->session()->flash('error','Cart is Empty !');
-
             return back();
-
         }
 
-        // $cart=Cart::get();
-
-        // // return $cart;
-
-        // $cart_index='ORD-'.strtoupper(uniqid());
-
-        // $sub_total=0;
-
-        // foreach($cart as $cart_item){
-
-        //     $sub_total+=$cart_item['amount'];
-
-        //     $data=array(
-
-        //         'cart_id'=>$cart_index,
-
-        //         'user_id'=>$request->user()->id,
-
-        //         'product_id'=>$cart_item['id'],
-
-        //         'quantity'=>$cart_item['quantity'],
-
-        //         'amount'=>$cart_item['amount'],
-
-        //         'status'=>'new',
-
-        //         'price'=>$cart_item['price'],
-
-        //     );
-
-
-
-        //     $cart=new Cart();
-
-        //     $cart->fill($data);
-
-        //     $cart->save();
-
-        // }
-
-
-
-        // $total_prod=0;
-
-        // if(session('cart')){
-
-        //         foreach(session('cart') as $cart_items){
-
-        //             $total_prod+=$cart_items['quantity'];
-
-        //         }
-
-        // }
-
         $prod_in_cart = Cart::where('user_id',auth()->user()->id)->where('order_id',null)->get();
-
         $prod_in_cart_arr=array();
-
         foreach($prod_in_cart as $res_cart_prod)
         {
             $prod_in_cart_arr[] = $res_cart_prod['product_id'];
         }
-
         if(count($prod_in_cart_arr)>0)
         {
             $prod_in_cart_str = implode(',',$prod_in_cart_arr);
@@ -182,107 +107,46 @@ class OrderController extends Controller
         }
         
         $order=new Order();
-
         $order_data=$request->all();
-
         $order_data['order_number']='ORD-'.strtoupper(Str::random(10));
-
         $order_data['product_id'] =  $prod_in_cart_str;
-
         $order_data['user_id']=$request->user()->id;
-
         $order_data['shipping_id']=$request->shipping;
-
-        $shipping=Shipping::where('id',$order_data['shipping_id'])->pluck('price');
-
-        // return session('coupon')['value'];
-
+        $shipping=Country::where('id',$request->country)->first();
         $order_data['sub_total']=Helper::totalCartPrice();
-
         $order_data['quantity']=Helper::cartCount();
-
+        $order_data['coupon']=Helper::cartCount();
+        $order_data['shipping_charge']=$shipping->shipping_charge;
         if(session('coupon')){
-
             $order_data['coupon']=session('coupon')['value'];
-
         }
-
-        if($request->shipping){
-
-            if(session('coupon'))
-            {
-
-                $order_data['total_amount']=Helper::totalCartPrice()+$shipping[0]-session('coupon')['value'];
-
-            }
-            else{
-
-                $order_data['total_amount']=Helper::totalCartPrice()+$shipping[0];
-
-            }
-
+        if(session('coupon'))
+        {
+            $order_data['total_amount']=Helper::totalCartPrice() + $shipping->shipping_charge - session('coupon')['value'];
         }
         else{
-
-            if(session('coupon')){
-
-                $order_data['total_amount']=Helper::totalCartPrice()-session('coupon')['value'];
-
-            }
-
-            else{
-
-                $order_data['total_amount']=Helper::totalCartPrice();
-
-            }
-
+            $order_data['total_amount']=Helper::totalCartPrice() + $shipping->shipping_charge;
         }
-
-        // return $order_data['total_amount'];
-
         $order_data['status']="new";
-
         if(request('payment_method')=='paypal'){
-
             $order_data['payment_method']='paypal';
-
             $order_data['payment_status']='unpaid';
-
-        }
-
-        else{
-
+        }else{
             $order_data['payment_method']='stripe';
-
             $order_data['payment_status']='unpaid';
-
         }
-
         $order->fill($order_data);
-
         $status=$order->save();
-
         if($order)
-
-        // dd($order->id);
-
         $users=User::where('role','admin')->first();
-
         $details=[
-
             'title'=>'New order created',
-
             'actionURL'=>route('order.show',$order->id),
-
             'fas'=>'fa-file-alt'
-
         ];
-
         Notification::send($users, new StatusNotification($details));
-
         if(request('payment_method')=='paypal'){
             return redirect()->route('payment')->with(['order_sql_id'=>$order->id]);
-            
         }elseif(request('payment_method')=='stripe'){
             //return redirect()->route('stripeform')->with(['order_sql_id'=>$order->id]);
             $enc_order_sqlid = Crypt::encrypt($order->id);
@@ -292,17 +156,10 @@ class OrderController extends Controller
             session()->forget('cart');
             session()->forget('coupon');
         }
-
         Cart::where('user_id', auth()->user()->id)->where('order_id', null)->update(['order_id' => $order->id]);
 
-
-
-        // dd($users);        
-
         request()->session()->flash('success','Your product successfully placed in order');
-
         return redirect()->route('home');
-
     }
 
 

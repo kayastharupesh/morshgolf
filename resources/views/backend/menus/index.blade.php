@@ -377,9 +377,8 @@
                             <div class="dd-handle">{{ $menu->name }}</div>
                             <input type="hidden" name="menus[{{ $menu->id }}][id]" value="{{ $menu->id }}">
                             <input type="hidden" name="menus[{{ $menu->id }}][name]" value="{{ $menu->name }}">
-                            <span class="button-delete btn btn-danger btn-xs pull-right"
-                                data-owner-id="{{ $menu->id }}">
-                                <i class="fa fa-times" aria-hidden="true"></i>
+                            <span class="button-delete btn btn-danger btn-xs pull-right">
+                              <a href="{{ route('menus.detele', $menu->id) }}"><i class="fa fa-times" aria-hidden="true"></i></a>
                             </span>
                             <span class="button-edit btn btn-success btn-xs pull-right">
                                 <a href="{{ route('menus.edit', $menu->id) }}"><i class="fa fa-pencil"
@@ -407,9 +406,8 @@
                                     <input type="hidden"
                                         name="menus[{{ $menu->id }}][submenus][{{ $submenu->id }}][name]"
                                         value="{{ $submenu->name }}">
-                                    <span class="button-delete btn btn-danger btn-xs pull-right"
-                                        data-owner-id="{{ $menu->id }}">
-                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    <span class="button-delete btn btn-danger btn-xs pull-right">
+                                      <a href="{{ route('menus.detele', $submenu->id) }}"><i class="fa fa-times" aria-hidden="true"></i></a>
                                     </span>
                                     <span class="button-edit btn btn-success btn-xs pull-right">
                                         <a href="{{ route('menus.edit', $submenu->id) }}"><i class="fa fa-pencil"

@@ -48,8 +48,8 @@ Route::get('/','FrontendController@home')->name('home');
 // Frontend Routes
 Route::get('/home', 'FrontendController@index');
 Route::get('/fairway-wood','FrontendController@fairwayWood')->name('fairway-wood');
-Route::get('/product','FrontendController@product')->name('product');
-Route::post('/product_category','FrontendController@productCategory')->name('product_category');
+Route::get('/allcatagory','FrontendController@allCatagory')->name('allcatagory');
+Route::get('/product_category/{id}','FrontendController@productCategory')->name('product_category');
 Route::get('/golf-balls','FrontendController@golfBalls')->name('golf-balls');
 
 Route::get('/about-us','FrontendController@aboutUs')->name('about-us');
@@ -158,9 +158,9 @@ Route::post('/shipping-stor', 'CountryController@shippingStore')->name('shipping
 
 
 
- // Ajax for show state
- Route::post('/show-state-country-wise', 'CountryController@showStateCountryWise')->name('show-state-country-wise');
-
+// Ajax for show state
+Route::post('/show-state-country-wise', 'CountryController@showStateCountryWise')->name('show-state-country-wise');
+Route::post('/setcurrency','FrontendController@setCurrency')->name('set-currency');
 
 // Backend section start
 Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
@@ -287,6 +287,7 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
     Route::get('menus/create','AdminController@menuCreate')->name('menus.create');
     Route::post('menu/store','AdminController@menuStore')->name('menu.store');
     Route::get('menus/edit/{id}','AdminController@menusEdit')->name('menus.edit');
+    Route::get('menus/delete/{id}','AdminController@menusDelete')->name('menus.detele');
     Route::post('menus/update','AdminController@menusUpdate')->name('menus.update');
     Route::post('menus/drackanddrop','AdminController@menusDrackanddrop')->name('menus.drackanddrop');
 

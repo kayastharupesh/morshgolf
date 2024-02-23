@@ -4,20 +4,6 @@ $productContDetails=DB::table('productcont')->first();
 @endphp 
 @extends('frontend.layouts.master')
 @section('meta')
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name='copyright' content=''>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="keywords" content="online shop, purchase, cart, ecommerce site, best online shopping">
-    <meta name="description" content="{{$product_detail->summary}}">
-    <meta property="og:url" content="{{route('product-detail',$product_detail->slug)}}">
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="{{$product_detail->title}}">
-    <meta property="og:image" content="{{$product_detail->photo}}">
-    <meta property="og:description" content="{{$product_detail->description}}">
-@endsection
-@section('meta')
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name='copyright' content=''>
@@ -87,7 +73,8 @@ $productContDetails=DB::table('productcont')->first();
                         <li><i class="fa-solid fa-star"></i> <span>{{ $product_detail->rating }}</span> Ratings</li>
                         <li><i class="fa-sharp fa-solid fa-bag-shopping"></i> <span>{{ $product_detail->no_of_product_sold }}</span>+ Sold</li>
                     </ul>
-                    <div class="product-price">$ {{ number_format($product_detail->price,2) }}</div>
+                    @php $currency = helper::getCurrency(number_format((float)$product_detail->price, 2, '.', '')); @endphp
+                    <div class="product-price">{{ session('symbol') .' '. number_format((float)$currency, 2, '.', '') }}</div>
                     
                     <hr>
                     @if(!empty($product_detail->hand_orientation) || !empty($product_detail->shaft_material) || !empty($product_detail->flex) || !empty($product_detail->configuration) || !empty($product_detail->volume) || !empty($product_detail->length) || !empty($product_detail->swing_weight))

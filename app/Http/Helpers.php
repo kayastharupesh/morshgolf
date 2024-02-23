@@ -1,27 +1,16 @@
 <?php
-
 use App\Models\Message;
-
 use App\Models\Category;
-
 use App\Models\PostTag;
-
 use App\Models\PostCategory;
-
 use App\Models\Product;
-
 use App\Models\Order;
-
 use App\Models\Wishlist;
-
 use App\Models\Country;
-
 use App\Models\Shipping;
-
 use App\Models\Cart;
-
 use App\Models\Menu;
-
+use AmrShawky\LaravelCurrency\Facade\Currency;
 // use Auth;
 
 class Helper{
@@ -247,6 +236,25 @@ class Helper{
     public static function subMenus($id){
         $SubMenu = Menu::where(['status' => 1, 'sub_menu' => $id,])->orderBy('order_by','asc')->get();
         return $SubMenu;
+    }
+
+    public static function getCurrency($price){
+        $exchange_rate = '';
+        if (session('currency') == 'EUR'){
+            $exchange_rate = 0.92481;
+            Session::put('symbol', "€");
+        }elseif (session('currency') == 'GBP'){
+            $exchange_rate = 0.7922;
+            Session::put('symbol', "£");
+        }elseif (session('currency') == 'CAD'){
+            $exchange_rate = 1.351;
+            Session::put('symbol', "$");
+        } else {
+            $exchange_rate = 1;
+            Session::put('symbol', "$");
+        }
+        $total_price = (float)$price * (float)$exchange_rate;
+        return (float)$total_price;
     }
 
 }

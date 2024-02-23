@@ -1,28 +1,15 @@
 @extends('frontend.layouts.master')
-@section('meta')
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name='copyright' content=''>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="keywords" content="online shop, purchase, cart, ecommerce site, best online shopping">
-    <meta name="description" content="{{$product_detail->summary}}">
-    <meta property="og:url" content="{{route('product-detail',$product_detail->slug)}}">
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="{{$product_detail->title}}">
-    <meta property="og:image" content="{{$product_detail->photo}}">
-    <meta property="og:description" content="{{$product_detail->description}}">
-@endsection
 @section('title','Contact us - Morsh Golf')
 @section('main-content')
 @php
 $settings=DB::table('settings')->get();
-// echo '<pre>';
-// print_r($settings);
 @endphp 
 <section class="contact-us-sec">
+    <div class="inner-about-us-sec" style="text-align: center">
+    <h1 >Contact us</h1>
+    </div>
     <div class="contact-us-body">
-        <div class="contact-us-left">
+        <div class="contact-us-left" >
             <ul>
                 <li><span><i class="fa-regular fa-location-dot"></i></span> <a href="#"> <small>Visit us </small> {{ $settings[0]->address }}</a></li>
                 <li><span><i class="fa-regular fa-square-envelope"></i></span> <a href="mailto:{{ $settings[0]->email }}"><small>Email Us</small> {{ $settings[0]->email }}</a></li>

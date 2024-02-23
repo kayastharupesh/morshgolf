@@ -1,18 +1,4 @@
 @extends('frontend.layouts.master')
-@section('meta')
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name='copyright' content=''>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="keywords" content="online shop, purchase, cart, ecommerce site, best online shopping">
-    <meta name="description" content="{{$product_detail->summary}}">
-    <meta property="og:url" content="{{route('product-detail',$product_detail->slug)}}">
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="{{$product_detail->title}}">
-    <meta property="og:image" content="{{$product_detail->photo}}">
-    <meta property="og:description" content="{{$product_detail->description}}">
-@endsection
 @section('title','Golf Balls')
 @section('main-content')
 <!--BANNER SEC-->
@@ -53,7 +39,7 @@
                             <img src="{{ url('/public/product/') }}/{{ $photo[0] }}" class="img-fluid" alt="{{ $p->title }}" />
                     @endif
                     <div class="offer-discount">
-                        @if(!empty($p->discount ))
+                        @if($p->discount > 1)
                             <div class="offer-d-box"><span>  {{ $p->discount }}%</span> OFF </div>
                         @endif
                     </div>
@@ -69,7 +55,8 @@
                     </div>
                 </div>
                 <div class="offer-box-bottom">
-                    <div class="offer-p">${{ number_format((float)$p->price, 2, '.', '') }}</div>
+                    @php $currency = helper::getCurrency(number_format((float)$p->price, 2, '.', '')); @endphp
+                    <div class="offer-p">{{ session('symbol') .' '. number_format((float)$currency, 2, '.', '') }}</div>
                     <a class="offer-box-btn" title="Add to cart" href="{{route('add-to-cart',$p->slug)}}">Add to Cart <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
                 </a> 

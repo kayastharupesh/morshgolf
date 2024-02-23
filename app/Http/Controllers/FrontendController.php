@@ -47,15 +47,14 @@ class FrontendController extends Controller
             ->with('plist', $products_lists);
     }
 
-    public function product(){
-        $products_lists = Product::where('status', 'active')->orderBy('id', 'DESC')->limit(10)->get();
-        return view('frontend.pages.product')
-            ->with('plist', $products_lists);
+    public function allCatagory(){
+        $categorys = Category::where('status', 'active')->get();
+        return view('frontend.pages.product')->with('categorys', $categorys);
     }
 
-    public function productCategory(Request $request){
-        $products_lists = Product::where('cat_id', $request->category)->where('status', 'active')->orderBy('id', 'DESC')->get();
-        return view('frontend.pages.product')->with('plist', $products_lists)->with('category', $request->category);
+    public function productCategory($id){
+        $products_lists = Product::where('status', 'active')->where('cat_id', $id)->orderBy('id', 'DESC')->get();
+        return view('frontend.pages.catagory-product')->with('plist', $products_lists);
     }
     
     public function testing(){
@@ -519,5 +518,10 @@ class FrontendController extends Controller
             request()->session()->flash('error', 'Already Subscribed');
             return back();
         }
+    }
+
+    public function setCurrency(Request $request){
+        Session::put('currency', $request->currency);
+        return response()->json(['status'=>true,'msg'=>'','data'=>null]);
     }
 }

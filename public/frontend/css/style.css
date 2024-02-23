@@ -505,7 +505,7 @@ li.product-list button.mob-btn {
 /*-------------MORSH OFFER SEC---------*/
 .offers-sec {
     margin: 0;
-    padding: 60px 0;
+   
     position: relative;
 }
 .offers-sec .offer-body {
@@ -3076,7 +3076,7 @@ button.place-order-btn {
 /*------CHECKOUT SEC------*/
 /*------INNER ABOUT SEC------*/
 .inner-about-us-sec {
-    margin: 150px 0 100px 0;
+    margin: 43px 0 100px 0;
     padding: 0 30px;
     position: relative;
 }
@@ -3239,12 +3239,12 @@ button.place-order-btn {
 }
 /*------POLICY SEC------*/
 .common-policy-sec {
-    margin: 150px 0 0 0;
+    margin: 38px 0 0 0;
     position: relative;
     padding: 0;
 }
 .common-policy-sec h1 {
-    margin: 0 0 50px 0;
+    margin: 0 0 30px 0;
     padding: 0;
     position: relative;
     font-size: 42px;
@@ -3441,7 +3441,7 @@ button.place-order-btn {
 }
 /*------CONTACT US------*/
 .contact-us-sec {
-    margin: 150px 0 60px 0;
+    margin: 38px 0 60px 0;
     padding: 0;
     position: relative;
 }
@@ -3769,6 +3769,10 @@ div#commentFormContainer h2 {
 
 .select-box-sec:before{
       display:none;
+   }
+
+   #translate:before{
+    display: none;
    }
 
 
@@ -4206,8 +4210,17 @@ div#commentFormContainer h2 {
 
   #translate{
     position: relative !important;
-    top: 0 !important;
+    top: 10px !important;
+    display: none;
   }
+
+  .avijit{
+    display: block !important;
+  }
+
+  .header-menu {
+    height: 366px !important;
+}
 
 }
 

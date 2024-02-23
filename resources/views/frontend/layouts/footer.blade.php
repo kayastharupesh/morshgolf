@@ -31,7 +31,8 @@
             </div>
             <div class="about-footer">
                 <h3>ABOUT US</h3>
-                <p>{{ $settings[0]->home_page_about_us }} <a href="{{ route('about-us') }}" style="color: #fff;">Read more...</a></p>
+                <p>{{ $settings[0]->home_page_about_us }} <a href="{{ route('about-us') }}" style="color: #fff;">Read
+                        more...</a></p>
             </div>
         </div>
     </div>
@@ -62,6 +63,57 @@
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>-->
 
 <!--<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>-->
+<script>
+    function setCurrency(currency) {
+        $.ajax({
+            url:"{{ route('set-currency') }}",
+            data:{
+                _token:"{{csrf_token()}}",
+                currency:currency
+            },
+            type:"POST",
+            success:function(response){
+                location.reload(true);
+            }
+        });     
+    }
+
+    const dropdowns = document.querySelectorAll(".dropdown");
+    dropdowns.forEach((dropdown) => {
+        const select = document.querySelector(".select");
+        const caret = document.querySelector(".caret");
+        const menu = document.querySelector(".menu");
+        const options = document.querySelectorAll(".menu li");
+        const selected = document.querySelector(".selected");
+        select.addEventListener("click", () => {
+            caret.classList.toggle("caret-rotate");
+            menu.classList.toggle("menu-open");
+        });
+
+        options.forEach((option) => {
+            option.addEventListener("click", () => {
+                selected.classList.remove("placeholder");
+                selected.innerText = option.innerText;
+                caret.classList.remove("caret-rotate");
+                menu.classList.remove("menu-open");
+                options.forEach((option) => option.classList.remove("active"));
+                option.classList.add("active");
+            });
+        });
+    });
+
+    const header = document.querySelector(".pages-header");
+    const toggleClass = "is-sticky";
+
+    window.addEventListener("scroll", () => {
+        const currentScroll = window.pageYOffset;
+        if (currentScroll > 100) {
+            header.classList.add(toggleClass);
+        } else {
+            header.classList.remove(toggleClass);
+        }
+    });
+</script>
 
 <script>
     $(document).ready(function() {

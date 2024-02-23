@@ -123,7 +123,7 @@
 
         <div class="form-group">
           <div class=" h-100 py-2">
-            <label for="status" class="col-form-label">Free Shipiing Amount <span class="text-danger">*</span></label>
+            <label for="status" class="col-form-label">Free Shipping Amount <span class="text-danger">*</span></label>
             <input type="text" name="free_shipping_cost" class="form-control" value="{{ $data->free_shipping_cost }}">
 
             @error('free_shipping_cost')
