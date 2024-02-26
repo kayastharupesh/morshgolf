@@ -44,7 +44,7 @@ class ProductController extends Controller
     public function create(){
         //$vendor = Vendor::get()->where('status','active');
         $brand = Brand::get()->where('status','active');
-        $category = Category::where('is_parent',1)->get()->where('status','active');
+        $category = Category::where('status','active')->get();
         // return $category;
         return view('backend.product.create')->with('categories',$category)->with('brands',$brand);
     }
@@ -181,7 +181,7 @@ class ProductController extends Controller
     public function edit($id){
         $brand=Brand::get();
         $product=Product::findOrFail($id);
-        $category=Category::where('is_parent',1)->get();
+        $category=Category::where('status','active')->get();
         $items=Product::where('id',$id)->get();
         // return $items;
         return view('backend.product.edit')->with('product',$product)

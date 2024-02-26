@@ -18,10 +18,10 @@
     <!-- Breadcrumbs -->
     <section class="all-bedcrumbs-sec">
         <div class="bedcrumb-body">
-            <ul>
+            {{-- <ul>
                 <li><a href="{{ route('home') }}">Home</a></li>
                 <li>Blog</li>
-            </ul>
+            </ul> --}}
         </div>
     </section>
     <!-- End Breadcrumbs -->
@@ -83,29 +83,17 @@
                                         <form class="form comment_form" id="commentForm" action="{{route('post-comment.store',$post->slug)}}" method="POST">
                                             @csrf
                                             <div class="row">
-                                                {{-- <div class="col-lg-6 col-md-6 col-12">
+                                                <div class="col-12" >
                                                     <div class="form-group">
-                                                        <label>Your Name<span>*</span></label>
-                                                        <input type="text" name="name" placeholder="" required="required">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 col-md-6 col-12">
-                                                    <div class="form-group">
-                                                        <label>Your Email<span>*</span></label>
-                                                        <input type="email" name="email" placeholder="" required="required">
-                                                    </div>
-                                                </div> --}}
-                                                <div class="col-12">
-                                                    <div class="form-group  comment_form_body">
-                                           
-                                                        <textarea name="comment" id="comment" rows="10" placeholder=""></textarea>
+                                                        <textarea name="comment" id="comment" cols="100" rows="10" placeholder="Your Comment Here"></textarea>
                                                         <input type="hidden" name="post_id" value="{{ $post->id }}" placeholder="Your Comment Here" />
                                                         <input type="hidden" name="parent_id" id="parent_id" value="" />
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group button">
-                                                        <button type="submit" class="btn"><span class="comment_btn comment">Post Comment</span><span class="comment_btn reply" style="display: none;">Reply Comment</span></button>
+                                                        <button type="submit" class="btn"><span class="comment_btn comment">Post Comment</span>
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -161,9 +149,8 @@
                         <div class="single-widget category">
                             <h3 class="title">Categories</h3>
                             <ul>
-                                {{-- {{count(Helper::postCategoryList())}} --}}
                                 @foreach(Helper::postCategoryList('posts') as $cat)
-                                <li><a href="#">{{$cat->title}} </a></li>
+                                    <li><a href="{{route('blog.categorysearch',$cat->id)}}">{{$cat->title}} </a>({{ Helper::postCategorycount($cat->id) }})</li>
                                 @endforeach
                             </ul>
                         </div>
@@ -173,7 +160,7 @@
                             <h3 class="title">Tags</h3>
                             <ul class="tag">
                                 @foreach(Helper::postTagList('posts') as $tag)
-                                    <li><a href="">{{$tag->title}}</a></li>
+                                    <li><a href="{{route('blog.tagsearch',$tag->title)}}">{{$tag->title}}</a></li>
                                 @endforeach
                             </ul>
                         </div>

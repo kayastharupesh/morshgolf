@@ -19,7 +19,7 @@ class PaypalController extends Controller
         
         $cart = Cart::where('user_id', auth()->user()->id)->where('order_id', null)->where('is_cross_sell', '<>', '1')->get()->toArray();
         $data = [];
-        $data['items'] = array_map(function ($item) use ($order_data) {
+        $data['items'] = array_map(function ($item) use ($cart) {
             $name = Product::where('id', $item['product_id'])->pluck('title');
             return [
                 'name' => $name,
@@ -129,6 +129,7 @@ class PaypalController extends Controller
             'date' => $order_data_mail->created_at,
             'total_amount' => session('symbol') . " " . $order_data_mail->currency_total_amount,
             'orderDetails' => $orderDetails,
+            'pdf' => $order_data_mail->id,
         ];
 
         Mail::send('mail.userorder', $datais, function ($messages) use ($datais) {

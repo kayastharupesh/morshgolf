@@ -2,6 +2,14 @@
 @section('title','Gallery - Morsh Golf')
 @section('main-content')
 @php $brands=DB::table('brands')->where('status', 'active')->get();@endphp
+<section class="all-bedcrumbs-sec">
+	<div class="bedcrumb-body">
+			<ul>
+					<li><a href="{{ route('home') }}">Home</a></li>
+					<li>Gallery</li>
+			</ul>
+	</div>
+</section>
 <section class="gallery-page">
     <div class="gallery-page-body">
         <h1>Product Gallery</h1>
@@ -20,8 +28,6 @@
 
 <style>
 .gallery-page {
-    margin: 100px 0 0 0;
-    padding: 50px 0;
     position: relative;
     text-align: center;
 }
@@ -32,7 +38,7 @@
     position: relative;
 }
 .gallery-page .gallery-page-body h1 {
-    margin: 0 0 30px  0;
+    margin: 0 0 -20px  0;
     padding: 0;
     position: relative;
     font-weight: bold;

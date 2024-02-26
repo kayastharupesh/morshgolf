@@ -147,17 +147,11 @@ $currency = session('currency');
                 @foreach ($menus as $menu)
                 @php $submenus = Helper::subMenus($menu->id); @endphp
                 @if ($submenus->isNotEmpty())
-                <li class="product-list"><a href="{{ route($menu->url) }}">{{ $menu->name }}</a>
+                <li class="product-list"><a href="{{ $menu->url }}">{{ $menu->name }}</a>
                     <div class="product-menu">
                         <div class="product-menu-left">
                             @foreach ($submenus as $submenu)
-                            @php $urlData = explode('/', $submenu->url); @endphp
-                            @if($urlData[0] == 'shop')
-                            <a class="product-paragraf" href="{{ url('shop/') }}/{{ $urlData[1] }}">{{ $submenu->name
-                                }}</a>
-                            @else
-                            <a href="{{ route($submenu->url) }}">{{ $submenu->name }}</a>
-                            @endif
+                                <a href="{{ $submenu->url }}">{{ $submenu->name }}</a>
                             @endforeach
                         </div>
                         <div class="product-menu-right">
@@ -167,10 +161,10 @@ $currency = session('currency');
                     <button type="button" class="mob-btn"><i class="fa-regular fa-circle-chevron-down"></i></button>
                 </li>
                 @else
-                <li><a href="{{ route($menu->url) }}">{{ $menu->name }}</a></li>
+                <li><a href="{{ $menu->url }}">{{ $menu->name }}</a></li>
                 @endif
                 @endforeach
-                <li>
+                {{-- <li>
                     <div class='dropdown'>
                         <div class='select'>
                             @if($currency != null)
@@ -196,7 +190,7 @@ $currency = session('currency');
                         </ul>
                     </div>
 
-                </li>
+                </li> --}}
                 <li id="translate" class="avijit"></li>
 
             </ul>

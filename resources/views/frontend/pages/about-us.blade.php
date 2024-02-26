@@ -89,17 +89,6 @@
 <!--MORSH WHY CHOOSE SEC--> 
     
 <!--MORSH CALL TO ACTION SEC-->
-<section class="morsh-call-to-action-sec">
-    <div class="morsh-call-to-action-body">
-        <div class="morsh-call-to-action-left"> <img src="{{ asset('frontend/images/logo-2.png') }}" alt="" />
-            <h2>Get Your 2 Wood Today! <span></span></h2>
-            <p>Upgrade Your Golf Game Today <span>with our professionally designed adjustable 2 wood.</span></p>
-            <p>You've nothing to loose to try it.</p>
-            <a href="#">ORDER NOW <span class="material-symbols-outlined">arrow_right_alt</span></a> </div>
-        <div class="morsh-call-to-action-right">
-            <img src="{{ asset('frontend/images/get-morsh-today.webp') }}" alt="Right to action" >
-        </div>
-    </div>
-</section>
+@include('frontend.layouts.call_to_action')
 <!--MORSH CALL TO ACTION SEC--> 
 @endsection

@@ -79,16 +79,7 @@ class AdminController extends Controller
     }
 
 
-    public function settingsUpdate(Request $request){
-        $this->validate($request,[
-            'short_des'=>'required|string',
-            'long_des'=>'required|string',
-            'logo'=>'required',
-            'photo'=>'required',
-            'address'=>'required|string',
-            'email'=>'required|email',
-            'phone'=>'required|string',
-        ]);
+    public function settingsUpdate(Request $request){        
         $data=$request->all();
         $settings=Settings::first();
 

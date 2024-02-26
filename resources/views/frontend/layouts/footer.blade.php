@@ -127,14 +127,9 @@
         $('.shipping select[name=shipping]').change(function(){
 
 			let cost = parseFloat( $(this).find('option:selected').data('price') ) || 0;
-
 			let subtotal = parseFloat( $('.order_subtotal').data('price') );
-
 			let coupon = parseFloat( $('.coupon_price').data('price') ) || 0;
-
-			// alert(coupon);
-
-			$('#order_total_price span').text('$'+(subtotal + cost-coupon).toFixed(2));
+			$('#order_total_price span').text('$'+(subtotal + cost - coupon).toFixed(2));
 
 		});
 
@@ -190,7 +185,13 @@
             })
             .done(function(response) {
                 var total_amount_data  = $('#total_amount_data').val();
-                var resultData = parseFloat(response[0].shipping_charge) + parseFloat(total_amount_data);
+                var shipping_product  = $('#shipping_product').val();
+                if(shipping_product == 11) {
+                    var resultData = parseFloat(total_amount_data);
+                } else {
+                    var resultData = parseFloat(response[0].shipping_charge) + parseFloat(total_amount_data);
+                }
+                
                 resultData = resultData.toFixed(2);
 
                 var shipping_charge_data = parseFloat(response[0].shipping_charge);
@@ -200,7 +201,12 @@
                     $("#shipping_method").show();
                     $("#shipping_method_1").hide();
                     $("#shipping_country_name").html(response[0].shipping_country_name);
-                    $("#shipping_charge").html(result_shipping_charge_data);
+                    if(shipping_product == 11) {
+                        $("#shipping_charge").html('00.00');
+                    } else {
+                        $("#shipping_charge").html(result_shipping_charge_data);
+                    }
+                    
                     $(".shipping_charge_data").html(resultData);
                 } else {
                     $("#shipping_method").hide();

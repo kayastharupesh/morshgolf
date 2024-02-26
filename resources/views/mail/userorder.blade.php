@@ -58,13 +58,14 @@
             <p>Payment Method: {{$payment_method}}</p>
             <p>Order Total: {{$total_amount}}</p>
             <p><b>We hope you enjoyed your shopping experience with us and that you will visit us again soon.</b></p>
-            <br><br>
+            <br>
             @if ($orderDetails != null)
               <p>Product Details</p>
               <table border="1">
                   <thead>
                       <tr>
                           <th>Product Name</th>
+                          <th>Product Image</th>
                           <th>Product Quantity</th>
                           <th>Product Price</th>
                       </tr>
@@ -73,6 +74,7 @@
                       @foreach (json_decode($orderDetails, true) as $orderDetail)
                           <tr>
                               <td>{{ $orderDetail['title'] }}</td>
+                              <td><img src="{{ url('/public/product/') }}/{{ $orderDetail['photo'] }}" class="img-fluid zoom" style="max-width:80px" alt="{{$orderDetail['photo']}}"></td>
                               <td>{{ $orderDetail['quantity'] }}</td>
                               <td>${{ $orderDetail['amount'] }}</td>
                           </tr>
@@ -82,6 +84,7 @@
             @endif
             <p><a href=" {{route('login.form')}} ">Click here</a> to visit our website.</p>
           </td>
+          <p><a href="{{route('order.pdf',$pdf)}} ">Click here</a> to downlode PDF.</p>
         </tr>
         <tr>
             <td class="footer">

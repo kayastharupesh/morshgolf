@@ -19,6 +19,9 @@
       @if (!empty(Helper::getAllProductFromCart()))
         <div class="checkout-product-list">
           @foreach (Helper::getAllProductFromCart() as $key => $cart)
+            @if ($cart->product_id == 11)
+              <input type="hidden" name="shipping_product" id="shipping_product" value="{{ $cart->product_id }}">
+            @endif
             <div class="checkout-product-box">
               <div class="checkout-p">
                 @php

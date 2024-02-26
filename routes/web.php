@@ -127,6 +127,8 @@ Route::post('product/track/order','OrderController@productTrackOrder')->name('pr
 Route::get('/blog','FrontendController@blog')->name('blog');
 Route::get('/blog-detail/{slug}','FrontendController@blogDetail')->name('blog.detail');
 Route::get('/blog/search','FrontendController@blogSearch')->name('blog.search');
+Route::get('/blog/category/{id}','FrontendController@blogCategory')->name('blog.categorysearch');
+Route::get('/blog/tags/{slug}','FrontendController@blogByTag')->name('blog.tagsearch');
 Route::post('/blog/filter','FrontendController@blogFilter')->name('blog.filter');
 
 // Blog Category

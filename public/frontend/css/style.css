@@ -1605,13 +1605,11 @@ li.product-list button.mob-btn {
 /*------ALL INNER PAGE BANNER SEC---------*/
 /*------BEDCRUMBS SEC------*/
 .all-bedcrumbs-sec {
-    margin: 0;
-    padding: 40px 0;
+    margin: 10px 0;
     position: relative;
 }
 .all-bedcrumbs-sec .bedcrumb-body {
     margin: 0 auto;
-    padding: 60px 30px 0;
     max-width: 1380px;
     position: relative;
 }

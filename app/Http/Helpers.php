@@ -10,6 +10,7 @@ use App\Models\Country;
 use App\Models\Shipping;
 use App\Models\Cart;
 use App\Models\Menu;
+use App\Models\Post;
 use AmrShawky\LaravelCurrency\Facade\Currency;
 // use Auth;
 
@@ -93,6 +94,12 @@ class Helper{
             return PostCategory::orderBy('id','DESC')->get();
         }
         return PostCategory::has('posts')->orderBy('id','DESC')->get();
+    }
+
+    public static function postCategorycount($id){
+        $postCategorycount = Post::where('post_cat_id',$id)->count();
+        
+        return $postCategorycount;
     }
 
     // Cart Count

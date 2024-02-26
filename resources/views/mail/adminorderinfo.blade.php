@@ -56,13 +56,14 @@
             <p>Name: {{$name}}</p>
             <p>Email: {{$email}}</p>
             <p>Phone Number: {{$phone}}</p>
-            <br><br>
+            <br>
             @if ($orderDetails != null)
               <p>Product Details</p>
               <table border="1">
                   <thead>
                       <tr>
                           <th>Product Name</th>
+                          <th>Product Image</th>
                           <th>Product Quantity</th>
                           <th>Product Price</th>
                       </tr>
@@ -71,6 +72,7 @@
                       @foreach (json_decode($orderDetails, true) as $orderDetail)
                           <tr>
                               <td>{{ $orderDetail['title'] }}</td>
+                              <td><img src="{{ url('/public/product/') }}/{{ $orderDetail['photo'] }}" class="img-fluid zoom" style="max-width:80px" alt="{{$orderDetail['photo']}}"></td>
                               <td>{{ $orderDetail['quantity'] }}</td>
                               <td>${{ $orderDetail['amount'] }}</td>
                           </tr>

@@ -6,7 +6,7 @@
 <section class="all-inner-banner-sec" style="background: url('{{ asset('frontend/images/product-details/inner-banner.webp') }}') center center no-repeat;">
     <div class="all-inner-banner-body">
         <div class="inner-banne-left">
-            <h1>Fairway Wood</h1>
+            <h1>Product</h1>
         </div>
         <div class="inner-banne-img">
             <img src="{{ asset('frontend/images/product-details/product-img.png') }}" class="mar-minus-buttom" alt="" />
@@ -20,7 +20,7 @@
     <div class="bedcrumb-body">
         <ul>
             <li><a href="{{ route('home') }}">Home</a></li>
-            <li><a href="#">Fairway Wood</a></li>
+            <li><a href="#">Product</a></li>
         </ul>
     </div>
 </section>

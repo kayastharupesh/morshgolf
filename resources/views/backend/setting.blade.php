@@ -2,7 +2,7 @@
 @section('main-content')
 
 <div class="card">
-  <h5 class="card-header">Edit Setting</h5>
+  <h5 class="card-header">General Setting</h5>
   @include('backend.layouts.notification')
   <div class="card-body">
     <form method="post" action="{{route('settings.update')}}" enctype="multipart/form-data">
@@ -304,9 +304,6 @@
             </div>
           </div>
           <div class="form-group mt-4">
-            <div class="card">
-              <h5 class="card-header">Home Page Heding Information</h5>
-            </div>
             <div class="row">
               <div class="form-group mb-3">
                 <button class="btn btn-success" type="submit">Update</button>

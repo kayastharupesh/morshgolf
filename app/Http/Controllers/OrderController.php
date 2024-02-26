@@ -85,7 +85,7 @@ class OrderController extends Controller
             'terms_and_condition'  =>'string|required'
         ]);
 
-        $cart_data_count = Cart::where('user_id',auth()->user()->id)->where('order_id','ORD-XJOHA6DENG')->count();
+        $cart_data_count = Cart::where('user_id',auth()->user()->id)->where('order_id',null)->count();
         if($cart_data_count==0){
             request()->session()->flash('error','Cart is Empty !');
             return back();
@@ -116,16 +116,31 @@ class OrderController extends Controller
         $order_data['sub_total']=Helper::totalCartPrice();
         $order_data['quantity']=Helper::cartCount();
         $order_data['coupon']=Helper::cartCount();
-        $order_data['shipping_charge']=$shipping->shipping_charge;
+        if($request->shipping_product == 11) {
+            $shipping = 00.00;
+            $order_data['shipping_charge']=$shipping;
+        } else {
+            $order_data['shipping_charge']=$shipping->shipping_charge;
+        }
+        
         if(session('coupon')){
             $order_data['coupon']=session('coupon')['value'];
         }
         if(session('coupon'))
         {
-            $order_data['total_amount']=Helper::totalCartPrice() + $shipping->shipping_charge - session('coupon')['value'];
+            if($request->shipping_product == 11) {
+                $order_data['total_amount']=Helper::totalCartPrice() - session('coupon')['value'];
+            } else {
+                $order_data['total_amount']=Helper::totalCartPrice() + $shipping->shipping_charge - session('coupon')['value'];
+            }            
         }
         else{
-            $order_data['total_amount']=Helper::totalCartPrice() + $shipping->shipping_charge;
+            if($request->shipping_product == 11) {
+                $order_data['total_amount']=Helper::totalCartPrice();
+            } else {
+                $order_data['total_amount']=Helper::totalCartPrice() + $shipping->shipping_charge;
+            }
+            
         }
         $order_data['status']="new";
         if(request('payment_method')=='paypal'){

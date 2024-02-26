@@ -348,8 +348,6 @@ class FrontendController extends Controller
 
 
     public function blogSearch(Request $request){
-
-        // return $request->all();
         $rcnt_post = Post::where('status', 'active')->orderBy('id', 'DESC')->limit(3)->get();
         $posts = Post::orwhere('title', 'like', '%' . $request->search . '%')
             ->orwhere('quote', 'like', '%' . $request->search . '%')
@@ -357,7 +355,14 @@ class FrontendController extends Controller
             ->orwhere('description', 'like', '%' . $request->search . '%')
             ->orwhere('slug', 'like', '%' . $request->search . '%')
             ->orderBy('id', 'DESC')
-            ->paginate(8);
+            ->paginate(20);
+        return view('frontend.pages.blog')->with('posts', $posts)->with('recent_posts', $rcnt_post);
+    }
+
+
+    public function blogCategory($id){
+        $rcnt_post = Post::where('status', 'active')->orderBy('id', 'DESC')->limit(3)->get();
+        $posts = Post::where('status', 'active')->where('post_cat_id', $id)->orderBy('id', 'DESC')->paginate(20);
         return view('frontend.pages.blog')->with('posts', $posts)->with('recent_posts', $rcnt_post);
     }
 
@@ -398,17 +403,17 @@ class FrontendController extends Controller
     public function blogByCategory(Request $request){
         $post = PostCategory::getBlogByCategory($request->slug);
         $rcnt_post = Post::where('status', 'active')->orderBy('id', 'DESC')->limit(3)->get();
-        return view('frontend.pages.blog')->with('posts', $post->post)->with('recent_posts', $rcnt_post);
+        return view('frontend.pages.blog')->with('posts', $post)->with('recent_posts', $rcnt_post);
     }
 
 
 
-    public function blogByTag(Request $request){
-        // dd($request->slug);
-        $post = Post::getBlogByTag($request->slug);
-        // return $post;
+    public function blogByTag($slug){
         $rcnt_post = Post::where('status', 'active')->orderBy('id', 'DESC')->limit(3)->get();
-        return view('frontend.pages.blog')->with('posts', $post)->with('recent_posts', $rcnt_post);
+        $posts = Post::orwhere('tags', 'like', '%' . $slug . '%')
+            ->orderBy('id', 'DESC')
+            ->paginate(20);
+        return view('frontend.pages.blog')->with('posts', $posts)->with('recent_posts', $rcnt_post);
     }
 
     // Login

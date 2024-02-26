@@ -56,9 +56,14 @@ class StripePaymentController extends Controller
         }
         $currency_data = number_format($ord_dtl, 1);
         $checkout_amount =  $currency_data * 100;
+        if(session('currency') != null) {
+            $currency_session = session('currency');
+        } else  {
+            $currency_session = 'usd';
+        }
         $response =  Stripe\Charge::create ([
             "amount" => $checkout_amount,
-            "currency" => session('currency'),
+            "currency" => $currency_session,
             'customer' => $customer->id,
             "description" => 'Invoice of Order ID #'.$order_id 
         ]);
@@ -115,8 +120,9 @@ class StripePaymentController extends Controller
                     'payment_method' => $order_data_mail->payment_method,
                     'currency' => session('symbol'),
                     'date' => $order_data_mail->created_at,
-                    'total_amount' => $order_data_mail->total_amount,
+                    'total_amount' => session('symbol') . " " . $order_data_mail->currency_total_amount,
                     'orderDetails' => $orderDetails,
+                    'pdf' => $order_data_mail->id,
 
                 ];
 
@@ -132,7 +138,7 @@ class StripePaymentController extends Controller
                     'name' => $order_data_mail->first_name . " " . $order_data_mail->last_name,
                     'payment_method' => $order_data_mail->payment_method,
                     'date' => $order_data_mail->created_at,
-                    'total_amount' => $order_data_mail->total_amount,
+                    'total_amount' => session('symbol') . " " . $order_data_mail->currency_total_amount,
                     'currency' => session('symbol'),
                     'email' => auth()->user()->email,
                     'phone' => $order_data_mail->phone,
