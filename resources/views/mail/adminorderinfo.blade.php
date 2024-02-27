@@ -44,41 +44,41 @@
     }
 
     .styled-table {
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    min-width: 400px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-}
+      border-collapse: collapse;
+      margin: 25px 0;
+      font-size: 0.9em;
+      font-family: sans-serif;
+      min-width: 400px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    }
 
-.styled-table thead tr {
-    background-color: #009879;
-    color: #ffffff;
-    text-align: left;
-}
+    .styled-table thead tr {
+      background-color: #ffc107;
+      color: #ffffff;
+      text-align: left;
+    }
 
-.styled-table th,
-.styled-table td {
-    padding: 12px 15px;
-}
+    .styled-table th,
+    .styled-table td {
+      padding: 12px 15px;
+    }
 
-.styled-table tbody tr {
-    border-bottom: 1px solid #dddddd;
-}
+    .styled-table tbody tr {
+      border-bottom: 1px solid #dddddd;
+    }
 
-.styled-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-}
+    .styled-table tbody tr:nth-of-type(even) {
+      background-color: #f3f3f3;
+    }
 
-.styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #009879;
-}
+    .styled-table tbody tr:last-of-type {
+      border-bottom: 2px solid #ffc107;
+    }
 
-.styled-table tbody tr.active-row {
-    font-weight: bold;
-    color: #009879;
-}
+    .styled-table tbody tr.active-row {
+      font-weight: bold;
+      color: #ffc107;
+    }
   </style>
 </head>
 
@@ -123,7 +123,7 @@
                   @php
                     $cart_photo = explode(',', $orderDetail['photo']);
                   @endphp
-                  <td><img src="{{url('/public/product/') }}/{{$cart_photo[0]}}" class="img-fluid zoom"
+                  <td><img src="{{ url('/public/product/') }}/{{ $cart_photo[0] }}" class="img-fluid zoom"
                       style="max-width:80px" alt="{{ $cart_photo[0] }}"></td>
                   <td>{{ $orderDetail['quantity'] }}</td>
                   <td>${{ $orderDetail['amount'] }}</td>
@@ -134,13 +134,13 @@
         @endif
 
         <h2>BILLING DETAILS:</h2>
-        <p>Name: {{ $billing->first_name .' '. $billing->last_name }}</p>
+        <p>Name: {{ $billing->first_name . ' ' . $billing->last_name }}</p>
         <p>Email: {{ $email }}</p>
         <p>Phone Number: {{ $phone }}</p>
         <p>Country: {{ $country }}</p>
         <p>Address: {{ $billing->address1 }}</p>
 
-               
+
         <p><a href=" {{ route('admin') }} ">Click here</a> to visit website.</p>
       </td>
     </tr>
