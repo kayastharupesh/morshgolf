@@ -2,7 +2,7 @@
 @section('main-content')
 
 <div class="card">
-  <h5 class="card-header">Today Nesw Edit Setting</h5>
+  <h5 class="card-header">Edit Home Page Today Nesw Information</h5>
   @include('backend.layouts.notification')
   <div class="card-body">
     @include('backend.layouts.tablinks')
@@ -11,9 +11,6 @@
 
       <div class="form-group">
           <div class="form-group mt-4">
-            <div class="card">
-              <h5 class="card-header">Home Page Today Nesw Information</h5>
-            </div>
             <div class="row">
               <div class="col-xl-12 col-md-12 mb-12">
                 <div class=" h-100 py-2">

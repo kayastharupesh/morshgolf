@@ -111,6 +111,9 @@ class StripePaymentController extends Controller
                 //------------Product Stock Updation cod end-----------//
 
                 $order_data_mail = Order::where('user_id', auth()->user()->id)->where('order_number', $order_id)->first();
+
+                $country = DB::table('countries')->where('id', $order_data_mail->country)->first();
+                $countryShip = DB::table('countries')->where('id', $order_data_mail->country_shipping)->first();
         
                 $datais = [
                     'to' => auth()->user()->email,
@@ -118,12 +121,15 @@ class StripePaymentController extends Controller
                     'order_number' => $order_id,
                     'name' => $order_data_mail->first_name . " " . $order_data_mail->last_name,
                     'payment_method' => $order_data_mail->payment_method,
-                    'currency' => session('symbol'),
+                    'total_amount' => session('symbol') . " " . $order_data_mail->total_amount,
+                    'sub_total' => session('symbol') . " " . $order_data_mail->sub_total ?? 0,
+                    'coupon' => session('symbol') . " " . $order_data_mail->coupon ?? 0,
+                    'shipping_charge' => session('symbol') . " " . $order_data_mail->shipping_charge ?? 0,
                     'date' => $order_data_mail->created_at,
-                    'total_amount' => session('symbol') . " " . $order_data_mail->currency_total_amount,
+                    'phone' => $order_data_mail->phone,
                     'orderDetails' => $orderDetails,
                     'pdf' => $order_data_mail->id,
-
+                    'countryShip' => $countryShip,
                 ];
 
                 Mail::send('mail.userorder',$datais, function($messages) use ($datais){
@@ -132,17 +138,22 @@ class StripePaymentController extends Controller
                 });
 
                 $datais = [
-                    'to' => 'info@morshgolf.com',
+                    'to' => 'suravi.polosoft@gmail.com',
                     'subject' => "New order we have received. || Morshgolf",
                     'order_number' => $order_id,
                     'name' => $order_data_mail->first_name . " " . $order_data_mail->last_name,
                     'payment_method' => $order_data_mail->payment_method,
                     'date' => $order_data_mail->created_at,
-                    'total_amount' => session('symbol') . " " . $order_data_mail->currency_total_amount,
-                    'currency' => session('symbol'),
-                    'email' => auth()->user()->email,
                     'phone' => $order_data_mail->phone,
+                    'total_amount' => session('symbol') . " " . $order_data_mail->total_amount,
+                    'sub_total' => session('symbol') . " " . $order_data_mail->sub_total ?? 0,
+                    'coupon' => session('symbol') . " " . $order_data_mail->coupon ?? 0,
+                    'shipping_charge' => session('symbol') . " " . $order_data_mail->shipping_charge ?? 0,
+                    'email' => auth()->user()->email,
                     'orderDetails' => $orderDetails,
+                    'billing' => $order_data_mail,
+                    'country' => $country->country_name,
+                    'countryShip' => $countryShip,
                 ];
 
                 Mail::send('mail.adminorderinfo',$datais, function($messages) use ($datais){

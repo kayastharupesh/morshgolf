@@ -13,7 +13,6 @@
               $product_id = $order->product_id;
               $product_id_arr = explode(',',$product_id);
               $ordered_prod=DB::table('products')->join('carts','products.id', '=', 'carts.product_id')->select('*')->whereIn('products.id',$product_id_arr)->where('order_id','=',$order->order_number)->get();
-
             @endphp
 
             <div class="user-product-box">
@@ -34,8 +33,6 @@
 							<div class="add-to-cart-box">
 									@php
 									$cart_photo=explode(',',$res_cart_prod->photo);
-									// echo '<pre>';
-									// print_r($cart_photo);
 									@endphp
 									
 									<div class="cart-details">

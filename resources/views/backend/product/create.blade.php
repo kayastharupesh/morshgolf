@@ -258,34 +258,31 @@
 
             </div>
 
-            <div class="col-xl-6 col-md-6 mb-6">
-
+            <div class="col-xl-6 col-md-6 mb-6 form-input-sec">
               <label for="size">Attribute</label>
+              <select name="size[]" class="form-control selectpicker" multiple data-live-search="true" style="display: block;
+              width: 100%;height: calc(1.5em + 0.75rem + 2px);padding: 0.375rem 0.75rem;font-size: 1rem;font-weight: 400;line-height: 1.5;
 
-          <select name="size[]" class="form-control selectpicker" multiple data-live-search="true" style="display: block;
+              color: #6e707e;background-color: #fff;background-clip: padding-box;border: 1px solid #d1d3e2;
 
-          width: 100%;height: calc(1.5em + 0.75rem + 2px);padding: 0.375rem 0.75rem;font-size: 1rem;font-weight: 400;line-height: 1.5;
-
-          color: #6e707e;background-color: #fff;background-clip: padding-box;border: 1px solid #d1d3e2;
-
-          border-radius: 0.35rem;transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;background-color: #dde2f1 !important;">
-              <option value=" ">--Select any attribute--</option>
-              <option value="Left Handed">Left Handed</option>
-              <option value="Right Handed">Right Handed</option>
-              <option value="Regular">Regular</option>
-              <option value="Stiff">Stiff</option>
-              <option value="XStiff">XStiff</option>
-              <option value="X-Stiff Shaft">X-Stiff Shaft</option>
-              <option value="RH REG">RH REG</option>
-              <option value="RH STIFF">RH STIFF</option>
-          </select>
+              border-radius: 0.35rem;transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;background-color: #dde2f1 !important;">
+                  <option value=" ">--Select any attribute--</option>
+                  <option value="Left Handed">Left Handed</option>
+                  <option value="Right Handed">Right Handed</option>
+                  <option value="Regular">Regular</option>
+                  <option value="Stiff">Stiff</option>
+                  <option value="XStiff">XStiff</option>
+                  <option value="X-Stiff Shaft">X-Stiff Shaft</option>
+                  <option value="RH REG">RH REG</option>
+                  <option value="RH STIFF">RH STIFF</option>
+              </select>
             </div>
           </div>
 
 
           <div class="row">
             <div class="col-xl-6 col-md-3 mb-4">
-              <label for="stock">Quantity <span class="text-danger">*</span></label>
+              <label for="stock">Stock Quantity <span class="text-danger">*</span></label>
               <input id="quantity" type="number" name="stock" min="0" placeholder="Enter quantity"  value="{{old('stock')}}" class="form-control">
               @error('stock')
               <span class="text-danger">{{$message}}</span>

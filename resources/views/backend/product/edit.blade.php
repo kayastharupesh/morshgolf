@@ -154,24 +154,21 @@
           <span class="text-danger">{{$message}}</span>
           @enderror
         </div>
-        <div class="col-xl-6 col-md-6 mb-6">
+        <div class="col-xl-6 col-md-6 mb-6 form-input-sec">
           <label for="size">Attribute</label>
           <select name="size[]" class="form-control selectpicker" multiple data-live-search="true">
-            <option value="">--Select any Attribute--</option>
+            <option value=" ">--Select any attribute--</option>
             @foreach($items as $item)
-            @php
-            $data=explode(',',$item->size);
-            // dd($data);
-            @endphp
-            <option value="Left Handed" @if( in_array( "Left Handed" ,$data ) ) selected @endif>Left Handed</option>
-            <option value="Right Handed" @if( in_array( "Right Handed" ,$data ) ) selected @endif>Right Handed</option>
-            <option value="Regular" @if( in_array( "Regular" ,$data ) ) selected @endif>Regular</option>
-            <option value="Stiff" @if( in_array( "Stiff" ,$data ) ) selected @endif>Stiff</option>
-            <option value="XStiff" @if( in_array( "Xstiff" ,$data ) ) selected @endif>XStiff </option>
-            <option value="X-Stiff Shaft" @if( in_array( "X-Stiff Shaft" ,$data ) ) selected @endif>X-Stiff Shaft
-            </option>
-            <option value="RH REG" @if( in_array( "RH REG" ,$data ) ) selected @endif>RH REG</option>
-            <option value="RH STIFF" @if( in_array( "RH STIFF" ,$data ) ) selected @endif>RH STIFF</option>
+              @php $data=explode(',',$item->size); @endphp
+              <option value="Left Handed" @if( in_array( "Left Handed" ,$data ) ) selected @endif>Left Handed</option>
+              <option value="Right Handed" @if( in_array( "Right Handed" ,$data ) ) selected @endif>Right Handed</option>
+              <option value="Regular" @if( in_array( "Regular" ,$data ) ) selected @endif>Regular</option>
+              <option value="Stiff" @if( in_array( "Stiff" ,$data ) ) selected @endif>Stiff</option>
+              <option value="XStiff" @if( in_array( "Xstiff" ,$data ) ) selected @endif>XStiff </option>
+              <option value="X-Stiff Shaft" @if( in_array( "X-Stiff Shaft" ,$data ) ) selected @endif>X-Stiff Shaft
+              </option>
+              <option value="RH REG" @if( in_array( "RH REG" ,$data ) ) selected @endif>RH REG</option>
+              <option value="RH STIFF" @if( in_array( "RH STIFF" ,$data ) ) selected @endif>RH STIFF</option>
             @endforeach
           </select>
         </div>
@@ -180,7 +177,7 @@
 
       <div class="row">
         <div class="col-xl-6 col-md-3 mb-4">
-          <label for="stock">Quantity <span class="text-danger">*</span></label>
+          <label for="stock">Stock Quantity <span class="text-danger">*</span></label>
           <input id="quantity" type="number" name="stock" min="0" placeholder="Enter quantity"
             value="{{$product->stock}}" class="form-control">
           @error('stock')
@@ -478,6 +475,13 @@
       }
     });
   });
+
+  // $(document).ready(function() {
+  //   var button = $(".dropdown-toggle.btn-light");
+  //   button.css({
+  //     "height": "40px",
+  //   });
+  // });
 </script>
 
 

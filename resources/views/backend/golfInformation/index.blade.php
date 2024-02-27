@@ -9,7 +9,7 @@
          </div>
      </div>
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary float-left">Golf Information List</h6>
+      <h6 class="m-0 font-weight-bold text-primary float-left">Home Page Golf Information List</h6>
       <a href="{{route('golfInformation.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Add User"><i class="fas fa-plus"></i> Add Golf Information</a>
     </div>
     <div class="card-body">

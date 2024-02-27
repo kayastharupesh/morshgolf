@@ -91,7 +91,7 @@
         </div>
         <div class="float-right site-address">
             <h4>MorshGolf</h4>
-            <p>Phone: <a href="tel:{{ env('APP_PHONE') }}">{{ env('APP_PHONE') }}</a></p>
+            <p>Phone: <a href="tel:+1 888 800 1911">+1 888 800 1911</a></p>
             <p>Email: <a href="mailto:{{ env('MAIL_USERNAME') }}">{{ env('MAIL_USERNAME') }}</a></p>
         </div>
         <div class="clearfix"></div>

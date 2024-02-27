@@ -201,7 +201,7 @@ $currency = session('currency');
                         <div class="cart-num"> @if(Helper::cartCount()>0){{Helper::cartCount()}}@endif </div>
                     </a></li>
                 <li class="account-login"> <a href="#" class="account-login-link"><i class="fa-regular fa-user"></i></a>
-                    <div class="account-popup "> @auth
+                    <div class="account-popup " style="z-index: 9999;"> @auth
                         @if(Auth::user()->role=='admin')
                         <div class="acc-details"> <a href="{{route('admin')}}"><i class="fa-regular fa-user-large"></i>
                                 Welcome Admin</a> </div>

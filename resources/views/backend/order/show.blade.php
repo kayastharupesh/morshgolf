@@ -79,7 +79,7 @@
                 </tr>
                 <tr>
                   <td>Payment Method</td>
-                  <td> : @if($order->payment_method=='cod') Cash on Delivery @else Paypal @endif</td>
+                  <td> : {{ $order->payment_method }}</td>
 
                   <td>Payment Status</td>
                   <td> : {{$order->payment_status}}</td>
@@ -89,7 +89,11 @@
                   <td> : {{$order->status}}</td>
 
                   <td>Shipping Charge</td>
-                  <td> : Free</td>
+                  @if ($order->shipping_charge > 0)
+                    <td> :$ {{ number_format($order->shipping_charge,2)  }}</td>
+                  @else
+                    <td> :Free</td>
+                  @endif
                 </tr>
                 @foreach($ordered_prods as $res_cart_prod)
                   @php
@@ -123,7 +127,7 @@
             </div>
 
             <div class="shipping-info">
-              <h4 class="text-center pb-12">SHIPPING INFORMATION</h4>
+              <h4 class="text-center pb-12">BILLING INFORMATION</h4>
               <table class="table">
                 <tr class="">
                   <td>Full Name</td>
@@ -146,9 +150,44 @@
 
                   <td>Address</td>
                   <td> : {{$order->address1}}, {{$order->address2}}</td>
-                </tr>                
+                </tr>
+                @if ($order->order_note != null)
+                  <tr>
+                    <td>ORDER NOTES</td>
+                    <td> : {{ $order->order_note }}</td>
+                  </tr>
+                @endif             
               </table>
             </div>
+            @if ($order->ship_to_different == 1)
+              <div class="shipping-info">
+                <h4 class="text-center pb-12">SHIPPING DIFFERENT ADDRESS INFORMATION</h4>
+                <table class="table">
+                  <tr class="">
+                    <td>Full Name</td>
+                    <td> : {{$order->first_name_shipping}} {{$order->last_name_shipping}}</td>
+
+                    <td>Email</td>
+                    <td> : {{$order->email_shipping}} </td>
+                  </tr>
+                  <tr>
+                    <td>Phone No.</td>
+                    <td> : {{$order->phone_shipping}}</td>
+
+                    <td>Post Code</td>
+                    <td> : {{$order->post_code_shipping}}</td>
+                  </tr>
+                  <tr>
+                    @php $country = DB::table('countries')->where('id', $order->country_shipping)->first(); @endphp
+                    <td>Country</td>
+                    <td> : {{ $country->country_name }}</td>
+
+                    <td>Address</td>
+                    <td> : {{$order->address1_shipping}}, {{$order->address2_shipping}}</td>
+                  </tr>                
+                </table>
+              </div>
+            @endif
           </div>
         </div>
       </div>

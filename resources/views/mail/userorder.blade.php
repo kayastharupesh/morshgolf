@@ -56,6 +56,9 @@
             <p>Order ID: #{{$order_number}}</p>
             <p>Order Date: {{$date}}</p>
             <p>Payment Method: {{$payment_method}}</p>
+            <p>Sub Total: {{ $sub_total }}</p>
+            <p>coupon: {{ $coupon }}</p>
+            <p>Shipping Charge: {{ $shipping_charge }}</p>
             <p>Order Total: {{$total_amount}}</p>
             <p><b>We hope you enjoyed your shopping experience with us and that you will visit us again soon.</b></p>
             <br>
@@ -73,10 +76,13 @@
                   <tbody>
                       @foreach (json_decode($orderDetails, true) as $orderDetail)
                           <tr>
-                              <td>{{ $orderDetail['title'] }}</td>
-                              <td><img src="{{ url('/public/product/') }}/{{ $orderDetail['photo'] }}" class="img-fluid zoom" style="max-width:80px" alt="{{$orderDetail['photo']}}"></td>
-                              <td>{{ $orderDetail['quantity'] }}</td>
-                              <td>${{ $orderDetail['amount'] }}</td>
+                            <td>{{ $orderDetail['title'] }}</td>
+                            @php
+                            $cart_photo = explode(',', $orderDetail['photo']);
+                            @endphp
+                            <td><img src="{{url('/public/product/') }}/{{$cart_photo[0]}}" class="img-fluid zoom" style="max-width:80px" alt="{{ $cart_photo[0] }}"></td>
+                            <td>{{ $orderDetail['quantity'] }}</td>
+                            <td>${{ $orderDetail['amount'] }}</td>
                           </tr>
                       @endforeach
                   </tbody>

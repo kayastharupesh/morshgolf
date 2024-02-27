@@ -116,6 +116,10 @@ class OrderController extends Controller
         $order_data['sub_total']=Helper::totalCartPrice();
         $order_data['quantity']=Helper::cartCount();
         $order_data['coupon']=Helper::cartCount();
+
+        if($request->state_id_shipping == null){
+            $order_data['state_id_shipping'] = $request->state_text_shipping;
+        }
         if($request->shipping_product == 11) {
             $shipping = 00.00;
             $order_data['shipping_charge']=$shipping;
@@ -125,6 +129,8 @@ class OrderController extends Controller
         
         if(session('coupon')){
             $order_data['coupon']=session('coupon')['value'];
+        } else {
+            $order_data['coupon']=0;
         }
         if(session('coupon'))
         {

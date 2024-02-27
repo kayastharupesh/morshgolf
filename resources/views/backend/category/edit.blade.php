@@ -44,7 +44,7 @@
 
         <div class="form-group">
           <label for="inputTitle" class="col-form-label">Catagory Image <span class="text-danger">*</span></label>
-          <input  type="file" name="photo" value="{{old('photo')}}" class="form-control" required>
+          <input  type="file" name="photo" value="{{old('photo')}}" class="form-control">
           @error('photo')
           <span class="text-danger">{{$message}}</span>
           @enderror

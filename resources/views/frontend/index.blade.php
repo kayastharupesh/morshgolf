@@ -10,7 +10,7 @@
             <div class="banner-item-details">
               <h1>{{ $banner->main_heading }}</h1>
               <p>{{ $banner->sub_heading }}</p>
-              <a href="{{ $banner->link }}">{{ $banner->readmore_text }}</a>
+              <a href="{{ $banner->link }}" style="cursor:pointer;">{{ $banner->readmore_text }}</a>
             </div>
           </div>
         @endforeach

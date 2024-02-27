@@ -2,7 +2,7 @@
 @section('main-content')
 
 <div class="card">
-  <h5 class="card-header">Edit Setting</h5>
+  <h5 class="card-header">Edit Home Page Video Setting</h5>
   @include('backend.layouts.notification')
   <div class="card-body">
     @include('backend.layouts.tablinks')

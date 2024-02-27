@@ -119,10 +119,10 @@
     $(document).ready(function() {
         $('.header-part:contains("Powered by")').html('');
         $('#image_loader').hide();
-        $('#image_loader_checkout').hide();
+        $('#image_loader_shipping').hide();
 
         $('.show_state_name').hide();
-        $('.show_state_name_checkout').hide();
+        $('.show_state_name_shipping').hide();
 
         $('.shipping select[name=shipping]').change(function(){
 
@@ -223,54 +223,62 @@
 
 
         // show state in cart page
-        $('.nice-select-country_checkout').on('change', function() {
+        $('.nice-select-country_shipping').on('change', function() {
             var cat_id=$(this).val();
             if(cat_id !=null){
-            //console.log(cat_id);
-            // Ajax call
-            $.ajax({
-                url:"{{url('/')}}/country/"+cat_id+"/child",
-                data:{
-                _token:"{{csrf_token()}}",
-                id:cat_id
-                },
-                type:"POST",
-                beforeSend: function() {
-                    $('#image_loader_checkout').show();
-                },
-                success:function(response){
-                if(typeof(response) !='object'){
-                    response=$.parseJSON(response)
-                }
-                //console.log(response);
-                var html_option="<option value=''>---select state---</option>"
-                if(response.status===true){
-                    $('#image_loader_checkout').hide();
-                    var data=response.data;
-                    //alert(data);
-                    if(response.data){
-                        //console.log(response);
-                    $('.child_cat_hide_checkout').removeClass('d-none');
-                    $('.show_state_name_checkout').hide();
-                    $('#child_cat_id_checkout').removeClass('d-none');
-                    $.each(data,function(id,title){
-                        html_option +="<option value='"+id+"'>"+title+"</option>"
-                    });
+                $.ajax({
+                    url:"{{ route('show-state-country-wise') }}",
+                    data:{
+                        _token:"{{csrf_token()}}",
+                        id:cat_id
+                    },
+                    type:"POST",
+                    beforeSend: function() {
+                        $('#image_loader_shipping').show();
+                    },
+                    success:function(response){
+                    if(typeof(response) !='object'){
+                        response=$.parseJSON(response)
+                    }
+                    var html_option="<option value=''>---select state---</option>"
+                    if(response.status===true){
+                        $('#image_loader_shipping').hide();
+                        var data=response.data;
+                        if(response.data){
+                            $('.child_cat_hide_shipping').removeClass('d-none');
+                            $('.show_state_name_shipping').hide();
+                            $('#child_cat_id_shipping').removeClass('d-none');
+                            $.each(data,function(id,title){
+                                html_option +="<option value='"+id+"'>"+title+"</option>"
+                            });
+                        }
+                        else{
+                        }
                     }
                     else{
+                        $('#child_cat_id_shipping').addClass('d-none');
+                        $('#image_loader_shipping').hide();
+                        $('.show_state_name_shipping').show();
                     }
-                }
-                else{
-                    $('#child_cat_id_checkout').addClass('d-none');
-                    $('#image_loader_checkout').hide();
-                    $('.show_state_name_checkout').show();
-                }
-                $('#child_cat_id_checkout').html(html_option);
-                }
-            });
+                    $('#child_cat_id_shipping').html(html_option);
+                    }
+                });
             }
             
         })	
+    });
+
+    $(document).ready(function() {
+        $('.shipping_address').hide();
+        $('#ship_to_different').click(function() {
+            if ($(this).is(':checked')) {
+                $('#ship_to_different').val('1');
+            $('.shipping_address').show();
+            } else {
+                $('#ship_to_different').val('');
+            $('.shipping_address').hide();
+            }
+        });
     });
 
     $(".shipping_btns").click(function(){

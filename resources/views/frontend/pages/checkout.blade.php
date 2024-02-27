@@ -37,12 +37,12 @@
               <div class="c-product-qty">{{ $cart->quantity }}</div>
               <div class="c-product-price">
                 @if ($cart['is_cross_sell'] == '1')
-                  @php $currif = helper::getCurrency(number_format($cart['price'],2)); @endphp
+                  @php $currif = Helper::getCurrency(number_format($cart['price'],2)); @endphp
                   Price : <strike
                     class="text-danger">{{ session('symbol') . ' ' . number_format($currif, 2, '.', '') }}</strike>{{ session('symbol') }}0.00
                 @else
                   @php
-                    $currelse = helper::getCurrency(number_format($cart['price'],2));
+                    $currelse = Helper::getCurrency(number_format($cart['price'],2));
                   @endphp
                   Price : {{ session('symbol') . ' ' . number_format($currelse, 2, '.', '') }}
                 @endif
@@ -102,7 +102,7 @@
               </div>
 
               <div class="form-group">
-                <label for="">Country *</label>
+                <label for="">Countr *</label>
                 @if (Helper::country())
                   <select class="nice-select-country form-control" id="country" name="country" required>
                     <option value=""> - select country - </option>
@@ -123,7 +123,7 @@
                   <option value=""> - select state - </option>
                 </select>
 
-                <input type="text" name="state_id" class="form-control show_state_name">
+                <input type="text" name="state_etxt_id" class="form-control show_state_name">
               </div>
 
               <div class="form-group">
@@ -158,8 +158,11 @@
                   <span class='text-danger'>{{ $message }}</span>
                 @enderror
               </div>
+              <input type="checkbox" id="ship_to_different" name="ship_to_different" value="" >
+              <label for="ship_to_different" style="margin-top: 9px;">Ship to a different address?</label><br>
+              
               <div class="form-group full-width-f-g defferent_add">
-                <div class="billing-details-form shipping_address d-none">
+                <div class="billing-details-form shipping_address" style="display: none;">
                   <div class="form-group">
                     <label for="">First Name *</label>
                     <input type="text" class="form-control" placeholder="" name="first_name_shipping"
@@ -212,7 +215,7 @@
                     <select class="form-control" id="child_cat_id_shipping" name="state_id_shipping">
                       <option value=""> - select state - </option>
                     </select>
-                    <input type="text" name="state_id" class="form-control show_state_name_shipping">
+                    <input type="text" name="state_text_shipping" class="form-control show_state_name_shipping">
                   </div>
                   <div class="form-group full-width-f-g">
                     <label for="">Postcode Lookup *</label>
@@ -221,9 +224,6 @@
                     @error('post_code')
                       <span class='text-danger'>{{ $message }}</span>
                     @enderror
-                  </div>
-                  <div class="form-group full-width-f-g">
-                    <button type="button" class="checkout-f-btn">Find My Address</button>
                   </div>
                   <div class="form-group">
                     <label for="">Street Address *</label>
@@ -259,6 +259,7 @@
                   </div>
                 </div>
               </div>
+              
               <div class="form-group full-width-f-g">
                 <label for="">Order Notes (Optional) </label>
                 <textarea class="form-control" name="order_note" rows="4"></textarea>
@@ -279,19 +280,21 @@
 
                   @if (session('coupon'))
                     @php
-                      $curcoupon = helper::getCurrency(number_format(session('coupon')['value']));
+                      $curcoupon = Helper::getCurrency(number_format(session('coupon')['value']));
                     @endphp
                     <li class="coupon_price" data-price="{{ $curcoupon }}">You
                       Save<span>{{ session('symbol') . ' ' . number_format((float) $curcoupon, 2, '.', '') }}</span></li>
                   @endif
 
                   @php
-                    $total_amount = helper::getCurrency(number_format(Helper::totalCartPrice()));
+                    $totalAmount = Helper::totalCartPrice();
+                    $total_amount = Helper::getCurrency(number_format((float) $totalAmount, 2, '.', ''));
                     if (session('coupon')) {
-                        $total_amount = $total_amount - helper::getCurrency(number_format(session('coupon')['value']));
+                        $total_amount = $total_amount - Helper::getCurrency(number_format(session('coupon')['value']));
                     }
                   @endphp
                 </ul>
+                
                 <div class="billing-details-form cart-coupon shipping_calculation" style="background:none;">
                   <div id="shipping_method" style="display: none;">
                     <div class="cart-c-title">Shipping&nbsp;
@@ -301,7 +304,7 @@
                           {{ '( Free )' }}
                         @else
                           @php 
-                            $currency = helper::getCurrency(number_format($total_amount, 2));
+                            $currency = Helper::getCurrency(number_format($total_amount, 2));
                           @endphp
                           <input type="hidden" name="shipping_amount" value="{{ number_format((float) $currency, 2, '.', '') }}">
                           {{ session('symbol') }}<span

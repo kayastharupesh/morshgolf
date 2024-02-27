@@ -10,7 +10,7 @@
      </div>
      
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary float-left">Banners List</h6>
+      <h6 class="m-0 font-weight-bold text-primary float-left">Home Page Banners List</h6>
       <a href="{{route('banner.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Add User"><i class="fas fa-plus"></i> Add Banner</a>
 
       

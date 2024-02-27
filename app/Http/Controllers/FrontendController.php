@@ -432,9 +432,13 @@ class FrontendController extends Controller
                 $already_cart->user_id = Auth::user()->id;
                 $already_cart->user_type = 'reg';
                 $already_cart->save();
+
+                request()->session()->flash('success', 'Successfully login');
+                return redirect()->route('cart');
+            } else {
+                request()->session()->flash('success', 'Successfully login');
+                return redirect()->route('home'); 
             }
-            request()->session()->flash('success', 'Successfully login');
-            return redirect()->route('home');
         } else {
             request()->session()->flash('error', 'Invalid email and password pleas try again!');
             return redirect()->back();

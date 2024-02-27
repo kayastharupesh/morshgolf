@@ -112,12 +112,11 @@ class ProductController extends Controller
             foreach($request->file('photo') as $file)
             {
                 $fileName       = $file->getClientOriginalName();
-                //$file_extension = $file->extension();
-                //$file_size      = $file->getSize();
-                //$file_Newname   = $fileName.rand(10, 100).".".$file_extension;
+                $file_extension = $file->extension();
+                $file_Newname   = "product-".rand(10, 999).".".$file_extension;
 
-                if($file->move('public/product/',$fileName)){
-                    $img_lists[] = $fileName;
+                if($file->move('public/product/',$file_Newname)){
+                    $img_lists[] = $file_Newname;
                 } else {
                     request()->session()->flash('error','Failed to upload document. Please try again after some time.');
                 }
@@ -258,12 +257,11 @@ class ProductController extends Controller
             foreach($request->file('photo') as $file)
             {
                 $fileName       = $file->getClientOriginalName();
-                //$file_extension = $file->extension();
-                //$file_size      = $file->getSize();
-                //$file_Newname   = $fileName.".".$file_extension;
+                $file_extension = $file->extension();
+                $file_Newname   = "product-".rand(10, 999).".".$file_extension;
 
-                if($file->move('public/product/',$fileName)){
-                    $img_lists[] = $fileName;
+                if($file->move('public/product/',$file_Newname)){
+                    $img_lists[] = $file_Newname;
                 } else {
                     request()->session()->flash('error','Failed to upload document. Please try again after some time.');
                 }

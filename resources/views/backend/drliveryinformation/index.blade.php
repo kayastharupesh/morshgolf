@@ -9,7 +9,7 @@
          </div>
      </div>
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary float-left">Facilities List</h6>
+      <h6 class="m-0 font-weight-bold text-primary float-left">Home Page Facilities List</h6>
     </div>
     <div class="card-body">
       @include('backend.layouts.tablinks')
