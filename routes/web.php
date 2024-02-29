@@ -70,6 +70,7 @@ Route::get('/contact','FrontendController@contact')->name('contact');
 
 Route::get('/returns','FrontendController@returns')->name('returns');
 Route::get('/abandoned-cart','AbandonedCart@index')->name('returns');
+Route::get('/send-mail-abandoned-cart','AbandonedCart@sendMailAbandonedCart')->name('send-mail-abandoned-cart');
 Route::get('/story','FrontendController@ourStory')->name('story');
 
 Route::get('/contact','FrontendController@contact')->name('contact');
@@ -96,8 +97,6 @@ Route::post('cart-update','CartController@cartUpdate')->name('cart.update');
 Route::get('/cart',function(){
     return view('frontend.pages.cart');
 })->name('cart');
-
-Route::get('/checkout','CartController@checkout')->name('checkout');
 
 // Wishlist
 Route::get('/wishlist',function(){
@@ -252,6 +251,10 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
     Route::get('todaynesw','AdminController@todaynesw')->name('todaynesw');
     Route::get('video','AdminController@video')->name('video');
     Route::post('setting/update','AdminController@settingsUpdate')->name('settings.update');
+    Route::post('setting/homepageheding','AdminController@settingsHomepageheding')->name('settings.homepageheding.update');
+    Route::post('setting/morshinfo','AdminController@morshinfoUpdate')->name('morshinfo.update');
+    Route::post('setting/todaynesw','AdminController@todayneswUpdate')->name('todaynesw.update');
+    Route::post('setting/video','AdminController@videoUpdate')->name('video.update');
     
     //home page popup
     Route::get('homepage_popup','AdminController@homepage_popup')->name('homepage_popup');
@@ -302,12 +305,17 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
     Route::get('change-password', 'AdminController@changePassword')->name('change.password.form');
     Route::post('change-password', 'AdminController@changPasswordStore')->name('change.password');
 
+    // Abonded Cart 
+    Route::get('abondedcart', 'CartController@abondedcart')->name('abondedcart.index');
+
 });
 
 
 
 // User section start
 Route::group(['prefix'=>'/user','middleware'=>['user']],function(){
+
+    Route::get('/checkout','CartController@checkout')->name('checkout');
 
     Route::get('/','HomeController@index')->name('user');
 

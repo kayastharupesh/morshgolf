@@ -57,15 +57,15 @@
 
                     <td>
                       @foreach($author_info as $data)
-                          {{$data->name}}
+                        {{$data->name}}
                       @endforeach
                     </td>
                     <td>
-                        @if($post->photo)
-                            <img src="{{$post->photo}}" class="img-fluid zoom" style="max-width:80px" alt="{{$post->photo}}">
-                        @else
-                            <img src="{{asset('backend/img/thumbnail-default.jpg')}}" class="img-fluid" style="max-width:80px" alt="avatar.png">
-                        @endif
+                      @if($post->photo)
+                      <img src="{{asset('backend/gallery/'.$post->photo)}}" class="img-fluid" style="max-width:100px" alt="{{$post->photo}}">                          
+                      @else
+                        <img src="{{asset('backend/img/thumbnail-default.jpg')}}" class="img-fluid" style="max-width:80px" alt="avatar.png">
+                      @endif
                     </td>                   
                     <td>
                         @if($post->status=='active')
@@ -74,7 +74,7 @@
                             <span class="badge badge-warning">{{$post->status}}</span>
                         @endif
                     </td>
-                    <td>
+                    <td class="table-icons-order">
                         <a href="{{route('post.edit',$post->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
                     <form method="POST" action="{{route('post.destroy',[$post->id])}}">
                       @csrf 

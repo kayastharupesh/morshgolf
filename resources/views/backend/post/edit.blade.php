@@ -5,7 +5,7 @@
 <div class="card">
     <h5 class="card-header">Edit Post</h5>
     <div class="card-body">
-      <form method="post" action="{{route('post.update',$post->id)}}">
+      <form method="post" action="{{route('post.update',$post->id)}}" enctype="multipart/form-data">
         @csrf 
         @method('PATCH')
         <div class="form-group">
@@ -68,13 +68,7 @@
         </div>
         <div class="form-group">
           <label for="inputPhoto" class="col-form-label">Photo <span class="text-danger">*</span></label>
-          <div class="input-group">
-              <span class="input-group-btn">
-                  <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
-                  <i class="fa fa-picture-o"></i> Choose
-                  </a>
-              </span>
-          <input id="thumbnail" class="form-control" type="text" name="photo" value="{{$post->photo}}">
+          <input class="form-control" type="file" name="photo" value="{{$post->photo}}">
         </div>
         <div id="holder" style="margin-top:15px;max-height:100px;"></div>
 

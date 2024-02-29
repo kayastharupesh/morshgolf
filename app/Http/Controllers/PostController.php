@@ -50,7 +50,6 @@ class PostController extends Controller
             'quote'=>'string|nullable',
             'summary'=>'string|required',
             'description'=>'string|nullable',
-            'photo'=>'string|nullable',
             'tags'=>'nullable',
             'added_by'=>'nullable',
             'post_cat_id'=>'required',
@@ -65,6 +64,19 @@ class PostController extends Controller
             $slug=$slug.'-'.date('ymdis').'-'.rand(0,999);
         }
         $data['slug']=$slug;
+
+        if($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "post-".rand(111, 999).".".$file_extension;
+            if($file->move('public/backend/gallery/',$file_Newname)){
+                $data['photo']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
 
         $tags=$request->input('tags');
         if($tags){
@@ -127,7 +139,6 @@ class PostController extends Controller
             'quote'=>'string|nullable',
             'summary'=>'string|required',
             'description'=>'string|nullable',
-            'photo'=>'string|nullable',
             'tags'=>'nullable',
             'added_by'=>'nullable',
             'post_cat_id'=>'required',
@@ -136,7 +147,18 @@ class PostController extends Controller
 
         $data=$request->all();
         $tags=$request->input('tags');
-        // return $tags;
+        if($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "post-".rand(111, 999).".".$file_extension;
+            if($file->move('public/backend/gallery/',$file_Newname)){
+                $data['photo']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
         if($tags){
             $data['tags']=implode(',',$tags);
         }

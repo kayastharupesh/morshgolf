@@ -157,6 +157,323 @@ class AdminController extends Controller
         }
         return redirect()->route('settings');
     }
+
+    public function settingsHomepageheding(Request $request){        
+        $data=$request->all();
+        $settings=Settings::first();
+
+        if($request->hasFile('home_banner1')) {
+            $file = $request->file('home_banner1');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "homeimage-" . time() . "." . $file_extension;
+            if($file->move('public/product/',$file_Newname)){
+                $data['home_banner1']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+
+        if($request->hasFile('home_banner2')) {
+            $file = $request->file('home_banner2');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "homeimage-" . time() . "." . $file_extension;
+            if($file->move('public/product/',$file_Newname)){
+                $data['home_banner2']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+
+        if($request->hasFile('home_banner3')) {
+            $file = $request->file('home_banner3');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "homeimage-" . time() . "." . $file_extension;
+            if($file->move('public/product/',$file_Newname)){
+                $data['home_banner3']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+
+        if($request->hasFile('home_banner4')) {
+            $file = $request->file('home_banner4');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "homeimage-" . time() . "." . $file_extension;
+            if($file->move('public/product/',$file_Newname)){
+                $data['home_banner4']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+
+        if($request->hasFile('home_page_heding_image')) {
+            $file = $request->file('home_page_heding_image');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "homeimage-" . time() . "." . $file_extension;
+            if($file->move('public/product/',$file_Newname)){
+                $data['home_page_heding_image']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+
+        $status=$settings->fill($data)->save();
+        if($status){
+            request()->session()->flash('success','Setting successfully updated');
+        }
+        else{
+            request()->session()->flash('error','Please try again');
+        }
+        return redirect()->route('homeheding');
+    }
+
+    public function morshinfoUpdate(Request $request){        
+        $data=$request->all();
+        $settings=Settings::first();
+
+        if($request->hasFile('home_banner1')) {
+            $file = $request->file('home_banner1');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "homeimage-" . time() . "." . $file_extension;
+            if($file->move('public/product/',$file_Newname)){
+                $data['home_banner1']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+
+        if($request->hasFile('home_banner2')) {
+            $file = $request->file('home_banner2');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "homeimage-" . time() . "." . $file_extension;
+            if($file->move('public/product/',$file_Newname)){
+                $data['home_banner2']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+
+        if($request->hasFile('home_banner3')) {
+            $file = $request->file('home_banner3');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "homeimage-" . time() . "." . $file_extension;
+            if($file->move('public/product/',$file_Newname)){
+                $data['home_banner3']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+
+        if($request->hasFile('home_banner4')) {
+            $file = $request->file('home_banner4');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "homeimage-" . time() . "." . $file_extension;
+            if($file->move('public/product/',$file_Newname)){
+                $data['home_banner4']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+
+        if($request->hasFile('home_page_heding_image')) {
+            $file = $request->file('home_page_heding_image');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "homeimage-" . time() . "." . $file_extension;
+            if($file->move('public/product/',$file_Newname)){
+                $data['home_page_heding_image']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+
+        $status=$settings->fill($data)->save();
+        if($status){
+            request()->session()->flash('success','Setting successfully updated');
+        }
+        else{
+            request()->session()->flash('error','Please try again');
+        }
+        return redirect()->route('morshinfo');
+    }
+
+    public function todayneswUpdate(Request $request){        
+        $data=$request->all();
+        $settings=Settings::first();
+
+        if($request->hasFile('home_banner1')) {
+            $file = $request->file('home_banner1');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "homeimage-" . time() . "." . $file_extension;
+            if($file->move('public/product/',$file_Newname)){
+                $data['home_banner1']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+
+        if($request->hasFile('home_banner2')) {
+            $file = $request->file('home_banner2');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "homeimage-" . time() . "." . $file_extension;
+            if($file->move('public/product/',$file_Newname)){
+                $data['home_banner2']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+
+        if($request->hasFile('home_banner3')) {
+            $file = $request->file('home_banner3');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "homeimage-" . time() . "." . $file_extension;
+            if($file->move('public/product/',$file_Newname)){
+                $data['home_banner3']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+
+        if($request->hasFile('home_banner4')) {
+            $file = $request->file('home_banner4');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "homeimage-" . time() . "." . $file_extension;
+            if($file->move('public/product/',$file_Newname)){
+                $data['home_banner4']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+
+        if($request->hasFile('home_page_heding_image')) {
+            $file = $request->file('home_page_heding_image');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "homeimage-" . time() . "." . $file_extension;
+            if($file->move('public/product/',$file_Newname)){
+                $data['home_page_heding_image']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+
+        $status=$settings->fill($data)->save();
+        if($status){
+            request()->session()->flash('success','Setting successfully updated');
+        }
+        else{
+            request()->session()->flash('error','Please try again');
+        }
+        return redirect()->route('todaynesw');
+    }
+
+    public function videoUpdate(Request $request){        
+        $data=$request->all();
+        $settings=Settings::first();
+
+        if($request->hasFile('home_banner1')) {
+            $file = $request->file('home_banner1');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "homeimage-" . time() . "." . $file_extension;
+            if($file->move('public/product/',$file_Newname)){
+                $data['home_banner1']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+
+        if($request->hasFile('home_banner2')) {
+            $file = $request->file('home_banner2');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "homeimage-" . time() . "." . $file_extension;
+            if($file->move('public/product/',$file_Newname)){
+                $data['home_banner2']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+
+        if($request->hasFile('home_banner3')) {
+            $file = $request->file('home_banner3');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "homeimage-" . time() . "." . $file_extension;
+            if($file->move('public/product/',$file_Newname)){
+                $data['home_banner3']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+
+        if($request->hasFile('home_banner4')) {
+            $file = $request->file('home_banner4');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "homeimage-" . time() . "." . $file_extension;
+            if($file->move('public/product/',$file_Newname)){
+                $data['home_banner4']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+
+        if($request->hasFile('home_page_heding_image')) {
+            $file = $request->file('home_page_heding_image');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "homeimage-" . time() . "." . $file_extension;
+            if($file->move('public/product/',$file_Newname)){
+                $data['home_page_heding_image']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+
+        $status=$settings->fill($data)->save();
+        if($status){
+            request()->session()->flash('success','Setting successfully updated');
+        }
+        else{
+            request()->session()->flash('error','Please try again');
+        }
+        return redirect()->route('video');
+    }
+
     
     
     public function productcont(){

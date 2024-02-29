@@ -1,4 +1,9 @@
 <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 				<!-- allow pinned sites -->
 		<link rel="pingback" href="https://morshgolf.com/xmlrpc.php">
 				<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />

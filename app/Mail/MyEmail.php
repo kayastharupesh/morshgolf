@@ -13,7 +13,7 @@ class MyEmail extends Mailable
 
     public $datais;
 
-    public function __construct($datais)
+    public function __construct($datais, $data)
     {
         $this->data = $datais;
          $datais['type'];

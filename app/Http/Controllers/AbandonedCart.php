@@ -30,7 +30,24 @@ class AbandonedCart extends Controller
     }
    
     
-
+    public function sendMailAbandonedCart(Request $request)
+    {
+        $avondedcarts = Cart::where(["order_id" => NULL, "user_type" => "reg"])->orderBy('id','DESC')->get();
+        foreach ($avondedcarts as $key => $value) {
+            $user = User::find($value->user_id);
+            $datais = [
+                'to' => $user->email,
+                'subject' => "You miss your ordet process - MorshGolf",
+                'name' => $user->name,
+                'data' => $value
+            ];
+            Mail::send('mail.abandonedcart',$datais, function($messages) use ($datais){
+                $messages->to($datais['to']);
+                $messages->subject($datais['subject']);
+            });
+        }
+        return redirect()->route('home');
+    }
 
 
     

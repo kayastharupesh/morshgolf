@@ -1,3 +1,12 @@
+<style>
+    .pagination{
+        display: flex;
+        justify-content: center;
+        margin: 30px 0;
+    }
+</style>
+
+
 @extends('frontend.layouts.master')
 @section('title','Blog - Morsh Golf')
 @section('main-content') 
@@ -19,7 +28,7 @@
                         <div class="shop-single-blog">
                             <div class="offer-box-img">
                                 @if($post->photo)
-                                    <img src="{{$post->photo}}" alt="{{$post->photo}}">
+                                    <img src="{{asset('backend/gallery/'.$post->photo)}}" class="img-fluid"  alt="{{$post->photo}}" width="300px" height="300px"> 
                                 @else
                                     <img src="{{ asset('/public/images/No_Image_Available.jpg') }}" alt="{{$post->photo}}" width="300px" height="300px">
                                 @endif
@@ -41,12 +50,13 @@
                         </div>
                     </div>
                 @endforeach
-                <div class="col-12 ">
-                    {{$posts->appends($_GET)->links()}} 
-                </div>
+                
             </div>
         </div>
     </section>
+    <div class="col-12 col-md-12 col-lg-12">
+        {{$posts->appends($_GET)->links()}} 
+    </div>
 <!--/ End Blog Single -->
 @endsection
 <style>

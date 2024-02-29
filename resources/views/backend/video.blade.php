@@ -6,7 +6,7 @@
   @include('backend.layouts.notification')
   <div class="card-body">
     @include('backend.layouts.tablinks')
-    <form method="post" action="{{route('settings.update')}}" enctype="multipart/form-data">
+    <form method="post" action="{{route('video.update')}}" enctype="multipart/form-data">
       @csrf
       <div class="row">
         <div class="col-xl-6 col-md-6 mb-6">

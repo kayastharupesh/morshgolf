@@ -67,7 +67,7 @@ $productContDetails=DB::table('productcont')->first();
                         <li><i class="fa-solid fa-star"></i> <span>{{ $product_detail->rating }}</span> Ratings</li>
                         <li><i class="fa-sharp fa-solid fa-bag-shopping"></i> <span>{{ $product_detail->no_of_product_sold }}</span>+ Sold</li>
                     </ul>
-                    @php $currency = helper::getCurrency(number_format((float)$product_detail->price, 2, '.', '')); @endphp
+                    @php $currency = Helper::getCurrency(number_format((float)$product_detail->price, 2, '.', '')); @endphp
                     <div class="product-price">{{ session('symbol') .' '. number_format((float)$currency, 2, '.', '') }}</div>
                     
                     <hr>

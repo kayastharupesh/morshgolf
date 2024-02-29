@@ -1,6 +1,7 @@
 @extends('frontend.layouts.master')
 @section('title', 'Morsh Golf 2 Wood | 10 Degree 3 Wood Golf Club')
 @section('main-content')
+
   <!--BANNER SEC-->
   @if (count($banners) > 0)
     <section class="banner-sec">

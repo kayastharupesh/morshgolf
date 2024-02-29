@@ -122,6 +122,13 @@
       <span>Orders</span>
     </a>
   </li>
+  <!-- Abonded Cart -->
+  <li class="nav-item">
+    <a class="nav-link" href="{{route('abondedcart.index')}}">
+      <i class="fas fa-cart-arrow-down fa-chart-area"></i>
+      <span>Abonded Cart</span>
+    </a>
+  </li>
   <!-- Reviews -->
   <li class="nav-item">
     <a class="nav-link" href="{{route('review.index')}}">

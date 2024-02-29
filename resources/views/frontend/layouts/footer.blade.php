@@ -37,8 +37,7 @@
         </div>
     </div>
     <div class="footer-copyright">
-        <p>{{ $settings[0]->location_map }} | Development: <a href="https://www.polosoftech.com/"
-                target="_blank">Polosoftech</a></p>
+        <p>{{ $settings[0]->location_map }}</p>
         <div class="footer-payment"> <a href=""><img src="{{ asset('frontend/images/payment-method.png') }}" alt=""></a>
         </div>
     </div>

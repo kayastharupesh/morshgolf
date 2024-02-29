@@ -128,8 +128,11 @@ class StripePaymentController extends Controller
                     'date' => $order_data_mail->created_at,
                     'phone' => $order_data_mail->phone,
                     'orderDetails' => $orderDetails,
+                    'email' => auth()->user()->email,
+                    'country' => $country->country_name,
                     'pdf' => $order_data_mail->id,
                     'countryShip' => $countryShip,
+                    'billing' => $order_data_mail,
                 ];
 
                 Mail::send('mail.userorder',$datais, function($messages) use ($datais){
@@ -138,7 +141,7 @@ class StripePaymentController extends Controller
                 });
 
                 $datais = [
-                    'to' => 'suravi.polosoft@gmail.com',
+                    'to' => 'morshgolf2wood@gmail.com',
                     'subject' => "New order we have received. || Morshgolf",
                     'order_number' => $order_id,
                     'name' => $order_data_mail->first_name . " " . $order_data_mail->last_name,

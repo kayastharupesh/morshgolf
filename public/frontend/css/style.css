@@ -110,7 +110,7 @@ header .header-body .header-logo a {
     padding: 0;
     position: relative;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 600;
     color: #FFF;
     text-transform: uppercase;
 }
@@ -156,7 +156,7 @@ header .header-body .header-logo a {
     opacity: 0;
     visibility: hidden;
     overflow: hidden;
-    z-index: 999;
+    z-index: 999999;
 }
 .header-menu ul li:hover .product-menu {
     visibility: visible;
@@ -517,7 +517,7 @@ li.product-list button.mob-btn {
     width: 100%;
 }
 .offers-title-sec {
-    margin: 0;
+    margin-top: 40px;
     padding: 0;
     position: relative;
     display: flex;
@@ -717,7 +717,7 @@ li.product-list button.mob-btn {
 /*-------------MORSH OFFER SEC---------*/
 /*-------------MORSH FACILITIES SEC---------*/
 .morsh-facilities-sec {
-    margin: 0;
+    margin: 50px 0 0;
     padding: 50px 0;
     position: relative;
     background: #faf7f2;
@@ -1396,7 +1396,7 @@ li.product-list button.mob-btn {
 /*-------------MORSH FAQ AND TESTIMONIALS SEC---------*/
 /*-------------MORSH FOOTER SEC---------*/
 .morsh-footer-sec {
-    margin: 0;
+    margin: 30px 0 0 0;
     padding: 50px 0 0 0;
     position: relative;
     display: block;
@@ -1611,7 +1611,7 @@ li.product-list button.mob-btn {
     position: relative;
 }
 .all-bedcrumbs-sec .bedcrumb-body {
-    margin: 0 auto;
+    margin: 23px 65px;
     max-width: 1380px;
     position: relative;
 }
@@ -3171,11 +3171,11 @@ button.place-order-btn {
 }
 .our-story-sec .our-story-body .story-content {
     margin: -90px 0 0 0;
-    padding: 150px 30px 30px 30px;
+    padding: 30px 30px 30px 30px;
     background: #FFF;
     border-radius: 25px;
     position: relative;
-    z-index: 0;
+    z-index: 2;
 }
 .our-story-sec .our-story-body .story-content p {
     margin: 0 0 24px 0;
@@ -3362,7 +3362,7 @@ button.place-order-btn {
     box-shadow: 0 2px 6px #00000030;
     border-radius: 13px;
     max-width: 1100px;
-    width: 100%;
+    width: 50%;
 }
 .returns-form .billing-details-form {
     margin: 0;

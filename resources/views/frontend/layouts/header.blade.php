@@ -151,7 +151,7 @@ $currency = session('currency');
                     <div class="product-menu">
                         <div class="product-menu-left">
                             @foreach ($submenus as $submenu)
-                                <a href="{{ $submenu->url }}">{{ $submenu->name }}</a>
+                                <a href="{{ $submenu->url }}"><i class="fa-regular fa-golf-club"></i>{{ $submenu->name }}</a>
                             @endforeach
                         </div>
                         <div class="product-menu-right">

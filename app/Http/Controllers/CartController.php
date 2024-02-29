@@ -442,5 +442,10 @@ class CartController extends Controller
 
     }
 
+    public function abondedcart(){
+        $abondedcarts = Cart::where(["order_id" => NULL, "user_type" => "reg"])->orderBy('id','DESC')->paginate(10);
+        return view('backend.abondedcart.index')->with('abondedcarts', $abondedcarts);
+    }
+
 }
 

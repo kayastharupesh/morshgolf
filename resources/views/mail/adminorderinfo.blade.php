@@ -35,6 +35,9 @@
     .content {
       padding: 20px;
     }
+    p, th{
+      font-size: 15px !important;
+    }
 
     .footer {
       background-color: #010101;
@@ -79,6 +82,9 @@
       font-weight: bold;
       color: #ffc107;
     }
+    .table-font td{
+      font-size: 14px !important;
+    }
   </style>
 </head>
 
@@ -118,7 +124,7 @@
             </thead>
             <tbody>
               @foreach (json_decode($orderDetails, true) as $orderDetail)
-                <tr>
+                <tr class="table-font">
                   <td>{{ $orderDetail['title'] }}</td>
                   @php
                     $cart_photo = explode(',', $orderDetail['photo']);
