@@ -15,7 +15,7 @@ class CountryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $countries=Country::orderBy('country_name','DESC')->paginate();
+        $countries=Country::orderBy('id','DESC')->get();
         // return $country;
         return view('backend.country.index')->with('countries',$countries);
     }

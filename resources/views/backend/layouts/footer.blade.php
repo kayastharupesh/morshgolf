@@ -40,6 +40,7 @@
 
   <!-- Page level plugins -->
   <script src="{{asset('backend/vendor/chart.js/Chart.min.js')}}"></script>
+  <script src="https://cdn.datatables.net/2.0.1/js/dataTables.js"></script>
 
   <!-- Page level custom scripts -->
   {{-- <script src="{{asset('backend/js/demo/chart-area-demo.js')}}"></script> --}}

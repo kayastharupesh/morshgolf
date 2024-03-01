@@ -113,7 +113,12 @@ class StripePaymentController extends Controller
                 $order_data_mail = Order::where('user_id', auth()->user()->id)->where('order_number', $order_id)->first();
 
                 $country = DB::table('countries')->where('id', $order_data_mail->country)->first();
-                $countryShip = DB::table('countries')->where('id', $order_data_mail->country_shipping)->first();
+                $countryShipData = "";
+                if($order_data_mail->ship_to_different == 1) {
+                    $countryShip = DB::table('countries')->where('id', $order_data_mail->country_shipping)->first();
+                    $countryShipData= $countryShip->country_name;
+                }
+                
         
                 $datais = [
                     'to' => auth()->user()->email,
@@ -131,7 +136,7 @@ class StripePaymentController extends Controller
                     'email' => auth()->user()->email,
                     'country' => $country->country_name,
                     'pdf' => $order_data_mail->id,
-                    'countryShip' => $countryShip,
+                    'countryShip' => $countryShipData,
                     'billing' => $order_data_mail,
                 ];
 
@@ -141,7 +146,7 @@ class StripePaymentController extends Controller
                 });
 
                 $datais = [
-                    'to' => 'morshgolf2wood@gmail.com',
+                    'to' => 'rupesh.polosoftech@gmail.com', //morshgolf2wood@gmail.com
                     'subject' => "New order we have received. || Morshgolf",
                     'order_number' => $order_id,
                     'name' => $order_data_mail->first_name . " " . $order_data_mail->last_name,
@@ -156,7 +161,7 @@ class StripePaymentController extends Controller
                     'orderDetails' => $orderDetails,
                     'billing' => $order_data_mail,
                     'country' => $country->country_name,
-                    'countryShip' => $countryShip,
+                    'countryShip' => $countryShipData,
                 ];
 
                 Mail::send('mail.adminorderinfo',$datais, function($messages) use ($datais){

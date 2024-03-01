@@ -1853,8 +1853,20 @@ pre code {
   -webkit-overflow-scrolling: touch;
 }
 
+.card .table-responsive {
+  overflow: hidden;
+}
+
 .table-responsive > .table-bordered {
   border: 0;
+}
+
+.dt-search, .paging_full_numbers{
+  float: right;
+}
+
+.dt-info{
+  padding-top: 6px;
 }
 
 .form-control {

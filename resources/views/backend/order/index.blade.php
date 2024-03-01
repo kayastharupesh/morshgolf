@@ -21,6 +21,7 @@
               <th>Order No.</th>
               <th>Name</th>
               <th>Email</th>
+              <th>Date</th>
               <th>Quantity</th>
               <th>Total Amount</th>
               <th>Status</th>
@@ -33,6 +34,7 @@
               <th>Order No.</th>
               <th>Name</th>
               <th>Email</th>
+              <th>Date</th>
               <th>Quantity</th>
               <th>Total Amount</th>
               <th>Status</th>
@@ -49,6 +51,7 @@
                     <td>{{$order->order_number}}</td>
                     <td>{{$order->first_name}} {{$order->last_name}}</td>
                     <td>{{$order->email}}</td>
+                    <td>{{date('Y-m-d',strtotime($order->created_at))}}</td>
                     <td>{{$order->quantity}}</td>
                     <td>${{number_format($order->total_amount,2)}}</td>
                     <td>
@@ -97,12 +100,10 @@
 @push('scripts')
 
   <!-- Page level plugins -->
-  <script src="{{asset('backend/vendor/datatables/jquery.dataTables.min.js')}}"></script>
   <script src="{{asset('backend/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="{{asset('backend/js/demo/datatables-demo.js')}}"></script>
   <script>
     $('#order-dataTable').DataTable({
       "order": [[0, "desc"]],
@@ -113,10 +114,6 @@
         }
       ]
     });
-
-    function deleteData(id){
-        
-    }
 
     $(document).ready(function(){
       $.ajaxSetup({

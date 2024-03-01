@@ -20,7 +20,11 @@ $productContDetails=DB::table('productcont')->first();
 <section class="all-inner-banner-sec" style="background: url('{{ asset('frontend/images/product-details/inner-banner.webp') }}') center center no-repeat;">
     <div class="all-inner-banner-body">
         <div class="inner-banne-left">
-            <h1>{{ $product_detail->title }} – {{ $product_detail->product_sub_title }} – {{ $product_detail->size }}</h1>
+            <h1>{{ $product_detail->title }} 
+                @if ($product_detail->product_sub_title != null) - 
+                    {{ $product_detail->product_sub_title }} 
+                @endif
+            </h1>
         </div>
         <div class="inner-banne-img"> <img src="{{ asset('frontend/images/product-details/product-img.png') }}" class="mar-minus-buttom" alt="" /> </div>
     </div>
@@ -33,7 +37,8 @@ $productContDetails=DB::table('productcont')->first();
         <ul>
             <li><a href="{{ route('home') }}">Home</a></li>
             <li><a href="#">{{$product_detail->cat_info['title']}}</a></li>
-            <li><a>{{ $product_detail->title }} – {{ $product_detail->product_sub_title }} – {{ $product_detail->size }}</a></li>
+            <li><a>{{ $product_detail->title }} @if ($product_detail->product_sub_title != null) - {{ $product_detail->product_sub_title }} 
+            @endif</a></li>
         </ul>
         @include('frontend.layouts.notification')
     </div>
@@ -62,7 +67,7 @@ $productContDetails=DB::table('productcont')->first();
                     @endif
                 </div>
                 <div class="product-details-content">
-                    <h2>{{ $product_detail->title }} – {{ $product_detail->product_sub_title }} – {{ $product_detail->size }}</h2>
+                    <h2>{{ $product_detail->title }} @if($product_detail->product_sub_title != null) - {{ $product_detail->product_sub_title }} @endif </h2>
                     <ul class="ratings-sold-list">
                         <li><i class="fa-solid fa-star"></i> <span>{{ $product_detail->rating }}</span> Ratings</li>
                         <li><i class="fa-sharp fa-solid fa-bag-shopping"></i> <span>{{ $product_detail->no_of_product_sold }}</span>+ Sold</li>
@@ -105,7 +110,7 @@ $productContDetails=DB::table('productcont')->first();
                 @csrf
                 <div class="set-order-sec">
                     <h4>Set Order</h4>
-                    <div class="product-title">{{ $product_detail->title }} – {{ $product_detail->product_sub_title }} – {{ $product_detail->size }}</div>
+                    <div class="product-title">{{ $product_detail->title }} @if($product_detail->product_sub_title != null)– {{ $product_detail->product_sub_title }} – {{ $product_detail->size }}</div>
                     <div class="quantity qty-stock-part">
                         <div class="qty-container">
                             <button class="qty-btn-minus btn-light" type="button"><i class="fa fa-minus"></i></button>

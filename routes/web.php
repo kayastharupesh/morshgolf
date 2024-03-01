@@ -47,7 +47,7 @@ Route::get('/','FrontendController@home')->name('home');
 
 // Frontend Routes
 Route::get('/home', 'FrontendController@index');
-Route::get('/fairway-wood','FrontendController@fairwayWood')->name('fairway-wood');
+Route::get('/shop','FrontendController@fairwayWood')->name('shop');
 Route::get('/allcatagory','FrontendController@allCatagory')->name('allcatagory');
 Route::get('/product_category/{id}','FrontendController@productCategory')->name('product_category');
 Route::get('/golf-balls','FrontendController@golfBalls')->name('golf-balls');

@@ -17,6 +17,7 @@
     <!-- Custom styles for this template-->
     <link href="{{asset('backend/css/sb-admin-2.min.css')}}" rel="stylesheet">
     <link href="{{asset('backend/css/sb-admin-2.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.1/css/dataTables.dataTables.css" />
     @stack('styles')
   
 </head>

@@ -122,7 +122,11 @@ class PaypalController extends Controller
         $orderDetails = Cart::join('products', 'carts.product_id', '=', 'products.id')->where('user_id', auth()->user()->id)->where('order_id', $order_id)->get();
 
         $country = DB::table('countries')->where('id', $order_data_mail->country)->first();
-        $countryShip = DB::table('countries')->where('id', $order_data_mail->country_shipping)->first();
+        $countryShipData = "";
+        if($order_data_mail->ship_to_different == 1) {
+            $countryShip = DB::table('countries')->where('id', $order_data_mail->country_shipping)->first();
+            $countryShipData= $countryShip->country_name;
+        }
         $datais = [
             'to' => auth()->user()->email,
             'subject' => "Thank You for your purchase of product. || Morshgolf",
@@ -139,17 +143,16 @@ class PaypalController extends Controller
             'email' => auth()->user()->email,
             'country' => $country->country_name,
             'pdf' => $order_data_mail->id,
-            'countryShip' => $countryShip,
+            'countryShip' => $countryShipData,
             'billing' => $order_data_mail,
         ];
-
         Mail::send('mail.userorder',$datais, function($messages) use ($datais){
             $messages->to($datais['to']);
             $messages->subject($datais['subject']);
         });
 
         $datais = [
-            'to' => 'morshgolf2wood@gmail.com',
+            'to' => 'rupesh.polosoftech@gmail.com', //morshgolf2wood@gmail.com
             'subject' => "New order we have received. || Morshgolf",
             'order_number' => $order_id,
             'name' => $order_data_mail->first_name . " " . $order_data_mail->last_name,
@@ -164,7 +167,7 @@ class PaypalController extends Controller
             'orderDetails' => $orderDetails,
             'billing' => $order_data_mail,
             'country' => $country->country_name,
-            'countryShip' => $countryShip,
+            'countryShip' => $countryShipData,
         ];
 
         Mail::send('mail.adminorderinfo',$datais, function($messages) use ($datais){

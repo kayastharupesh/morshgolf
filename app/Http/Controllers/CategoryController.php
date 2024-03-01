@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Support\Str;
 
 class CategoryController extends Controller
@@ -101,7 +102,8 @@ class CategoryController extends Controller
     {
         $parent_cats=Category::where('is_parent',1)->get();
         $category=Category::findOrFail($id);
-        return view('backend.category.edit')->with('category',$category)->with('parent_cats',$parent_cats);
+        $products = Product::where('cat_id', $id)->get();
+        return view('backend.category.edit')->with('category',$category)->with('parent_cats',$parent_cats)->with('products',$products);
     }
 
     /**

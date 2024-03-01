@@ -56,7 +56,7 @@
           <h2>MorshGolf Top Offers</h2>
           <p>Choose MorshGolf and Elevate Your Golf Game! </p>
         </div>
-        <div class="offers-link"> <a href="{{ route('fairway-wood') }}">ORDER NOW <i class="fa-solid fa-arrow-right"></i></a> </div>
+        <div class="offers-link"> <a href="{{ route('shop') }}">ORDER NOW <i class="fa-solid fa-arrow-right"></i></a> </div>
       </div>
       <div class="offer-list">
         @if ($product_lists)

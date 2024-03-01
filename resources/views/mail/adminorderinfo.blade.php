@@ -139,12 +139,23 @@
           </table>
         @endif
 
-        <h2>BILLING DETAILS:</h2>
+        <h2>SHIPPING INFORMATION:</h2>
         <p>Name: {{ $billing->first_name . ' ' . $billing->last_name }}</p>
         <p>Email: {{ $email }}</p>
         <p>Phone Number: {{ $phone }}</p>
         <p>Country: {{ $country }}</p>
         <p>Address: {{ $billing->address1 }}</p>
+        <p>Order notes: {{ $billing->order_note }}</p>
+
+        @if ($billing->ship_to_different == 1)
+          <h2>SHIPPING DIFFERENT ADDRESS INFORMATION:</h2>
+          <p>Name: {{ $billing->first_name_shipping . ' ' . $billing->last_name_shipping }}</p>
+          <p>Email: {{ $billing->email_shipping }}</p>
+          <p>Phone Number: {{ $billing->phone_shipping }}</p>
+          <p>Country: {{ $countryShip }}</p>
+          <p>Post code: {{ $billing->post_code_shipping }}</p>
+          <p>Address: {{ $billing->address1_shipping . ', ' . $billing->address2_shipping }}</p>
+        @endif
 
 
         <p><a href=" {{ route('admin') }} ">Click here</a> to visit website.</p>

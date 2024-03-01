@@ -146,6 +146,16 @@
         <p>Phone Number: {{ $phone }}</p>
         <p>Country: {{ $country }}</p>
         <p>Address: {{ $billing->address1 }}</p>
+        
+        @if ($billing->ship_to_different == 1)
+          <h2>SHIPPING DIFFERENT ADDRESS INFORMATION:</h2>
+          <p>Name: {{ $billing->first_name_shipping . ' ' . $billing->last_name_shipping }}</p>
+          <p>Email: {{ $billing->email_shipping }}</p>
+          <p>Phone Number: {{ $billing->phone_shipping }}</p>
+          <p>Country: {{ $countryShip }}</p>
+          <p>Post code: {{ $billing->post_code_shipping }}</p>
+          <p>Address: {{ $billing->address1_shipping . ', ' . $billing->address2_shipping }}</p>
+        @endif
         <p><a href=" {{ route('login.form') }} ">Click here</a> to visit our website.</p>
       </td>
     </tr>

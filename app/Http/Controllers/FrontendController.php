@@ -42,7 +42,7 @@ class FrontendController extends Controller
     }
 
     public function fairwayWood(){
-        $products_lists = Product::where('status', 'active')->where('cat_id', '!=', 2)->orderBy('id', 'DESC')->limit(20)->get();
+        $products_lists = Product::where('status', 'active')->orderBy('id', 'DESC')->limit(20)->get();
         return view('frontend.pages.fairway-wood')
             ->with('plist', $products_lists);
     }

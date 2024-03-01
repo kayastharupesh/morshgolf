@@ -133,19 +133,12 @@
           </div>
 
           <div class="col-xl-3 col-md-3 mb-4">
-
             <label for="inputTitle" class="col-form-label">Configuration <span class="text-danger">*</span></label>
-
             <input id="inputTitle" type="text" name="configuration" placeholder="Enter configuration"  value="{{old('configuration')}}" class="form-control">
-
             @error('configuration')
-
             <span class="text-danger">{{$message}}</span>
-
             @enderror
-
           </div>
-
         </div>
 
 
@@ -156,7 +149,7 @@
 
         <div class="row">
 
-          <div class="col-xl-4 col-md-4 mb-4">
+          <div class="col-xl-3 col-md-3 mb-3">
 
           <label for="inputTitle" class="col-form-label">Volume  <span class="text-danger">*</span></label>
 
@@ -170,7 +163,7 @@
 
           </div>
 
-          <div class="col-xl-4 col-md-4 mb-4">
+          <div class="col-xl-3 col-md-3 mb-3">
 
             <label for="inputTitle" class="col-form-label">Length  <span class="text-danger">*</span></label>
 
@@ -184,7 +177,7 @@
 
           </div>
 
-          <div class="col-xl-4 col-md-4 mb-4">
+          <div class="col-xl-3 col-md-3 mb-3">
 
             <label for="inputTitle" class="col-form-label">Swing weight <span class="text-danger">*</span></label>
 
@@ -197,7 +190,14 @@
             @enderror
 
           </div>
-
+          <div class="col-xl-3 col-md-3 mb-3">
+            <label for="inputTitle" class="col-form-label">Shipping Price </label>
+            <input id="inputTitle" type="text" name="shipping_price" placeholder="Enter shipping price" value="{{old('shipping_price')}}"
+              class="form-control">
+            @error('shipping_price')
+            <span class="text-danger">{{$message}}</span>
+            @enderror
+          </div>
 
 
          

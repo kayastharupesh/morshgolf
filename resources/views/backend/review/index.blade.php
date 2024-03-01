@@ -80,7 +80,7 @@
           @endforeach
         </tbody>
       </table>
-      <span style="float:right">{{$reviews->links()}}</span>
+      
       @else
       <h6 class="text-center">No reviews found!!!</h6>
       @endif
@@ -102,21 +102,18 @@
 @push('scripts')
 
 <!-- Page level plugins -->
-<script src="{{asset('backend/vendor/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('backend/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
 <!-- Page level custom scripts -->
-<script src="{{asset('backend/js/demo/datatables-demo.js')}}"></script>
 <script>
-  $('#order-dataTable').DataTable( {
-            "columnDefs":[
-                {
-                    "orderable":false,
-                    "targets":[5,6]
-                }
-            ]
-        } );
+  var dataTable = $('#order-dataTable').DataTable({
+      "order": [[0, "desc"]],
+      "columnDefs": [{
+        "orderable": false,
+      }],
+      "pagingType": "full_numbers"
+    });
 
         // Sweet alert
 

@@ -90,7 +90,7 @@
       </div>
 
       <div class="row">
-        <div class="col-xl-4 col-md-4 mb-4">
+        <div class="col-xl-3 col-md-3 mb-3">
           <label for="inputTitle" class="col-form-label">Volume <span class="text-danger">*</span></label>
           <input id="inputTitle" type="text" name="volume" placeholder="Enter volume" value="{{$product->volume}}"
             class="form-control">
@@ -99,7 +99,7 @@
           @enderror
         </div>
 
-        <div class="col-xl-4 col-md-4 mb-4">
+        <div class="col-xl-3 col-md-3 mb-3">
           <label for="inputTitle" class="col-form-label">Length <span class="text-danger">*</span></label>
           <input id="inputTitle" type="text" name="length" placeholder="Enter length" value="{{$product->length}}"
             class="form-control">
@@ -108,11 +108,19 @@
           @enderror
         </div>
 
-        <div class="col-xl-4 col-md-4 mb-4">
+        <div class="col-xl-3 col-md-3 mb-3">
           <label for="inputTitle" class="col-form-label">Swing weight <span class="text-danger">*</span></label>
           <input id="inputTitle" type="text" name="swing_weight" placeholder="Enter flex"
             value="{{$product->swing_weight}}" class="form-control">
           @error('swing_weight')
+          <span class="text-danger">{{$message}}</span>
+          @enderror
+        </div>
+        <div class="col-xl-3 col-md-3 mb-3">
+          <label for="inputTitle" class="col-form-label">Shipping Price </label>
+          <input id="inputTitle" type="text" name="shipping_price" placeholder="Enter shipping price" value="{{$product->shipping_price}}"
+            class="form-control">
+          @error('shipping_price')
           <span class="text-danger">{{$message}}</span>
           @enderror
         </div>
